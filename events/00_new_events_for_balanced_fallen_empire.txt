@@ -438,6 +438,7 @@ country_event = {
 	is_triggered_only = yes
 
 	trigger = {
+		NOT = { has_country_flag = got_assimialted } # Hive fragment absorbed during awakening, not a true destruction
 		OR = {
 			is_country_type = fallen_empire
 			is_country_type = awakened_fallen_empire
