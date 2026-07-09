@@ -1,0 +1,8 @@
+is_fallen_empire_machine = {
+    OR = {
+        is_country_type = fallen_empire
+        is_country_type = awakened_fallen_empire
+    }
+    is_machine_empire = yes
+    not = { has_country_flag = fallen_empire_machine_LgateGrander }
+}

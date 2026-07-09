@@ -1,0 +1,542 @@
+namespace = Nanites_grander
+event = {
+    id = Nanites_grander.1
+    is_triggered_only = yes
+    fire_only_once = yes
+    hide_window = yes
+    trigger = {
+        lgate_enabled = yes
+        num_fallen_empires > 0
+    }
+    immediate = {
+        random_list = {
+            6 = {}
+            3 = {
+                modifier = {
+                    factor = 2
+                    any_country = { is_fallen_empire_machine = yes }
+                }
+
+                every_country = {
+                    limit = { is_ai = no }
+                    country_event = { id = Nanites_grander.100 days = 7200 }
+                }
+                random_system = {
+                    limit = { has_megastructure = lgate_base }
+                    every_system_megastructure = { remove_megastructure = this }
+                    set_spawn_system_batch = begin
+                    spawn_system = {
+                        min_distance = 10
+                        max_distance = 15
+                        min_jumps = 0
+                        max_jumps = 0
+                        initializer = fallen_lgategrander
+                    }
+                    set_spawn_system_batch = end
+                    last_created_system = { save_event_target_as = Lgate_grander_system }
+                }
+                event_target:Lgate_grander_system = {
+                    create_species = {
+                        name = random class = MACHINE namelist = MACHINE3 portrait = random
+                        traits = {
+                            trait = trait_machine_unit
+                            trait = random_traits
+                        }
+                        extra_trait_points = 3 allow_negative_traits = no
+                    }
+                    create_country = {
+                        name = random
+                        type = fallen_empire
+                        ignore_initial_colony_error = yes
+                        authority = auth_machine_intelligence
+                        civics = {
+                            civic = civic_machine_remnants
+                            civic = civic_lgate_grander
+                        }
+                        species = last_created_species
+                        ethos = { ethic = ethic_gestalt_consciousness }
+                        flag = random
+                        origin = origin_fallen_empire
+                        effect = {
+                            add_modifier = { modifier = mod_fallen_lgater days = -1 }
+                            set_country_flag = fallen_empire_machine_LgateGrander
+                            save_global_event_target_as = lgate_grander_fallen
+                            add_resource = {
+                                minerals = 10000
+                                energy = 10000
+                                food = 1000
+                                influence = 500
+                                nanites = 10000
+                            }
+                            add_tradition = tr_nanotech_adopt
+                            add_tradition = tr_nanotech_1
+                            add_tradition = tr_nanotech_2
+                            add_tradition = tr_nanotech_3
+                            add_tradition = tr_nanotech_4
+                            add_tradition = tr_nanotech_5
+                            add_tradition = tr_nanotech_finish
+                            if = {
+                                limit = { host_has_dlc = "Apocalypse" }
+                                give_technology = { tech = tech_colossus message = no }
+                            }
+                            add_global_ship_design = NAME_FE_Starbase
+                            add_global_ship_design = NAME_Nanite_Mothership
+                            add_global_ship_design = NAME_Nanite_Interdictor
+                            if = {
+                                limit = { has_global_flag = PlayAsGray_Opened }
+                                add_global_ship_design = NAME_Nanite_Mothership_AG_1
+                                add_global_ship_design = NAME_Nanite_Mothership_AG_carrier_1
+                                add_global_ship_design = NAME_Nanite_Mothership_AG_carrier_2
+                            }
+                            ruler = { add_skill = 9 }
+                        }
+                    }
+                    every_system_planet = {
+                        limit = { is_colonizable = yes }
+                        clear_blockers = yes
+                        create_colony = { owner = event_target:lgate_grander_fallen species = event_target:lgate_grander_fallen.owner_main_species }
+                        create_pop_group = { size = 8000 species = event_target:lgate_grander_fallen.owner_main_species }
+                        while = {
+                            count = 8
+                            add_district = district_city
+                            add_district = district_mining_uncapped
+                            add_district = district_generator_uncapped
+                            add_district = district_industrial
+                        }
+                    }
+                    create_starbase = {
+                        size = "starbase_citadel"
+                        owner = event_target:lgate_grander_fallen
+                        module = "shipyard"
+                        module = "shipyard"
+                        module = "shipyard"
+                        module = "hangar_bay"
+                        module = "gun_battery"
+                        module = "gun_battery"
+                        building = "target_uplink_computer"
+                        building = "defense_grid"
+                        building = "colossus_yards"
+                        building = "titan_yards"
+                        effect = {
+                            while = {
+                                count = 18
+                                create_fallen_empire_platform = yes
+                            }
+                        }
+                    }
+                    every_system = {
+                        limit = {
+                            distance = {
+                                source = prev type = hyperlane max_jumps = 2
+                            }
+                        }
+                        create_starbase = {
+                            size = "starbase_citadel"
+                            owner = event_target:lgate_grander_fallen
+                            module = "gun_battery"
+                            module = "gun_battery"
+                            module = "gun_battery"
+                            module = "gun_battery"
+                            module = "gun_battery"
+                            module = "gun_battery"
+                            building = "target_uplink_computer"
+                            building = "defense_grid"
+                            effect = {
+                                while = {
+                                    count = 10
+                                    create_fallen_empire_platform = yes
+                                }
+                            }
+                        }
+                    }
+                    event_target:lgate_grander_fallen.capital_scope = {
+                        create_fleet = {
+                            name = nanite_swarm_modifier
+                            effect = {
+                                set_owner = event_target:lgate_grander_fallen
+                                set_location = prev
+                                while = {
+                                    count = 4
+                                    create_ship = {
+                                        design = NAME_Nanite_Mothership
+                                        name = random
+                                    }
+                                    while = {
+                                        count = 8
+                                        create_ship = {
+                                            design = NAME_Nanite_Interdictor
+                                            name = random
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+#检测L星门线索值以生气 和宣战
+country_event ={
+    id = Nanites_grander.3
+    is_triggered_only = yes
+    title = Nanites_grander.3.title
+    desc = Nanites_grander.3.desc
+    picture = GFX_evt_busy_spaceport
+    diplomatic = yes
+    event_picture_background = GFX_evt_busy_spaceport
+    picture_event_data = {
+        portrait = event_target:lgate_grander_fallen.ruler
+        room = event_target:lgate_grander_fallen
+        planet_background = event_target:lgate_grander_fallen.capital_scope
+    }
+    trigger = {
+        check_variable = { which = num_lcluster_clues value = 1 }
+        not = { has_country_flag = num1_arrived }
+        exists = event_target:lgate_grander_fallen
+    }
+    immediate = { set_country_flag = num1_arrived }
+    option = {
+        name = Nanites_grander.3.a
+    }
+}
+country_event = {
+    id = Nanites_grander.4
+    is_triggered_only = yes
+    title = Nanites_grander.3.title
+    desc = Nanites_grander.4.desc
+    picture = GFX_evt_busy_spaceport
+    event_picture_background = GFX_evt_busy_spaceport
+    picture_event_data = {
+        portrait = event_target:lgate_grander_fallen.ruler
+        room = event_target:lgate_grander_fallen
+        planet_background = event_target:lgate_grander_fallen.capital_scope
+    }
+    diplomatic = yes
+    trigger = {
+        check_variable = { which = num_lcluster_clues value = 3 }
+        not = { has_country_flag = num2_arrived }
+        exists = event_target:lgate_grander_fallen
+    }
+    immediate = {
+        set_country_flag = num2_arrived
+        add_modifier = { modifier = mod_research_reduce_lgate days = -1 }
+    }
+    option = {
+        name = Nanites_grander.4.a
+    }
+    option = {
+        name = Nanites_grander.4.b
+    }
+}
+country_event = {
+    id = Nanites_grander.5
+    is_triggered_only = yes
+    title = Nanites_grander.3.title
+    desc = Nanites_grander.5.desc
+    picture = GFX_evt_busy_spaceport
+    event_picture_background = GFX_evt_busy_spaceport
+    diplomatic = yes
+    picture_event_data = {
+        portrait = event_target:lgate_grander_fallen.ruler
+        room = event_target:lgate_grander_fallen
+        planet_background = event_target:lgate_grander_fallen.capital_scope
+    }
+    trigger = {
+        check_variable = { which = num_lcluster_clues value = 6 }
+        not = { has_country_flag = num3_arrived }
+        exists = event_target:lgate_grander_fallen
+    }
+    immediate = {
+        set_country_flag = num3_arrived
+        add_modifier = { modifier = mod_produces_reduce_lgate days = -1 }
+    }
+    option = {
+        name = Nanites_grander.5.a
+    }
+    option = {
+        name = Nanites_grander.4.b
+    }
+}
+country_event = {
+    id = Nanites_grander.6
+    is_triggered_only = yes
+    title = Nanites_grander.3.title
+    desc = Nanites_grander.6.desc
+    picture = GFX_evt_busy_spaceport
+    diplomatic = yes
+    event_picture_background = GFX_evt_busy_spaceport
+    picture_event_data = {
+        portrait = event_target:lgate_grander_fallen.ruler
+        room = event_target:lgate_grander_fallen
+        planet_background = event_target:lgate_grander_fallen.capital_scope
+    }
+    fire_only_once = yes
+    trigger = {
+        exists = event_target:lgate_grander_fallen
+        check_variable = { which = num_lcluster_clues value = 7 }
+    }
+    option = {
+        name = Nanites_grander.6.a
+    }
+    immediate = {
+        save_global_event_target_as = lgate_Opener_player
+        remove_modifier = mod_produces_reduce_lgate
+        remove_modifier = mod_research_reduce_lgate
+        every_country = { establish_communications_no_message =  event_target:lgate_grander_fallen }
+        event_target:lgate_grander_fallen = {
+            set_country_flag = fallen_empire_machine_LgateGrander_awake
+            set_country_type = awakened_fallen_empire
+            change_government = {
+                civics = {
+                    civic = civic_lgate_grander
+                    civic = civic_final_defense_protocols
+                }
+            }
+            add_awakened_fallen_empire_resources = yes
+            add_awakened_fallen_empire_fleet = yes
+            capital_scope = {
+                if = {
+                    limit = { has_global_flag = PlayAsGray_Opened }
+                    create_AG_graygoo_tempest_fleet = yes
+                }
+                create_fleet = {
+                    name = nanite_swarm_modifier
+                    effect = {
+                        set_owner = event_target:lgate_grander_fallen
+                        set_location = prev
+                        while = {
+                            count = 4
+                            create_ship = {
+                                design = NAME_Nanite_Mothership
+                                name = random
+                            }
+                            while = {
+                                count = 8
+                                create_ship = {
+                                    design = NAME_Nanite_Interdictor
+                                    name = random
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            declare_war = { target = root attacker_war_goal = wg_end_threat_crisis name = lgater_war}
+        }
+    }
+}
+#检测开门后是什么的
+country_event = {
+    id = Nanites_grander.7
+    is_triggered_only = yes
+    fire_only_once = yes
+    hide_window = yes
+    trigger = {
+        is_same_value = event_target:lgate_Opener_player
+        has_global_flag = lgates_activated_globally
+    }
+    immediate = {
+        every_war = { end_war_effect = yes }
+        event_target:lgate_grander_fallen = {
+            every_war = { end_war_effect = yes }
+        }
+        if = {
+            limit = { any_country = { is_country_type = gray_goo } }
+            set_global_flag = lgater_fighting_graygoo_tempest
+            every_country = {country_event = { id = Nanites_grander.7 days = 5 } }
+            country_event = { id = Nanites_grander.8  }
+        }
+        if = {
+            limit = { any_country = { is_country_type = gate_builders } }
+            random_country = {
+                limit = { is_country_type = gate_builders }
+                save_event_target_as = gate_builders_hm
+            }
+            event_target:lgate_grander_fallen = {
+                every_owned_planet = { set_owner = event_target:gate_builders_hm }
+            }
+            country_event = { id = Nanites_grander.11 }
+        }
+        else_if = {
+            limit = { has_global_flag = dragon_season }
+            country_event = { id = Nanites_grander.12 }
+        }
+        else_if = {
+            limit = {
+                nor = {
+                    has_global_flag = dragon_season
+                    has_global_flag = gray_goo_empire_set
+                    has_global_flag = gray_goo_crisis_set
+                }
+            }
+            country_event = { id = Nanites_grander.12 }
+        }
+    }
+}
+#大战灰蛊情况
+country_event = {
+    id = Nanites_grander.8
+    is_triggered_only = yes
+    title = Nanites_grander.3.title
+    desc = Nanites_grander.7.desc
+    picture = GFX_evt_busy_spaceport
+    diplomatic = yes
+    event_picture_background = GFX_evt_busy_spaceport
+    picture_event_data = {
+        portrait = event_target:lgate_grander_fallen.ruler
+        room = event_target:lgate_grander_fallen
+        planet_background = event_target:lgate_grander_fallen.capital_scope
+    }
+    immediate = {
+        random_country = {
+            limit = { is_country_type = gray_goo }
+            add_modifier = { modifier = mod_graygoo_kill_gater days = -1 }
+        }
+        event_target:lgate_grander_fallen = {
+            every_owned_fleet = {
+                limit = { is_ship_class = shipclass_military }
+                fleet_event = { id = Nanites_grander.9 }
+            }
+        }
+    }
+    fire_only_once = yes
+    option = { name = OK }
+}
+fleet_event = {
+    id = Nanites_grander.9
+    is_triggered_only = yes
+    hide_window = yes
+    trigger = { has_global_flag =lgater_fighting_graygoo_tempest  }
+    immediate = {
+        fleet_event = { id = Nanites_grander.9 days = 31 }
+        queue_actions = {
+            repeat = {
+                find_random_fleet = {
+                    trigger = {
+                        id = lgater_fighting1
+                        owner = { is_country_type = gray_goo}
+                    }
+                    found_fleet = {
+                        move_to = this
+                    }
+                }
+            }
+        }
+    }
+}
+country_event = {
+    id = Nanites_grander.10
+    is_triggered_only = yes
+    fire_only_once = yes
+    title =fallen_empires_awakening.5.name
+    desc = Nanites_grander.9.desc
+    picture = GFX_evt_ship_travel
+    trigger = {
+        has_global_flag = lgater_fighting_graygoo_tempest
+        not = { any_country = { is_country_type = gray_goo } }
+        exists = event_target:lgate_grander_fallen
+        is_same_value = event_target:lgate_Opener_player
+    }
+    immediate = {
+        event_target:lgate_grander_fallen = {
+            set_faction_hostility = {
+                set_friendly = yes
+                target = root
+            }
+        }
+        remove_global_flag = lgater_fighting_graygoo_tempest
+    }
+    option = { name = OK }
+}
+#伪装帝国情况
+country_event = {
+    id = Nanites_grander.11
+    is_triggered_only = yes
+    fire_only_once = yes
+    title = Nanites_grander.11.title
+    desc = Nanites_grander.11.desc
+    immediate = { event_target:lgate_grander_fallen= { destroy_country = yes } }
+    option = { name = huh }
+}
+#其他俩情况
+country_event = {
+    id = Nanites_grander.12
+    is_triggered_only = yes
+    fire_only_once = yes
+    title =fallen_empires_awakening.5.name
+    desc = Nanites_grander.12.desc
+    picture = GFX_evt_ship_travel
+    trigger = {
+        exists = event_target:lgate_grander_fallen
+    }
+    immediate = {
+        event_target:lgate_grander_fallen = {
+            set_faction_hostility = {
+                set_friendly = yes
+                target = root
+            }
+        }
+        remove_global_flag = lgater_fighting_graygoo_tempest
+    }
+    option = { name = OK }
+}
+
+#有事没事送东西的
+country_event = {
+    id = Nanites_grander.100
+    is_triggered_only = yes
+    title = Nanites_grander.3.title
+    desc = Nanites_grander.100.desc
+    picture = GFX_evt_busy_spaceport
+    diplomatic = yes
+    event_picture_background = GFX_evt_busy_spaceport
+    picture_event_data = {
+        portrait = event_target:lgate_grander_fallen.ruler
+        room = event_target:lgate_grander_fallen
+        planet_background = event_target:lgate_grander_fallen.capital_scope
+    }
+    trigger = {
+        is_ai = no
+        not = { is_at_war_with = root }
+    }
+    immediate = {
+        country_event = { id = Nanites_grander.100 days = 3600 random = 1200 }
+    }
+    option = {
+        name = thankful
+        random_list = {
+            1 = {
+                add_resource = {
+                    energy = 5000 minerals = 5000 alloys = 2500 consumer_goods = 2500
+                    food = 5000 engineering_research = 25000 physics_research = 25000 society_research = 25000
+                }
+            }
+            1= {
+                custom_tooltip = get_a_fleet
+                capital_scope = {
+                    create_fleet = {
+                        name = nanite_swarmer
+                        effect = {
+                            set_owner = root
+                            set_location = prev
+                            create_ship = {
+                                design = NAME_Nanite_Mothership
+                                name = NAME_Nanite_Mothership
+                            }
+                            while = {
+                                count = 4
+                                create_ship = {
+                                    design = NAME_Nanite_Interdictor
+                                    name = NAME_Nanite_Interdictor
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            1 = { add_modifier = { modifier = mod_lgater_helping days = 1800 } }
+        }
+    }
+}

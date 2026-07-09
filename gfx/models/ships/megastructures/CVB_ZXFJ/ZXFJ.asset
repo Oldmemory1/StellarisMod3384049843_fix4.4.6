@@ -1,0 +1,736 @@
+#星列耀环
+entity = {
+	name = "CVB_animation_entity_DGJXHD"
+	pdxmesh = "nemesis_01_colossus_mesh"
+
+	default_state = "idle"
+	state = { name = "idle" animation = "open" 
+		chance = {
+			if_current_state = {
+				"idle" = 100
+				"moving" = 100
+				"death" = 100
+				"working" = 100
+				"working_looping" = 100
+			}
+		}
+		event = { time = 0	id = "beam_start" }
+	
+		event = { trigger_once = yes sound = { soundeffect = "amb_star_eater_open_energy" stop_on_state_change = yes } }
+		event = { trigger_once = yes sound = { soundeffect = "amb_nemesis_colossus_idle_hum" } }
+		event = { trigger_once = yes sound = { soundeffect = "amb_nemesis_colossus_idle_distortion" } }
+
+		event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "light_locator_015" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "light_locator_016" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "light_locator_017" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "light_locator_017" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "light_locator_019" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "light_locator_020" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "light_locator_06" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+
+#		event = { time = 0 node = "root" particle = "nemesis_colossus_core_lightning_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "L_effect_5" particle = "nemesis_colossus_side_lightning_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "R_effect_5" particle = "nemesis_colossus_side_lightning_effect" keep_particle = yes trigger_once = yes }
+	
+		event = { time = 0 node = "L_effect_4" particle = "nemesis_colossus_side_lightning_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "R_effect_4" particle = "nemesis_colossus_side_lightning_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "L_effect_3" particle = "nemesis_colossus_side_lightning_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "R_effect_3" particle = "nemesis_colossus_side_lightning_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "L_effect_2" particle = "nemesis_colossus_side_lightning_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "R_effect_2" particle = "nemesis_colossus_side_lightning_effect" keep_particle = yes trigger_once = yes }
+
+		event = { time = 0 node = "L_effect_1" particle = "nemesis_colossus_side_lightning_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "R_effect_1" particle = "nemesis_colossus_side_lightning_effect" keep_particle = yes trigger_once = yes }		
+	}
+	
+	scale = 40
+}
+#rotation倾斜介绍按照顺序为正反倾斜 前后倾斜 左右倾斜 position顺序 左右 高度 前后
+#烛虚封界
+entity = {
+	name = "CVB_mega_titan_entity"
+	
+	locator = { name = "root"	position = {	0	0	-160	}	}
+	locator = { name = "roof"	position = {	0	0	-161	}	}
+	locator = { name = "1" position = { 0 0 150 } rotation = { 0 0 90 }}
+	locator = { name = "2" position = { 60 60 150 } rotation = { 0 0 0 }}
+	locator = { name = "3" position = { -60 60 150 } rotation = { 0 0 0 }}
+	locator = { name = "4" position = { 0 0 190 } rotation = { 0 90 0 }} #帝国尾部巨像旋转动画
+	locator = { name = "5" position = { 0 0 170 } rotation = { 90 0 0 }} #哺乳尾部巨像旋转动画
+	locator = { name = "6" position = { 0 60 150 } rotation = { 0 0 0 }}
+	locator = { name = "7" position = { 60 0 150 } rotation = { 0 0 0 }}
+	locator = { name = "8" position = { -60 0 150 } rotation = { 0 0 0 }}
+	locator = { name = "9" position = { 0 -60 150 } rotation = { 0 0 0 }}
+	locator = { name = "10" position = { 60 -60 150 } rotation = { 0 0 0 }}
+	locator = { name = "11" position = { -60 -60 150 } rotation = { 0 0 0 }}
+	locator = { name = "12" position = { 0 0 190 } rotation = { 0 -90 0 }} #帝国尾部巨像旋转动画2号
+	locator = { name = "13" position = { 0 0 190 } rotation = { 0 90 0 }} #帝国尾部巨像旋转动画3号
+	locator = { name = "14" position = { 0 0 170 } rotation = { 90 0 0 }} #哺乳尾部巨像旋转动画2号
+	locator = { name = "15" position = { 0 0 170 } rotation = { 0 90 0 }} #帝国尾部巨像旋转动画4号
+	locator = { name = "16" position = { 0 0 -40 } rotation = { 0 0 0 }} #前部主宰船身
+	locator = { name = "17" position = { 0 0 -80 } rotation = { 0 0 0 }} #前部主宰船身
+	locator = { name = "18" position = { 0 0 -120 } rotation = { 0 0 0 }} #前部主宰船身
+	locator = { name = "19" position = { 0 0 -160 } rotation = { 0 0 0 }} #前部主宰船身
+	locator = { name = "20" position = { 0 0 -200 } rotation = { 0 0 0 }} #前部主宰船身
+	locator = { name = "21" position = { 0 0 -240 } rotation = { 0 0 0 }} #前部主宰船身
+	locator = { name = "22" position = { 0 0 -280 } rotation = { 0 0 0 }} #前部主宰船身
+	locator = { name = "23" position = { 0 0 -320 } rotation = { 0 0 0 }} #前部主宰船身
+	locator = { name = "24" position = { 0 0 -360 } rotation = { 0 0 0 }} #前部主宰船身
+	locator = { name = "25" position = { 0 0 -400 } rotation = { 0 0 0 }} #前部主宰船身
+	locator = { name = "26" position = { 0 0 -440 } rotation = { 0 0 0 }} #前部正常主宰船身
+	locator = { name = "27a" position = { 0 400 -160 } rotation = { 0 0 0 }} #舰船中部指挥所(哺乳)
+	locator = { name = "28a" position = { 0 400 -160 } rotation = { 0 0 0 }} #舰船中部指挥所(爬行)
+	locator = { name = "29a" position = { 0 400 -160 } rotation = { 0 0 0 }} #舰船中部指挥所(帝国)
+	locator = { name = "30a" position = { 0 400 -160 } rotation = { 90 0 0 }} #舰船中部巨像环
+	locator = { name = "32a" position = { 0 400 -160 } rotation = { 0 180 0 }} #舰船中部指挥所(哺乳)
+	locator = { name = "33a" position = { 0 400 -160 } rotation = { 0 180 0 }} #舰船中部指挥所(爬行)
+	locator = { name = "34a" position = { 0 400 -160 } rotation = { 0 180 0 }} #舰船中部指挥所(帝国)
+	locator = { name = "27b" position = { 0 -400 -160 } rotation = { 0 0 0 }} #舰船中部指挥所(哺乳)
+	locator = { name = "28b" position = { 0 -400 -160 } rotation = { 0 0 0 }} #舰船中部指挥所(爬行)
+	locator = { name = "29b" position = { 0 -400 -160 } rotation = { 0 0 0 }} #舰船中部指挥所(帝国)
+	locator = { name = "30b" position = { 0 -400 -160 } rotation = { 90 0 0 }} #舰船中部巨像环
+	locator = { name = "32b" position = { 0 -400 -160 } rotation = { 0 180 0 }} #舰船中部指挥所(哺乳)
+	locator = { name = "33b" position = { 0 -400 -160 } rotation = { 0 180 0 }} #舰船中部指挥所(爬行)
+	locator = { name = "34b" position = { 0 -400 -160 } rotation = { 0 180 0 }} #舰船中部指挥所(帝国)
+	locator = { name = "27c" position = { 400 0 -160 } rotation = { 0 0 90 }} #舰船中部指挥所(哺乳)
+	locator = { name = "28c" position = { 400 0 -160 } rotation = { 0 0 90 }} #舰船中部指挥所(爬行)
+	locator = { name = "29c" position = { 400 0 -160 } rotation = { 0 0 90 }} #舰船中部指挥所(帝国)
+	locator = { name = "30c" position = { 400 0 -160 } rotation = { 90 0 0 }} #舰船中部巨像环
+	locator = { name = "32c" position = { 400 0 -160 } rotation = { 0 180 -90 }} #舰船中部指挥所(哺乳)
+	locator = { name = "33c" position = { 400 0 -160 } rotation = { 0 180 -90 }} #舰船中部指挥所(爬行)
+	locator = { name = "34c" position = { 400 0 -160 } rotation = { 0 180 -90 }} #舰船中部指挥所(帝国)
+	locator = { name = "27d" position = { -400 0 -160 } rotation = { 0 0 90 }} #舰船中部指挥所(哺乳)
+	locator = { name = "28d" position = { -400 0 -160 } rotation = { 0 0 90 }} #舰船中部指挥所(爬行)
+	locator = { name = "29d" position = { -400 0 -160 } rotation = { 0 0 90 }} #舰船中部指挥所(帝国)
+	locator = { name = "30d" position = { -400 0 -160 } rotation = { 90 0 0 }} #舰船中部巨像环
+	locator = { name = "32d" position = { -400 0 -160 } rotation = { 0 180 -90 }} #舰船中部指挥所(哺乳)
+	locator = { name = "33d" position = { -400 0 -160 } rotation = { 0 180 -90 }} #舰船中部指挥所(爬行)
+	locator = { name = "34d" position = { -400 0 -160 } rotation = { 0 180 -90 }} #舰船中部指挥所(帝国)
+	locator = { name = "35" position = { 0 0 -470 } rotation = { 0 0 90 }}
+	locator = { name = "36" position = { 60 60 -470 } rotation = { 0 0 0 }}
+	locator = { name = "37" position = { -60 60 -470 } rotation = { 0 0 0 }}
+	locator = { name = "38" position = { 0 0 -430 } rotation = { 180 90 0 }} #帝国尾部巨像旋转动画
+	locator = { name = "39" position = { 0 0 -450 } rotation = { 270 0 0 }} #哺乳尾部巨像旋转动画
+	locator = { name = "40" position = { 0 60 -470 } rotation = { 0 0 0 }}
+	locator = { name = "41" position = { 60 0 -470 } rotation = { 0 0 0 }}
+	locator = { name = "42" position = { -60 0 -470 } rotation = { 0 0 0 }}
+	locator = { name = "43" position = { 0 -60 -470 } rotation = { 0 0 0 }}
+	locator = { name = "44" position = { 60 -60 -470 } rotation = { 0 0 0 }}
+	locator = { name = "45" position = { -60 -60 -470 } rotation = { 0 0 0 }}
+	locator = { name = "46" position = { 0 0 -450 } rotation = { 180 -90 0 }} #帝国尾部巨像旋转动画2号
+	locator = { name = "47" position = { 0 0 -450 } rotation = { 180 90 0 }} #帝国尾部巨像旋转动画3号
+	locator = { name = "48" position = { 0 0 -430 } rotation = { 270 0 0 }} #哺乳尾部巨像旋转动画2号
+	locator = { name = "49" position = { 0 0 -430 } rotation = { 180 90 0 }} #帝国尾部巨像旋转动画4号
+	attach = { "roof" = "CVB_mega_planet" }
+	attach = { "root" = "CVB_mega_shield_entity" }
+	#attach = { root = "CVB_mega_core_entity" }
+	#attach = { root = "CVB_mega_ship_entity" }
+	#attach = { root = "CVB_mega_stern_entity" }
+	#attach = { root = "CVB_mega_NeutronWarStar_MVT7_mid_entity" }
+	#attach = { root = "CVB_mega_NeutronWarStar_MVT7_mid2_entity" }
+	#attach = { root = "CVB_mega_colossus_rings_entity" }
+	attach = { "1" = "CVB_mega_colossus_rings_entity"} 
+	attach = { "2" = "CVB_mega_bow_entity"}
+	attach = { "2" = "CVB_mega_mid_entity"}
+	attach = { "2" = "CVB_mega_core_entity"}
+	attach = { "3" = "CVB_mega_bow_entity"}
+	attach = { "3" = "CVB_mega_mid_entity"}
+	attach = { "3" = "CVB_mega_core_entity"}
+	attach = { "4" = "CVB_mega_animation_entity_ZS"}
+	attach = { "5" = "CVB_mega_animation_entity_ZSA"}
+	attach = { "6" = "CVB_mega_bow_entity"}
+	attach = { "6" = "CVB_mega_mid_entity"}
+	attach = { "6" = "CVB_mega_core_entity"}
+	attach = { "7" = "CVB_mega_bow_entity"}
+	attach = { "7" = "CVB_mega_mid_entity"}
+	attach = { "7" = "CVB_mega_core_entity"}
+	attach = { "8" = "CVB_mega_bow_entity"}
+	attach = { "8" = "CVB_mega_mid_entity"}
+	attach = { "8" = "CVB_mega_core_entity"}
+	attach = { "9" = "CVB_mega_bow_entity"}
+	attach = { "9" = "CVB_mega_mid_entity"}
+	attach = { "9" = "CVB_mega_core_entity"}
+	attach = { "10" = "CVB_mega_bow_entity"}
+	attach = { "10" = "CVB_mega_mid_entity"}
+	attach = { "10" = "CVB_mega_core_entity"}
+	attach = { "11" = "CVB_mega_bow_entity"}
+	attach = { "11" = "CVB_mega_mid_entity"}
+	attach = { "11" = "CVB_mega_core_entity"}
+	attach = { "12" = "CVB_mega_animation_entity_ZS"}
+	attach = { "13" = "CVB_mega_animation_entity_ZSC"}
+	attach = { "14" = "CVB_mega_animation_entity_ZSB"}
+	attach = { "15" = "CVB_mega_animation_entity_ZSC"}
+	# attach = { "16" = "CVB_mega_shipS_entity"}
+	# attach = { "17" = "CVB_mega_shipS_entity"}
+	# attach = { "18" = "CVB_mega_shipS_entity"}
+	# attach = { "19" = "CVB_mega_shipS_entity"}
+	# attach = { "20" = "CVB_mega_shipS_entity"}
+	# attach = { "21" = "CVB_mega_shipS_entity"}
+	# attach = { "22" = "CVB_mega_shipS_entity"}
+	# attach = { "23" = "CVB_mega_shipS_entity"}
+	# attach = { "24" = "CVB_mega_shipS_entity"}
+	# attach = { "25" = "CVB_mega_shipS_entity"}
+	# attach = { "26" = "CVB_mega_shipS_entity"}
+	attach = { "27a" = "CVB_mega_shipZ_entity"} #哺乳擎天堡
+	attach = { "28a" = "CVB_mega_shipZA_entity"} #爬行擎天堡
+	attach = { "29a" = "CVB_mega_shipZB_entity"} #帝国擎天堡
+	attach = { "32a" = "CVB_mega_shipZ_entity"} #哺乳擎天堡
+	attach = { "33a" = "CVB_mega_shipZA_entity"} #爬行擎天堡
+	attach = { "34a" = "CVB_mega_shipZB_entity"} #帝国擎天堡
+	attach = { "30a" = "CVB_mega_shipZC_entity"} #中部巨像环
+	attach = { "27b" = "CVB_mega_shipZ_entity"} #哺乳擎天堡
+	attach = { "28b" = "CVB_mega_shipZA_entity"} #爬行擎天堡
+	attach = { "29b" = "CVB_mega_shipZB_entity"} #帝国擎天堡
+	attach = { "32b" = "CVB_mega_shipZ_entity"} #哺乳擎天堡
+	attach = { "33b" = "CVB_mega_shipZA_entity"} #爬行擎天堡
+	attach = { "34b" = "CVB_mega_shipZB_entity"} #帝国擎天堡
+	attach = { "30b" = "CVB_mega_shipZC_entity"} #中部巨像环
+	attach = { "27c" = "CVB_mega_shipZ_entity"} #哺乳擎天堡
+	attach = { "28c" = "CVB_mega_shipZA_entity"} #爬行擎天堡
+	attach = { "29c" = "CVB_mega_shipZB_entity"} #帝国擎天堡
+	attach = { "32c" = "CVB_mega_shipZ_entity"} #哺乳擎天堡
+	attach = { "33c" = "CVB_mega_shipZA_entity"} #爬行擎天堡
+	attach = { "34c" = "CVB_mega_shipZB_entity"} #帝国擎天堡
+	attach = { "30c" = "CVB_mega_shipZC_entity"} #中部巨像环
+	attach = { "27d" = "CVB_mega_shipZ_entity"} #哺乳擎天堡
+	attach = { "28d" = "CVB_mega_shipZA_entity"} #爬行擎天堡
+	attach = { "29d" = "CVB_mega_shipZB_entity"} #帝国擎天堡
+	attach = { "32d" = "CVB_mega_shipZ_entity"} #哺乳擎天堡
+	attach = { "33d" = "CVB_mega_shipZA_entity"} #爬行擎天堡
+	attach = { "34d" = "CVB_mega_shipZB_entity"} #帝国擎天堡
+	attach = { "30d" = "CVB_mega_shipZC_entity"} #中部巨像环
+	#attach = { "31" = "CVB_mega_shipQ_entity"} #前部主宰
+	attach = { "35" = "CVB_mega_colossus_rings_entity"} 
+	attach = { "36" = "CVB_mega_bow_entity"}
+	attach = { "36" = "CVB_mega_mid_entity"}
+	attach = { "36" = "CVB_mega_core_entity"}
+	attach = { "37" = "CVB_mega_bow_entity"}
+	attach = { "37" = "CVB_mega_mid_entity"}
+	attach = { "37" = "CVB_mega_core_entity"}
+	attach = { "38" = "CVB_mega_animation_entity_ZS"}
+	attach = { "39" = "CVB_mega_animation_entity_ZSA"}
+	attach = { "40" = "CVB_mega_bow_entity"}
+	attach = { "40" = "CVB_mega_mid_entity"}
+	attach = { "40" = "CVB_mega_core_entity"}
+	attach = { "41" = "CVB_mega_bow_entity"}
+	attach = { "41" = "CVB_mega_mid_entity"}
+	attach = { "41" = "CVB_mega_core_entity"}
+	attach = { "42" = "CVB_mega_bow_entity"}
+	attach = { "42" = "CVB_mega_mid_entity"}
+	attach = { "42" = "CVB_mega_core_entity"}
+	attach = { "43" = "CVB_mega_bow_entity"}
+	attach = { "43" = "CVB_mega_mid_entity"}
+	attach = { "43" = "CVB_mega_core_entity"}
+	attach = { "44" = "CVB_mega_bow_entity"}
+	attach = { "44" = "CVB_mega_mid_entity"}
+	attach = { "44" = "CVB_mega_core_entity"}
+	attach = { "45" = "CVB_mega_bow_entity"}
+	attach = { "45" = "CVB_mega_mid_entity"}
+	attach = { "45" = "CVB_mega_core_entity"}
+	attach = { "46" = "CVB_mega_animation_entity_ZS"}
+	attach = { "47" = "CVB_mega_animation_entity_ZSC"}
+	attach = { "48" = "CVB_mega_animation_entity_ZSB"}
+	attach = { "49" = "CVB_mega_animation_entity_ZSC"}
+	scale = 3
+}
+#主体A
+entity = {
+	name = "CVB_mega_bow_entity"
+	
+	locator = { name = "root"	position = {	0	0	0	}	}
+	locator = { name = "bow"	position = {	0	0	-30	}	}
+	locator = { name = "gun_01"	position = {	0	0	-30	}	}
+
+	attach = { bow = "mammalian_01_titan_bow_entity" }
+
+	scale = 1
+}
+#主体B
+entity = {
+	name = "CVB_mega_mid_entity"
+	
+	locator = { name = "root"	position = {	0	0	0	}	}
+	locator = { name = "mid"	position = {	0	0	-20	}	}
+	locator = { name = "gun_01"	position = {	0	10	-28	}	}
+	locator = { name = "gun_02"	position = {	0	10	-22	}	}
+
+	attach = { mid = "mammalian_01_titan_mid_entity" }
+
+	scale = 1
+}
+#主体C
+entity = {
+	name = "CVB_mega_core_entity"
+	
+	locator = { name = "root"	position = {	0	0	0	}	}
+	locator = { name = "core"	position = {	0	0	25	}	}
+	locator = { name = "around"	position = {	0	0	20	}	rotation = {	0	90	0	}	}
+	
+	attach = { core = "gatebuilder_gateway_portal_entity" }
+	attach = { around = "CVB_mega_animation_entity" }
+
+	scale = 1
+}
+#帝国尾部巨像旋转动画2号
+entity = {
+	name = "CVB_mega_animation_entity_ZSC"
+	pdxmesh = "nemesis_01_colossus_mesh"
+
+	default_state = "idle"
+	state = { name = "idle" animation = "open" 
+		chance = {
+			if_current_state = {
+				"idle" = 100
+				"moving" = 100
+				"death" = 100
+				"working" = 100
+				"working_looping" = 100
+			}
+		}
+		event = { time = 0	id = "beam_start" }
+	
+		event = { trigger_once = yes sound = { soundeffect = "amb_star_eater_open_energy" stop_on_state_change = yes } }
+		event = { trigger_once = yes sound = { soundeffect = "amb_nemesis_colossus_idle_hum" } }
+		event = { trigger_once = yes sound = { soundeffect = "amb_nemesis_colossus_idle_distortion" } }
+
+		event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "light_locator_015" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "light_locator_016" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "light_locator_017" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "light_locator_017" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "light_locator_019" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "light_locator_020" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "light_locator_06" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+
+#		event = { time = 0 node = "root" particle = "nemesis_colossus_core_lightning_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "L_effect_5" particle = "nemesis_colossus_side_lightning_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "R_effect_5" particle = "nemesis_colossus_side_lightning_effect" keep_particle = yes trigger_once = yes }
+	
+		event = { time = 0 node = "L_effect_4" particle = "nemesis_colossus_side_lightning_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "R_effect_4" particle = "nemesis_colossus_side_lightning_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "L_effect_3" particle = "nemesis_colossus_side_lightning_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "R_effect_3" particle = "nemesis_colossus_side_lightning_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "L_effect_2" particle = "nemesis_colossus_side_lightning_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "R_effect_2" particle = "nemesis_colossus_side_lightning_effect" keep_particle = yes trigger_once = yes }
+
+		event = { time = 0 node = "L_effect_1" particle = "nemesis_colossus_side_lightning_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "R_effect_1" particle = "nemesis_colossus_side_lightning_effect" keep_particle = yes trigger_once = yes }		
+	}
+	
+	scale = 3
+}
+#帝国尾部巨像旋转动画
+entity = {
+	name = "CVB_mega_animation_entity_ZS"
+	pdxmesh = "nemesis_01_colossus_mesh"
+
+	default_state = "idle"
+	state = { name = "idle" animation = "open" 
+		chance = {
+			if_current_state = {
+				"idle" = 100
+				"moving" = 100
+				"death" = 100
+				"working" = 100
+				"working_looping" = 100
+			}
+		}
+		event = { time = 0	id = "beam_start" }
+	
+		event = { trigger_once = yes sound = { soundeffect = "amb_star_eater_open_energy" stop_on_state_change = yes } }
+		event = { trigger_once = yes sound = { soundeffect = "amb_nemesis_colossus_idle_hum" } }
+		event = { trigger_once = yes sound = { soundeffect = "amb_nemesis_colossus_idle_distortion" } }
+
+		event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "light_locator_015" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "light_locator_016" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "light_locator_017" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "light_locator_017" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "light_locator_019" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "light_locator_020" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "light_locator_06" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+
+#		event = { time = 0 node = "root" particle = "nemesis_colossus_core_lightning_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "L_effect_5" particle = "nemesis_colossus_side_lightning_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "R_effect_5" particle = "nemesis_colossus_side_lightning_effect" keep_particle = yes trigger_once = yes }
+	
+		event = { time = 0 node = "L_effect_4" particle = "nemesis_colossus_side_lightning_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "R_effect_4" particle = "nemesis_colossus_side_lightning_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "L_effect_3" particle = "nemesis_colossus_side_lightning_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "R_effect_3" particle = "nemesis_colossus_side_lightning_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "L_effect_2" particle = "nemesis_colossus_side_lightning_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "R_effect_2" particle = "nemesis_colossus_side_lightning_effect" keep_particle = yes trigger_once = yes }
+
+		event = { time = 0 node = "L_effect_1" particle = "nemesis_colossus_side_lightning_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "R_effect_1" particle = "nemesis_colossus_side_lightning_effect" keep_particle = yes trigger_once = yes }		
+	}
+	
+	scale = 5
+}
+#帝国巨象
+entity = {
+	name = "CVB_mega_animation_entity"
+	pdxmesh = "nemesis_01_colossus_mesh"
+
+	default_state = "idle"
+	state = { name = "idle" animation = "open" 
+		chance = {
+			if_current_state = {
+				"idle" = 100
+				"moving" = 100
+				"death" = 100
+				"working" = 100
+				"working_looping" = 100
+			}
+		}
+		event = { time = 0	id = "beam_start" }
+	
+		event = { trigger_once = yes sound = { soundeffect = "amb_star_eater_open_energy" stop_on_state_change = yes } }
+		event = { trigger_once = yes sound = { soundeffect = "amb_nemesis_colossus_idle_hum" } }
+		event = { trigger_once = yes sound = { soundeffect = "amb_nemesis_colossus_idle_distortion" } }
+
+		event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "light_locator_015" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "light_locator_016" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "light_locator_017" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "light_locator_017" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "light_locator_019" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "light_locator_020" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "light_locator_06" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+
+#		event = { time = 0 node = "root" particle = "nemesis_colossus_core_lightning_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "L_effect_5" particle = "nemesis_colossus_side_lightning_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "R_effect_5" particle = "nemesis_colossus_side_lightning_effect" keep_particle = yes trigger_once = yes }
+	
+		event = { time = 0 node = "L_effect_4" particle = "nemesis_colossus_side_lightning_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "R_effect_4" particle = "nemesis_colossus_side_lightning_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "L_effect_3" particle = "nemesis_colossus_side_lightning_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "R_effect_3" particle = "nemesis_colossus_side_lightning_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "L_effect_2" particle = "nemesis_colossus_side_lightning_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "R_effect_2" particle = "nemesis_colossus_side_lightning_effect" keep_particle = yes trigger_once = yes }
+
+		event = { time = 0 node = "L_effect_1" particle = "nemesis_colossus_side_lightning_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "R_effect_1" particle = "nemesis_colossus_side_lightning_effect" keep_particle = yes trigger_once = yes }		
+	}
+	
+	scale = 1
+}
+#哺乳主宰
+entity = {
+	name = "CVB_mega_ship_entity"
+	
+	locator = { name = "root"		position = {	0	0	0	}	}
+	locator = { name = "ship"		position = {	0	0	0	}	}
+	locator = { name = "locator_01"	position = {	9	10	0	}	}
+	locator = { name = "locator_02"	position = {	6	10	0	}	}
+	locator = { name = "locator_03"	position = {	3	10	0	}	}
+	locator = { name = "locator_04"	position = {	0	10	0	}	}
+	locator = { name = "locator_05"	position = {	-3	10	0	}	}
+	locator = { name = "locator_06"	position = {	-6	10	0	}	}
+	locator = { name = "locator_07"	position = {	-9	10	0	}	}
+
+	attach = { ship = "mammalian_01_juggernaut_core_section_entity" }
+	
+	scale = 1
+}
+#哺乳船尾
+entity = {
+	name = "CVB_mega_stern_entity"
+	
+	locator = { name = "root"	position = {	0	0	0	}	}
+	locator = { name = "stern"	position = {	0	0	10	}	}
+	locator = { name = "gun_01"	position = {	4	10	10	}	}
+	locator = { name = "gun_02"	position = {	2	10	10	}	}
+	locator = { name = "gun_03"	position = {	0	10	10	}	}
+	locator = { name = "gun_04"	position = {	-2	10	10	}	}
+	locator = { name = "gun_05"	position = {	-4	10	10	}	}
+
+	attach = { stern = "mammalian_01_titan_stern_entity" }
+
+	scale = 1
+}
+#横置星环基地
+entity = {
+	name = "CVB_mega_NeutronWarStar_MVT7_mid_entity"
+	pdxmesh = "orbital_ring_tier_03_mesh"
+
+	attach = { "part1" 			= "humanoid_01_orbital_ring_section_entity" }
+	attach = { "part2" 			= "humanoid_01_orbital_ring_section_entity" }
+	attach = { "part3" 			= "humanoid_01_orbital_ring_section_entity" }
+	attach = { "part4" 			= "humanoid_01_orbital_ring_section_entity" }
+	attach = { "hub1" 			= "humanoid_01_orbital_ring_hub_tier_03_entity" }
+	attach = { "hub2" 			= "humanoid_01_orbital_ring_hub_entity" }
+	attach = { "hub3" 			= "humanoid_01_orbital_ring_hub_entity" }
+	attach = { "hub4" 			= "humanoid_01_orbital_ring_hub_entity" }
+	attach = { "rotate" 		= "orbital_ring_elevator_stage_3_entity" }
+
+	default_state = "idle"
+	state = { name = "idle" state_time = 5 animation = "idle"
+		start_event = { trigger_once = yes sound = { soundeffect = "amb_megastructure_orbital_ring_03_idle" } }
+	}
+	state = { name = "moving" state_time = 5 animation = "idle"
+		start_event = { trigger_once = yes sound = { soundeffect = "amb_megastructure_orbital_ring_03_idle" } }
+	}
+	scale = 3
+
+	locator = { name = "magic_void_turret_01" position = { 27.72 11.48  0 } rotation = 	{ 0  0  0 } }
+	locator = { name = "magic_void_turret_02" position = { 21.21 21.21  0 } rotation = 	{ 0  0  0 } }
+	locator = { name = "magic_void_turret_03" position = { 11.48 27.72  0 } rotation = 	{ 0  0  0 } }
+	locator = { name = "magic_void_turret_04" position = { 0 30  0 } rotation = 	{ 0  0  0 } }
+	locator = { name = "magic_void_turret_05" position = { -11.48 27.72 0 } rotation = { 0  0  0 } }
+	locator = { name = "magic_void_turret_06" position = { -30 0  0 } rotation = 	{ 0  0  0 } }
+	locator = { name = "magic_void_turret_07" position = { -27.72 11.48  0 } rotation = 	{ 0  0  0 } }
+	locator = { name = "magic_void_turret_08" position = { -30 0  0 } rotation = 	{ 0  0  0 } }
+	locator = { name = "magic_void_turret_09" position = { -27.72 -11.48  0 } rotation = 	{ 0  0  0 } }
+	locator = { name = "magic_void_turret_10" position = { -21.21 -21.21  0 } rotation = 	{ 0  0  0 } }
+	locator = { name = "magic_void_turret_11" position = { -11.48 -27.72 0 } rotation = { 0  0  0 } }
+	locator = { name = "magic_void_turret_12" position = { 0 -30  0 } rotation = 	{ 0  0  0 } }
+	locator = { name = "magic_void_turret_13" position = { 11.48 -27.72  0 } rotation = 	{ 0  0  0 } }
+	locator = { name = "magic_void_turret_14" position = { 21.21 -21.21  0 } rotation = 	{ 0  0  0 } }
+	locator = { name = "magic_void_turret_15" position = { 27.72 -11.48  0 } rotation = 	{ 0  0  0 } }
+	locator = { name = "magic_void_turret_16" position = { 30 0  0 } rotation = 	{ 0  0  0 } }
+	state = { name = "death" state_time = 5 }
+
+	game_data = {
+		trail_locators = {
+			"exhaust_01" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+			"engine_small_01" = 		{ width = @small_trail_W 	lenght = @small_trail_L   	}
+			"engine_small_03" = 		{ width = @small_trail_W 	lenght = @small_trail_L   	}
+		}
+	}
+}
+#竖置星环基地
+entity = {
+	name = "CVB_mega_NeutronWarStar_MVT7_mid2_entity"
+	
+	locator = { name = "cust_root" position = { 0 0  0 } rotation = 	{ 0  90  0 } }
+	attach = { "cust_root" = "humanoid_01_orbital_ring_tier_3_section_entity" }
+	
+	scale = 3
+	
+	
+	
+	locator = { name = "magic_void_turret_01" position = { 27.72 11.48  0 } rotation = 	{ 0  0  0 } }
+	locator = { name = "magic_void_turret_02" position = { 21.21 21.21  0 } rotation = 	{ 0  0  0 } }
+	locator = { name = "magic_void_turret_03" position = { 11.48 27.72  0 } rotation = 	{ 0  0  0 } }
+	locator = { name = "magic_void_turret_04" position = { 0 30  0 } rotation = 	{ 0  0  0 } }
+	locator = { name = "magic_void_turret_05" position = { -11.48 27.72 0 } rotation = { 0  0  0 } }
+	locator = { name = "magic_void_turret_06" position = { -30 0  0 } rotation = 	{ 0  0  0 } }
+	locator = { name = "magic_void_turret_07" position = { -27.72 11.48  0 } rotation = 	{ 0  0  0 } }
+	locator = { name = "magic_void_turret_08" position = { -30 0  0 } rotation = 	{ 0  0  0 } }
+	locator = { name = "magic_void_turret_09" position = { -27.72 -11.48  0 } rotation = 	{ 0  0  0 } }
+	locator = { name = "magic_void_turret_10" position = { -21.21 -21.21  0 } rotation = 	{ 0  0  0 } }
+	locator = { name = "magic_void_turret_11" position = { -11.48 -27.72 0 } rotation = { 0  0  0 } }
+	locator = { name = "magic_void_turret_12" position = { 0 -30  0 } rotation = 	{ 0  0  0 } }
+	locator = { name = "magic_void_turret_13" position = { 11.48 -27.72  0 } rotation = 	{ 0  0  0 } }
+	locator = { name = "magic_void_turret_14" position = { 21.21 -21.21  0 } rotation = 	{ 0  0  0 } }
+	locator = { name = "magic_void_turret_15" position = { 27.72 -11.48  0 } rotation = 	{ 0  0  0 } }
+	locator = { name = "magic_void_turret_16" position = { 30 0  0 } rotation = 	{ 0  0  0 } }
+
+}
+#哺乳巨象舰船尾部旋转动画
+entity = {
+	name = "CVB_mega_animation_entity_ZSA"
+	pdxmesh = "mammalian_01_colossus_rings_mesh"
+	scale = 5
+	
+	get_state_from_parent = no
+	
+	default_state = "idle"
+	state = { name = "idle" animation = "idle" }
+}
+#哺乳巨象舰船尾部旋转动画2号
+entity = {
+	name = "CVB_mega_animation_entity_ZSB"
+	pdxmesh = "mammalian_01_colossus_rings_mesh"
+	scale = 3
+	
+	get_state_from_parent = no
+	
+	default_state = "idle"
+	state = { name = "idle" animation = "idle" }
+}
+#哺乳巨象纵向旋转动画
+entity = {
+	name = "CVB_mega_colossus_rings_entity"
+	pdxmesh = "mammalian_01_colossus_rings_mesh"
+	
+	get_state_from_parent = no
+	
+	default_state = "idle"
+	state = { name = "idle" animation = "idle" }
+}
+#主体星球                                                               正反倾斜 前后倾斜 左右倾斜
+entity = {
+	name = "CVB_mega_planet"
+	locator = { name = "1"	position = {	0	0	0	}	rotation = {	0	0	0	}	}
+	locator = { name = "2"	position = {	0	0	0	}	rotation = {	0	90	0	}	}
+	locator = { name = "3"	position = {	0	0 	0 	}	rotation = {	0	-90	0	}	}
+	locator = { name = "4"	position = {	0	0	0	}	rotation = {	0	180	0	}	}
+	locator = { name = "5"	position = {	0	0 	0 	}	rotation = {	90	0	0	}	}
+	locator = { name = "6"	position = {	0	0	0	}	rotation = {	-90 0	0	}	}
+	locator = { name = "7"	position = {	0	0 	0 	}	rotation = {	180	0	0	}	}
+	locator = { name = "8"	position = {	0	0	0	}	rotation = {	90	0	90	}	}
+	locator = { name = "9"	position = {	0	0 	0 	}	rotation = {	-90	0	90	}	}
+	locator = { name = "10"	position = {	0	0	0	}	rotation = {	0	90	90	}	}
+	locator = { name = "11"	position = {	0	0 	0 	}	rotation = {	0	-90	90	}	}
+	locator = { name = "12"	position = {	0	0	0	}	rotation = {	0	180	90	}	}
+	locator = { name = "13"	position = {	0	0	0	}	rotation = {	90	180	0	}	}
+	attach = { "1" = "necroid_01_mega_shipyard_01_stage_2_entity" }
+	attach = { "2" = "necroid_01_mega_shipyard_01_stage_2_entity" }
+	attach = { "3" = "necroid_01_mega_shipyard_01_stage_2_entity" }
+	attach = { "4" = "necroid_01_mega_shipyard_01_stage_2_entity" }
+	 attach = { "5" = "necroid_01_mega_shipyard_01_stage_2_entity" }
+	 attach = { "6" = "necroid_01_mega_shipyard_01_stage_2_entity" }
+	 attach = { "7" = "necroid_01_mega_shipyard_01_stage_2_entity" }
+	 attach = { "8" = "necroid_01_mega_shipyard_01_stage_2_entity" }
+	 attach = { "9" = "necroid_01_mega_shipyard_01_stage_2_entity" }
+	 attach = { "10" = "necroid_01_mega_shipyard_01_stage_2_entity" }
+	 attach = { "11" = "necroid_01_mega_shipyard_01_stage_2_entity" }
+	 attach = { "12" = "necroid_01_mega_shipyard_01_stage_2_entity" }
+	# attach = { "13" = "necroid_01_mega_shipyard_01_stage_3_entity" }
+	scale = 5
+
+}
+
+#正常哺乳主宰
+entity = {
+	name = "CVB_mega_shipS_entity"
+	
+	locator = { name = "root"		position = {	0	0	0	}	}
+	locator = { name = "ship"		position = {	0	0	0	}	}
+	locator = { name = "locator_01"	position = {	9	10	0	}	}
+	locator = { name = "locator_02"	position = {	6	10	0	}	}
+	locator = { name = "locator_03"	position = {	3	10	0	}	}
+	locator = { name = "locator_04"	position = {	0	10	0	}	}
+	locator = { name = "locator_05"	position = {	-3	10	0	}	}
+	locator = { name = "locator_06"	position = {	-6	10	0	}	}
+	locator = { name = "locator_07"	position = {	-9	10	0	}	}
+
+	attach = { ship = "mammalian_01_juggernaut_core_section_entity" }
+	
+	scale = 2
+}
+#哺乳擎天堡
+entity = {
+	name = "CVB_mega_shipZ_entity" #舰船中部指挥所（哺乳
+	
+	locator = { name = "root"		position = {	0	0	0	}	}
+	locator = { name = "ship"		position = {	0	0	0	}	}
+
+	attach = { ship = "mammalian_01_starbase_citadel_section_entity" }
+	
+	scale = 4
+}
+#爬行擎天堡
+entity = {
+	name = "CVB_mega_shipZA_entity" #舰船中部指挥所(爬行
+	
+	locator = { name = "root"		position = {	0	0	0	}	}
+	locator = { name = "ship"		position = {	0	0	0	}	}
+
+	attach = { ship = "reptilian_01_starbase_citadel_section_entity" }
+	
+	scale = 3
+}
+#帝国擎天堡
+entity = {
+	name = "CVB_mega_shipZB_entity" #舰船中部指挥所(帝国
+	
+	locator = { name = "root"		position = {	0	0	0	}	}
+	locator = { name = "ship"		position = {	0	0	0	}	}
+
+	attach = { ship = "necroid_01_starbase_citadel_section_entity" }
+	
+	scale = 5
+}
+#中部巨像环装饰
+entity = {
+	name = "CVB_mega_shipZC_entity"
+	pdxmesh = "mammalian_01_colossus_rings_mesh"
+	scale = 3.5
+	
+	get_state_from_parent = no
+	
+	default_state = "idle"
+	state = { name = "idle" animation = "idle" }
+}
+#最前方主宰
+entity = {
+	name = "CVB_mega_shipQ_entity"
+	
+	locator = { name = "root"		position = {	0	0	0	}	}
+	locator = { name = "ship"		position = {	0	0	0	}	}
+	locator = { name = "locator_01"	position = {	9	10	0	}	}
+	locator = { name = "locator_02"	position = {	6	10	0	}	}
+	locator = { name = "locator_03"	position = {	3	10	0	}	}
+	locator = { name = "locator_04"	position = {	0	10	0	}	}
+	locator = { name = "locator_05"	position = {	-3	10	0	}	}
+	locator = { name = "locator_06"	position = {	-6	10	0	}	}
+	locator = { name = "locator_07"	position = {	-9	10	0	}	}
+
+	attach = { ship = "mammalian_01_juggernaut_core_section_entity" }
+	
+	scale = 3.5
+}
+#巨构模型
+entity = {
+	name = "CVB_mega_mega_entity"
+
+	locator = { name = "root"	position = {	0	0	0	}	}
+	locator = { name = "ship" position = { 0 -500 0 } rotation = { 0 90 0 }}
+
+	attach = { "ship" = "CVB_mega_titan_entity" }
+	game_data = {
+		emissive_recolor_crunch = 6.0
+
+	}
+	scale = 0.1
+
+}
+#缩小版巨构模型
+entity = {
+	name = "CVB_zx_mega_mega_entity"
+
+	locator = { name = "root"	position = {	0	0	0	}	}
+	locator = { name = "ship" position = { 0 -500 0 } rotation = { 0 90 0 }}
+
+	attach = { "ship" = "CVB_mega_titan_entity" }
+	game_data = {
+		emissive_recolor_crunch = 6.0
+
+	}
+	scale = 1.5
+
+}
+
+
+
+	entity = {
+	name = "CVB_mega_shield_entity"
+
+	pdxmesh = "ae_shield_mesh"
+	scale = 2
+	default_state = "idle"
+	state = {
+		name = "idle" animation = "idle"
+	}
+
+}
+
+
+#传奇奈锈王知管运输舰
+entity = {
+	name = "yunfan_fallen_ship_of_star_entity"
+	pdxmesh = "fallen_empire_04_titan_mesh_yunfan"
+
+	default_state = "idle"
+	state = {
+		name = "idle"
+		animation = "idle"
+	}
+
+	scale = 50
+
+}

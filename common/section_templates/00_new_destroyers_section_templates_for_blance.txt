@@ -1,0 +1,182 @@
+@section_cost = 30
+
+ship_section_template = {
+	key = "DESTROYER_BOW_2L"
+	ship_size = destroyer
+	fits_on_slot = bow
+	should_draw_components = yes
+	entity = "destroyer_bow_M1S2_entity"
+	icon = "GFX_ship_part_core_bow"
+	ai_tags = { artillery }
+
+	prerequisites = { tech_use_weapen_as_shield }
+
+	ai_weight = {
+		modifier = {
+			factor = 10.0
+			NOR = {
+				has_ai_personality = peaceful_traders
+				has_ai_personality = slaving_despots
+				has_ai_personality = migrating_flock
+				has_ai_personality = evangelising_zealots
+				has_ai_personality = hive_mind
+			}
+		}
+	}
+
+	component_slot = {
+		name = "LARGE_GUN_01"
+		template = "large_turret"
+		locatorname = "large_gun_01"
+	}
+
+	component_slot = {
+		name = "LARGE_GUN_02"
+		template = "large_turret"
+		locatorname = "large_gun_02"
+	}
+
+	small_utility_slots = 2
+
+	resources = {
+		category = ship_sections
+		cost = {
+			alloys = @section_cost
+		}
+	}
+}
+
+ship_section_template = {
+	key = "DESTROYER_BOW_1H"
+	ship_size = destroyer
+	fits_on_slot = bow
+	should_draw_components = yes
+	entity = "destroyer_bow_S3_entity"
+	icon = "GFX_ship_part_core_bow"
+	ai_tags = { carrier }
+
+	prerequisites = { tech_use_weapen_as_shield }
+
+	ai_weight = {
+		modifier = {
+			factor = 10.0
+			NOR = {
+				has_ai_personality = peaceful_traders
+				has_ai_personality = slaving_despots
+				has_ai_personality = migrating_flock
+				has_ai_personality = evangelising_zealots
+				has_ai_personality = hive_mind
+			}
+		}
+	}
+
+	component_slot = {
+		name = "STRIKE_CRAFT_01"
+		template = "large_strike_craft"
+		rotation = 90
+		locatorname = "strike_craft_locator_01"
+	}
+
+	component_slot = {
+		name = "PD_01"
+		template = "point_defence_turret"
+		locatorname = "root"
+	}
+
+    component_slot = {
+		name = "PD_02"
+		template = "point_defence_turret"
+		locatorname = "root"
+	}
+
+	small_utility_slots = 4
+
+	resources = {
+		category = ship_sections
+		cost = {
+			alloys = @section_cost
+		}
+	}
+}
+
+ship_section_template = {
+	key = "DESTROYER_BOW_M1L1"
+	ship_size = destroyer
+	fits_on_slot = bow
+	should_draw_components = yes
+	entity = "destroyer_bow_M1S2_entity"
+	icon = "GFX_ship_part_core_bow"
+	ai_tags = { gunship }
+
+	prerequisites = { tech_use_weapen_as_shield }
+
+	ai_weight = {
+		modifier = {
+			factor = 10.0
+			NOR = {
+				has_ai_personality = peaceful_traders
+				has_ai_personality = slaving_despots
+				has_ai_personality = migrating_flock
+				has_ai_personality = evangelising_zealots
+				has_ai_personality = hive_mind
+			}
+		}
+	}
+
+	component_slot = {
+		name = "LARGE_GUN_01"
+		template = "large_turret"
+		locatorname = "large_gun_01"
+	}
+
+	component_slot = {
+		name = "MEDIUM_GUN_01"
+		template = "medium_turret"
+		locatorname = "medium_gun_01"
+	}
+
+	component_slot = {
+		name = "SMALL_GUN_01"
+		template = "small_turret"
+		locatorname = "small_gun_01"
+	}
+
+	component_slot = {
+		name = "SMALL_GUN_02"
+		template = "small_turret"
+		locatorname = "small_gun_02"
+	}
+
+	small_utility_slots = 2
+
+	resources = {
+		category = ship_sections
+		cost = {
+			alloys = @section_cost
+		}
+	}
+}
+
+ship_section_template = {
+	key = "DESTROYER_STERN_3A"
+	ship_size = destroyer
+	fits_on_slot = stern
+	should_draw_components = yes
+	entity = "destroyer_stern_S2_entity"
+	icon = "GFX_ship_part_core_stern"
+
+	prerequisites = { tech_use_weapen_as_shield }
+
+	ai_weight = {
+		factor = 100
+	}
+
+	aux_utility_slots = 3
+
+	resources = {
+		category = ship_sections
+		cost = {
+			alloys = @section_cost
+		}
+	}
+}

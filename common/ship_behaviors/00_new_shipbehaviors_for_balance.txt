@@ -1,0 +1,59 @@
+ship_behavior = {
+	name = far_fire
+
+	preferred_attack_range = max
+	formation_distance = 1000
+	return_to_formation_distance = 1000
+
+	source_target_anchor_factor = 1.0
+	combat_target_anchor = root
+
+	collision_awareness = 0.3
+	collision_strafe = 1.0
+	collision_radius = 1.0
+
+	attack_move_pattern = stay_at_range
+	passive_move_pattern = stay_at_range
+
+	desc = "far_fire_DESC"
+}
+
+ship_behavior = {
+	name = guerrilla
+
+	preferred_attack_range = 200
+	formation_distance = 200
+	return_to_formation_distance = 200
+
+	source_target_anchor_factor = 1.0
+	combat_target_anchor = root
+
+	collision_awareness = 0.3
+	collision_strafe = 1.0
+	collision_radius = 1.0
+
+	attack_move_pattern = maintain_distance
+	passive_move_pattern = stationary
+
+	desc = "guerrilla_DESC"
+}
+
+ship_behavior = {
+	name = face_fire
+
+	preferred_attack_range = min
+	formation_distance = min
+	return_to_formation_distance = min
+
+	source_target_anchor_factor = 1.0
+	combat_target_anchor = root
+
+	collision_awareness = 0.3
+	collision_strafe = 1.0
+	collision_radius = 1.0
+
+	attack_move_pattern = orbit
+	passive_move_pattern = charge
+
+	desc = "face_fire_DESC"
+}

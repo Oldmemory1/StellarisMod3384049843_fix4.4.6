@@ -1,0 +1,76 @@
+namespace = angle_of_end_events
+
+country_event = {
+	id = angle_of_end_events.1
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		is_fallen_empire_spiritualist = yes
+	}
+
+	immediate = {
+		save_global_event_target_as = spiritualist_fallen_empire2
+
+		create_country = {
+			type = global_flag
+			species = event_target:spiritualist_fallen_empire2.owner_main_species
+			effect = {
+				set_name = {
+					key = name_spiritualist_fallen_empire2
+					variable_string = "[spiritualist_fallen_empire2.GetName]"
+				}
+				save_global_event_target_as = spiritualist_fallen_empire
+			}
+		}
+		every_country = {
+			establish_communications_no_message = event_target:spiritualist_fallen_empire
+		}
+	}
+}
+
+country_event = {
+	id = angle_of_end_events.2
+	title = angle_of_end_events.2.title
+	diplomatic = yes
+	is_triggered_only = yes
+
+	desc = {
+		trigger = {
+			has_global_flag = used_r_fallen_unbidden_warlock
+		}
+		text = angle_of_end_events.2.desc.a
+	}
+
+	desc = {
+		trigger = {
+			NOT = {
+				has_global_flag = used_r_fallen_unbidden_warlock
+			}
+		}
+		text = angle_of_end_events.2.desc.b
+	}
+
+	picture_event_data = {
+		room = this
+		portrait = event_target:spiritualist_fallen_empire2.owner_main_species
+		city_level = this
+		graphical_culture = this
+	}
+
+	trigger = {
+		NOT = {
+			has_global_flag = communitied_to_angle_of_end
+		}
+	}
+
+	immediate = {
+		set_global_flag = communitied_to_angle_of_end
+	}
+
+	option = {
+        name = angle_of_end_events.2.a
+		response_text = angle_of_end_events.2.a.desc
+		is_dialog_only = yes
+    }
+}

@@ -1,0 +1,18 @@
+gov_lgate_grander = {
+    ruler_title = lgate_keepers
+    ruler_title_female = lgate_keepers
+    possible = {
+        has_country_flag = fallen_empire_machine_LgateGrander
+    }
+    weight = { base = 1000 }
+}
+
+gov_lgate_grander_awake = {
+    ruler_title = lgate_keepers_awake
+    ruler_title_female = lgate_keepers_awake
+    possible = {
+        has_country_flag = fallen_empire_machine_LgateGrander
+        has_country_flag = fallen_empire_machine_LgateGrander_awake
+    }
+    weight = { base = 1500 }
+}

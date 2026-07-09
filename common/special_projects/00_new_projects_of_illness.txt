@@ -1,0 +1,104 @@
+special_project = {
+	key = "research_vaccine_of_virus"
+	icon = "gfx/interface/icons/situation_log/situation_log_society.dds"
+	cost = 0
+	days_to_research = 900
+	picture = GFX_evt_vivisection
+	location = no
+	sound = no
+	event_scope = country_event
+	AI_wait_days = {
+		weight = 0
+	}
+	on_success = {
+		country_event = {
+			id = tech_fallen_events.25
+		}
+	}
+}
+
+special_project = {
+	key = "research_medicine_of_virus"
+	icon = "gfx/interface/icons/situation_log/situation_log_society.dds"
+	cost = 0
+	days_to_research = 1800
+	picture = GFX_evt_analyzing_artifacts
+	location = no
+	sound = no
+	event_scope = country_event
+	
+	AI_wait_days = {
+		weight = 0
+	}
+	on_success = {
+		country_event = {
+			id = tech_fallen_events.26
+		}
+	}
+}
+
+special_project = {
+	key = "research_fallen_per_ftl_fallen_ship"
+	icon = "gfx/interface/icons/situation_log/situation_log_archaeology.dds"
+	cost = 5000
+	tech_department = engineering_technology
+	picture = GFX_evt_archaeological_dig
+	location = yes
+	sound = no
+	event_scope = ship_event
+	
+	AI_wait_days = {
+		weight = 0
+	}
+
+	requirements = {
+		leader = scientist
+		shipclass_science_ship = 1
+	}
+
+	on_success = {
+		prev = {
+			country_event = {
+				id = fallen_per_ftl_events.9
+			}
+		}
+	}
+}
+
+special_project = {
+	key = "restart_fallen_per_ftl_fallen_ship_conmunity"
+	icon = "gfx/interface/icons/situation_log/situation_log_engineering.dds"
+	cost = 0
+	days_to_research = 90
+	picture = GFX_evt_archaeological_dig
+	location = yes
+	sound = no
+	event_scope = ship_event
+	energy = 500
+	
+	AI_wait_days = {
+		weight = 0
+	}
+
+	requirements = {
+		shipclass_constructor = 1
+	}
+
+	on_success = {
+		prev = {
+			hidden_effect = {
+				establish_communications = event_target:xenophile_fallen_empire
+			}
+			if = {
+				limit = {
+					any_country = {
+						is_same_empire = event_target:xenophile_fallen_empire
+					}
+				}
+				country_event = {
+					id = fallen_per_ftl_events.10
+				}
+			}
+		}
+	}
+}

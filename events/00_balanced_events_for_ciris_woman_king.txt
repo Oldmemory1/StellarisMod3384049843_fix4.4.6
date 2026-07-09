@@ -1,0 +1,173 @@
+namespace = crisis
+
+country_event = {
+	id = crisis.8042
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		OR = {
+			is_country_type = fallen_empire
+			is_country_type = awakened_fallen_empire
+		}
+	}
+
+	immediate = {
+		event_target:synth_queen_country_global = {
+			country_event = { id = crisis.8050 }
+		}
+		if = { #step 1 - Fog them up
+			limit = {
+				NOT = { has_country_flag = synth_queen_storm }
+			}
+			activate_fog_machine = synth_queen_nanite
+			fog_machine_auto_tracking = yes
+			set_country_flag = synth_queen_storm
+			every_system_within_border = {
+				limit = {
+					is_capital_system = no
+				}
+				add_modifier = {
+					modifier = queen_scorn_storm
+					days = -1
+				}
+			}
+			country_event = { id = crisis.8042 days = 360 random = 100 }
+		}
+		else_if = { #step 2 - weaken fleets
+			limit = {
+				has_country_flag = synth_queen_storm
+				NOT = { has_country_flag = weaker_navy }
+			}
+			set_country_flag = weaker_navy
+			country_event = { id = crisis.8042 days = 360 }
+		}
+		else = { #step 3+ - wipe colonies
+			random_owned_planet = {
+				if = {
+					limit = {
+						is_capital = no
+						is_colony = yes
+					}
+					remove_all_buildings = yes
+					every_owned_pop_group = {
+						kill_all_pop = yes
+					}
+					destroy_colony = yes
+					if = {
+						limit = {
+							is_artificial = no
+						}
+						change_pc = pc_gray_goo
+						if = {
+							limit = {
+								NOT = {
+									has_modifier = terraforming_candidate
+								}
+							}
+							add_modifier = {
+								modifier = terraforming_candidate
+								days = -1
+							}
+						}
+					}
+				}
+				else_if = {
+					limit = {
+						is_capital = yes
+					}
+					add_planet_devastation = 35
+					while = {
+						count = 20
+						random_owned_pop_group = {
+							kill_all_pop = yes
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					any_country = {
+						is_synth_queen_country_type = yes
+					}
+				}
+				country_event = { id = crisis.8042 days = 180 }
+			}
+		}
+	}
+}
+
+country_event = {
+	id = crisis.23015
+	title = "crisis.23015.name"
+	desc = "crisis.23015.desc"
+	picture = GFX_evt_debris
+	show_sound = event_celebration
+
+	is_triggered_only = yes
+
+	trigger = {
+		fromfromfrom = {
+			is_ship_size = synth_queen_titan
+		}
+	}
+
+	immediate = {
+		from = {
+			random_situation = {
+				limit = {
+					is_situation_type = situation_synth_queen_doomclock
+				}
+				destroy_situation = this
+			}
+		}
+		every_system = {
+			remove_modifier = queen_scorn_storm
+			remove_modifier = queen_small_scorn_storm
+			remove_modifier = queen_big_scorn_storm
+		}
+		every_country = {
+			deactivate_fog_machine = yes
+		}
+	}
+
+	option = {
+		name = crisis.23015.a
+		custom_tooltip = crisis.23015.a.tt
+		add_relic = r_cetanas_heart
+		hidden_effect = {
+			every_galaxy_planet = {
+				limit = {
+					has_planet_flag = synth_queen_bastille
+				}
+				change_pc = pc_shattered
+				clear_deposits = yes
+				clear_planet_modifiers = yes
+			}
+			random_country = {
+				limit = {
+					is_country_type = awakened_synth_queen
+				}
+				every_owned_fleet = {
+					delete_fleet = this
+				}
+				every_owned_leader = {
+					kill_leader = {
+						show_notification = no
+					}
+				}
+			}
+			stop_crisis_sound = yes
+			end_crisis = yes
+			from = { set_country_flag = with_great_power_achievement }
+			remove_global_flag = synth_queen_ongoing
+			set_global_flag = synth_queen_defeated
+			every_country = {
+				limit = {
+					is_country_type = default
+				}
+				country_event = { id = crisis.23005 }
+			}
+		}
+	}
+}

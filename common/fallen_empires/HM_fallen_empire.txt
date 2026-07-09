@@ -1,0 +1,78 @@
+# GateGrander
+fallen_machine_empire_LgateGrander = {
+	graphical_culture = "fallen_machine_empire_01"
+	initializer = fallen_lgategrander
+	weight_modifier = {
+		base = 100
+		modifier = {
+			factor = 0
+			num_fallen_empires = 0
+		}
+		modifier = {
+			factor = 0
+			lgate_enabled = no
+		}
+	}
+	possible = {
+		# 4.3.6+: Synthetic Dawn content is part of the base game; keep only the L-Gate/Distant Stars gate.
+		host_has_dlc = "Distant Stars Story Pack"
+	}
+	create_country_effect = {
+		create_species = {
+			name = random
+			class = MACHINE
+			namelist = MACHINE3
+			portrait = random
+			traits = {
+				trait = trait_machine_unit
+				trait = random_traits
+			}
+			extra_trait_points = 3
+			allow_negative_traits = no
+		}
+		create_country = {
+			name = random
+			type = fallen_empire
+			ignore_initial_colony_error = yes
+			authority = auth_machine_intelligence
+			civics = {
+				civic = civic_machine_remnants
+				civic = civic_custodian_directives
+			}
+			species = last_created_species
+			ethos = { ethic = ethic_gestalt_consciousness }
+			flag = random
+			origin = origin_fallen_empire
+			effect = {
+				set_country_flag = fallen_empire_machine_LgateGrander
+				add_resource = {
+					minerals = 10000
+					energy = 10000
+					food = 1000
+					influence = 500
+				}
+				add_tradition = tr_nanotech_adopt
+				add_tradition = tr_nanotech_1
+				add_tradition = tr_nanotech_2
+				add_tradition = tr_nanotech_3
+				add_tradition = tr_nanotech_4
+				add_tradition = tr_nanotech_5
+				add_tradition = tr_nanotech_finish
+				if = {
+					limit = { host_has_dlc = "Apocalypse" }
+					give_technology = { tech = tech_colossus message = no }
+				}
+				add_global_ship_design = NAME_FE_Starbase
+				add_global_ship_design = NAME_Nanite_Mothership
+				add_global_ship_design = NAME_Nanite_Interdictor
+				if = {
+					limit = { has_global_flag = PlayAsGray_Opened }
+					add_global_ship_design = NAME_Nanite_Mothership_AG_1
+					add_global_ship_design = NAME_Nanite_Mothership_AG_carrier_1
+					add_global_ship_design = NAME_Nanite_Mothership_AG_carrier_2
+				}
+				ruler = { add_skill = 9 }
+			}
+		}
+	}
+}

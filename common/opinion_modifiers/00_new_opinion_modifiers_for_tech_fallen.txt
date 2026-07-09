@@ -1,0 +1,32 @@
+triggered_opinion_has_tech_fallen_key = {
+	trigger = {
+		is_fallen_empire_materialist = yes
+		from = {
+			any_controlled_planet = {
+				has_modifier = planet_has_tech_fallen_key
+			}
+		}
+	}
+
+	opinion = {
+		base = -500
+	}
+}
+
+triggered_opinion_return_tech_fallen_key = {
+	trigger = {
+		is_fallen_empire_materialist = yes
+		from = {
+			NOT = {
+				any_controlled_planet = {
+					has_modifier = planet_has_tech_fallen_key
+				}
+			}
+			has_country_flag = returned_tech_fallen_key
+		}
+	}
+
+	opinion = {
+		base = 500
+	}
+}

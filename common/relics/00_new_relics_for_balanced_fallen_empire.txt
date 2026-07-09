@@ -1,0 +1,263 @@
+@activation_cost = 3000
+@triumph_duration = 3600
+@triumph_duration_short = 1800
+@triumph_duration_veryshort = 900
+
+r_fallen_contingency_core = {
+	activation_duration = @triumph_duration
+	portrait = "GFX_relic_fallen_contingency_core"
+	sound = "relic_activation_isolated_contingency_core"
+
+	resources = {
+		category = relics
+		# Activation cost
+		cost = {
+			unity = @activation_cost
+		}
+	}
+
+	ai_weight = {
+		weight = 100
+	}
+
+	triggered_country_modifier = {
+		potential = {
+			always = yes
+		}
+		megastructure_build_speed_mult = 0.3
+	}
+
+	score = 5000
+
+	active_effect = {
+		add_modifier = {
+			modifier = "fallen_contingency_calculation"
+			days = @triumph_duration
+		}
+		custom_tooltip = relic_triumph_cooldown
+		hidden_effect = {
+			add_modifier = {
+				modifier = "relic_activation_cooldown"
+				days = @triumph_duration
+			}
+		}
+	}
+
+	# Possible check for activation
+	possible = {
+		inline_script = {
+			script = relics/activation_checks
+			RELIC = r_fallen_contingency_core
+		}
+	}
+}
+
+r_fallen_khans_throne = {
+	activation_duration = @triumph_duration
+	portrait = "GFX_relic_fallen_khans_throne"
+	sound = "relic_activation_khans_throne"
+
+	resources = {
+		category = relics
+		# Activation cost
+		cost = {
+			unity = @activation_cost
+		}
+	}
+
+	ai_weight = {
+		weight = 100
+		modifier = {
+			factor = 3
+			is_at_war = yes
+		}
+	}
+
+	triggered_country_modifier = {
+		potential = {
+			always = yes
+		}
+		country_naval_cap_mult = 0.3
+	}
+
+	score = 5000
+
+	active_effect = {
+		add_modifier = {
+			modifier = "fallen_drums_of_war"
+			days = @triumph_duration
+		}
+		custom_tooltip = relic_triumph_cooldown
+		hidden_effect = {
+			add_modifier = {
+				modifier = "relic_activation_cooldown"
+				days = @triumph_duration
+			}
+		}
+	}
+
+	# Possible check for activation
+	possible = {
+		inline_script = {
+			script = relics/activation_checks
+			RELIC = r_fallen_khans_throne
+		}
+	}
+}
+
+r_fallen_omnicodex = {
+	activation_duration = @triumph_duration
+	portrait = "GFX_fallen_relic_omnicodex"
+	sound = "relic_activation_the_omnicodex"
+
+	resources = {
+		category = relics
+		# Activation cost
+		cost = {
+			unity = @activation_cost
+		}
+	}
+
+	ai_weight = {
+		weight = 100
+	}
+
+	triggered_country_modifier = {
+		potential = {
+			always = yes
+		}
+		all_technology_research_speed = 0.1
+	}
+
+	score = 5000
+
+	active_effect = {
+		add_modifier = {
+			modifier = "mod_fallen_omnicodex"
+			days = @triumph_duration
+		}
+		custom_tooltip = relic_triumph_cooldown
+		hidden_effect = {
+			add_modifier = {
+				modifier = "relic_activation_cooldown"
+				days = @triumph_duration
+			}
+		}
+	}
+
+	# Possible check for activation
+	possible = {
+		inline_script = {
+			script = relics/activation_checks
+			RELIC = r_fallen_omnicodex
+		}
+	}
+}
+
+r_fallen_unbidden_warlock = {
+	activation_duration = @triumph_duration
+	portrait = "GFX_relic_fallen_unbidden_warlock"
+	sound = "relic_activation_extradimensional_warlock"
+
+	resources = {
+		category = relics
+		# Activation cost
+		cost = {
+			unity = @activation_cost
+		}
+	}
+
+	ai_weight = {
+		weight = 10
+		modifier = {
+			factor = 30
+			is_at_war = yes
+		}
+	}
+
+	triggered_country_modifier = {
+		potential = {
+			always = yes
+		}
+		country_unity_produces_mult = 0.3
+	}
+
+	score = 5000
+
+	active_effect = {
+		# country_event = {
+		# 	id = angle_of_end_events.2
+		# }
+		add_monthly_resource_mult = {
+			resource = unity
+			value = 36
+		}
+		hidden_effect = {
+			set_global_flag = used_r_fallen_unbidden_warlock
+		}
+		custom_tooltip = relic_triumph_cooldown
+		hidden_effect = {
+			add_modifier = {
+				modifier = "relic_activation_cooldown"
+				days = @triumph_duration
+			}
+		}
+	}
+
+	# Possible check for activation
+	possible = {
+		inline_script = {
+			script = relics/activation_checks
+			RELIC = r_fallen_unbidden_warlock
+		}
+	}
+}
+
+r_fallen_continuum = {
+	activation_duration = @triumph_duration
+	portrait = "GFX_fallen_continuum"
+	sound = "relic_activation_continuum"
+
+	resources = {
+		category = relics
+		# Activation cost
+		cost = {
+			unity = @activation_cost
+		}
+	}
+
+	ai_weight = {
+		weight = 100
+	}
+
+	triggered_country_modifier = {
+		potential = {
+			always = yes
+		}
+		negative_traits_country = -2
+	}
+
+	score = 5000
+
+	active_effect = {
+		add_modifier = {
+			modifier = "mod_fallen_continuum"
+			days = @triumph_duration
+		}
+		custom_tooltip = relic_triumph_cooldown
+		hidden_effect = {
+			add_modifier = {
+				modifier = "relic_activation_cooldown"
+				days = @triumph_duration
+			}
+		}
+	}
+
+	# Possible check for activation
+	possible = {
+		inline_script = {
+			script = relics/activation_checks
+			RELIC = r_fallen_continuum
+		}
+	}
+}

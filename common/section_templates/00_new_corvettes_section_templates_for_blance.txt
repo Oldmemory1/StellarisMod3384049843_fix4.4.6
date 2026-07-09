@@ -1,0 +1,193 @@
+@section_cost = 30
+
+ship_section_template = {
+	key = "FRIGATE_M2"
+	ship_size = frigate
+	fits_on_slot = mid
+	should_draw_components = yes
+	entity = "corvette_M1S1_entity"
+	icon = "GFX_ship_part_core_mid"
+	ai_tags = { explosive explosive_stealth energy_torpedoes energy_torpedoes_stealth }
+
+	prerequisites = { tech_use_weapen_as_shield }
+
+	ai_weight = {
+		modifier = {
+			factor = 10.0
+			is_preferred_weapons = weapon_type_explosive
+		}
+		modifier = {
+			factor = 0.1
+			NOT = { is_preferred_weapons = weapon_type_explosive }
+		}
+	}
+
+	component_slot = {
+		name = "TORPEDO_01"
+		template = "medium_missile_turret"
+		locatorname = "medium_gun_01"
+	}
+
+	component_slot = {
+		name = "TORPEDO_02"
+		template = "medium_missile_turret"
+		locatorname = "medium_gun_02"
+	}
+
+	small_utility_slots = 3
+	aux_utility_slots = 1
+
+	resources = {
+		category = ship_sections
+		cost = {
+			alloys = @section_cost
+		}
+	}
+}
+
+ship_section_template = {
+	key = "FRIGATE_M3"
+	ship_size = frigate
+	fits_on_slot = mid
+	should_draw_components = yes
+	entity = "corvette_S3_entity"
+	icon = "GFX_ship_part_core_mid"
+	ai_tags = { explosive explosive_stealth energy_torpedoes energy_torpedoes_stealth }
+
+	prerequisites = { tech_use_weapen_as_shield }
+
+	ai_weight = {
+		modifier = {
+			factor = 10.0
+			is_preferred_weapons = weapon_type_explosive
+		}
+		modifier = {
+			factor = 0.1
+			NOT = { is_preferred_weapons = weapon_type_explosive }
+		}
+	}
+
+	component_slot = {
+		name = "TORPEDO_01"
+		template = "medium_missile_turret"
+		locatorname = "medium_gun_01"
+	}
+
+	component_slot = {
+		name = "TORPEDO_02"
+		template = "medium_missile_turret"
+		locatorname = "medium_gun_02"
+	}
+
+	component_slot = {
+		name = "TORPEDO_03"
+		template = "medium_missile_turret"
+		locatorname = "medium_gun_03"
+	}
+
+	small_utility_slots = 1
+	aux_utility_slots = 1
+
+	resources = {
+		category = ship_sections
+		cost = {
+			alloys = @section_cost
+		}
+	}
+}
+
+ship_section_template = {
+	key = "CORVETTE_m1"
+	ship_size = corvette
+	fits_on_slot = mid
+	should_draw_components = yes
+	entity = "corvette_M1S1_entity"
+	icon = "GFX_ship_part_core_mid"
+	ai_tags = { gunship artillery brawler brawler_stealth }
+
+	prerequisites = { tech_use_weapen_as_shield }
+
+	component_slot = {
+        name = "MEDIUM_GUN_01"
+        template = "medium_turret"
+        locatorname = "medium_gun_01"
+    }
+
+	component_slot = {
+		name = "SMALL_GUN_01"
+		template = "small_turret"
+		locatorname = "small_gun_01"
+	}
+
+	small_utility_slots = 3
+	aux_utility_slots = 1
+
+	ai_weight = {
+		modifier = {
+			factor = 10.0
+			OR = {
+				is_preferred_weapons = weapon_type_kinetic
+				is_preferred_weapons = weapon_type_energy
+			}
+		}
+		modifier = {
+			factor = 0.1
+			NOR = {
+				is_preferred_weapons = weapon_type_kinetic
+				is_preferred_weapons = weapon_type_energy
+			}
+		}
+	}
+
+	resources = {
+		category = ship_sections
+		cost = {
+			alloys = @section_cost
+		}
+	}
+}
+
+ship_section_template = {
+	key = "CORVETTE_L1"
+	ship_size = corvette
+	fits_on_slot = mid
+	should_draw_components = yes
+	entity = "corvette_M1S1_entity"
+	icon = "GFX_ship_part_core_mid"
+	ai_tags = { gunship artillery brawler brawler_stealth }
+
+	prerequisites = { tech_use_weapen_as_shield }
+
+    component_slot = {
+		name = "LARGE_GUN_02"
+		template = "large_turret"
+		locatorname = "large_gun_02"
+		}
+
+	small_utility_slots = 2
+	aux_utility_slots = 1
+
+	ai_weight = {
+		modifier = {
+			factor = 10.0
+			OR = {
+				is_preferred_weapons = weapon_type_kinetic
+				is_preferred_weapons = weapon_type_energy
+			}
+		}
+		modifier = {
+			factor = 0.1
+			NOR = {
+				is_preferred_weapons = weapon_type_kinetic
+				is_preferred_weapons = weapon_type_energy
+			}
+		}
+	}
+
+	resources = {
+		category = ship_sections
+		cost = {
+			alloys = @section_cost
+		}
+	}
+}

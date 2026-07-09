@@ -1,0 +1,313 @@
+cpu_plan_b = {
+    name = cpu_plan_b
+    max_instances = 1
+    flags = { cpu_b }
+    prevent_anomalies = yes
+    class = "sc_g"
+    asteroid_belt = {
+        type = rocky_asteroid_belt
+        radius = 145
+    }
+    asteroid_belt = {
+        type = icy_asteroid_belt
+        radius = 290
+    }
+    planet = {
+        name = "name_sun"
+        class = "pc_g_star"
+        orbit_distance = 0
+        orbit_angle = 1
+        size = 30
+        has_ring = no
+    }
+    planet = {
+        name = "name_cad"
+        class = "pc_relic"
+        orbit_distance = 25
+        orbit_angle = 120
+        size = 18
+        starting_planet = yes
+        has_ring = no
+        #entity = "continental_planet_earth_entity"
+        #deposit_blockers = none
+        #modifiers = none
+        flags = { planet_cpu_b }
+        init_effect = {
+            prevent_anomaly = yes
+            clear_deposits = yes
+            relic_world_deposits = yes
+            create_archaeological_site = new_computer_site #坟
+            clear_blockers = yes
+            add_deposit = d_central_spire
+            add_deposit = d_cpu_b_flag
+            add_deposit = d_city_ruins
+            add_deposit = d_city_ruins
+            add_deposit = d_city_ruins
+            add_deposit = d_city_ruins
+            add_deposit = d_city_ruins
+            add_deposit = d_city_ruins
+            add_deposit = d_city_ruins
+            add_deposit = d_city_ruins
+            add_deposit = d_city_ruins
+            set_planet_flag = grunur_cpu_b
+            save_global_event_target_as = sol_system_cpu_b
+            prevent_anomaly = yes
+        }
+    }
+    planet = {
+        name = "name_cdd"
+        class = "pc_machine"
+        orbit_distance = 25
+        orbit_angle = 60
+        size = 13
+        has_ring = no
+        init_effect = {
+        }
+    }
+    planet = {
+        name = "name_dad"
+        class = "pc_asteroid"
+        orbit_distance = 30
+        orbit_angle = -210
+        size = 5
+        has_ring = no
+    }
+    planet = {
+        name = "name_dba"
+        class = "pc_asteroid"
+        orbit_distance = 0
+        orbit_angle = 285
+        size = 5
+        has_ring = no
+    }
+    planet = {
+        name = "name_ppp"
+        class = "pc_gas_giant"
+        orbit_distance = 45
+        orbit_angle = -160
+        size = 35
+        has_ring = no
+        entity = "gas_giant_jupiter_entity"
+        change_orbit = 6
+        moon = {
+            name = "name_pap"
+            class = "pc_machine"
+            size = 8
+            orbit_distance = 12
+            orbit_angle = 320
+            has_ring = no
+        }
+    }
+    planet = {
+        name = "name_feq"
+        class = "pc_frozen"
+        orbit_distance = 25
+        orbit_angle = -195
+        size = 20
+        has_ring = no
+        change_orbit = 4
+        init_effect = {
+            set_planet_entity = {
+                entity = gas_giant_uranus_entity
+                atmosphere_color = hsv { 0.548 0.519 0.9 }
+                atmosphere_intensity = 0.1
+                atmosphere_width = 1.0
+            }
+        }
+    }
+    init_effect = {
+        save_global_event_target_as = rebuild_computer_place
+    }
+}
+
+tech_fallen_ship_system = {
+    name = tech_fallen_ship_system
+    max_instances = 1
+    flags = { tech_fallen_ship }
+    prevent_anomalies = yes
+    class = "sc_black_hole"
+    planet = {
+        name = "name_tech_fallen_ship"
+        class = "pc_yunfan_fallen_ship_of_star"
+        orbit_distance = 0
+        orbit_angle = 0
+        size = 28
+        has_ring = no
+    }
+    init_effect = {
+        save_global_event_target_as = tech_fallen_ship_place
+    }
+}
+
+fallen_per_ftl_events_system = {
+    name = fallen_per_ftl_events_system
+    max_instances = 1
+    flags = { fallen_per_ftl_system }
+    prevent_anomalies = yes
+    class = "sc_g"
+    planet = {
+        name = "name_fallen_per_ftl_sun"
+        class = "pc_g_star"
+        orbit_distance = 0
+        orbit_angle = 1
+        size = 30
+        has_ring = no
+        init_effect = {
+			while = {
+				count = 30
+				create_ambient_object = {
+					type = "large_debris_object"
+					entity_offset_height = { min = -0 max = -25 }
+					location = this
+				}
+				last_created_ambient_object = {
+					set_location = {
+						target = prev
+						distance = 45
+						angle = random
+					}
+				}
+			}
+			while = {
+				count = 50
+				create_ambient_object = {
+					type = "medium_debris_01_object"
+					entity_offset_height = { min = -0 max = -25 }
+					location = this
+				}
+				last_created_ambient_object = {
+					set_location = {
+						target = prev
+						distance = 45
+						angle = random
+					}
+				}
+			}
+			while = {
+				count = 50
+				create_ambient_object = {
+					type = "medium_debris_02_object"
+					entity_offset_height = { min = -0 max = -25 }
+					location = this
+				}
+				last_created_ambient_object = {
+					set_location = {
+						target = prev
+						distance = 45
+						angle = random
+					}
+				}
+			}
+			while = {
+				count = 100
+				create_ambient_object = {
+					type = "small_debris_object"
+					entity_offset_height = { min = -0 max = -25 }
+					location = this
+				}
+				last_created_ambient_object = {
+					set_location = {
+						target = prev
+						distance = 45
+						angle = random
+					}
+				}
+			}
+		}
+	}
+    planet = {
+        name = "name_fallen_per_ftl_planet"
+        class = "pc_gaia"
+        orbit_distance = 40
+        orbit_angle = random
+        size = 12
+        has_ring = no
+        init_effect = {
+            set_planet_flag = pre_ftl_default
+            create_country = {
+                name = "name_fallen_per_ftl_country"
+                ethos = {
+                    ethic = ethic_fanatic_xenophile
+                    ethic = ethic_spiritualist
+                }
+                civics = {
+                    civic = civic_increasing_urbanization
+                    civic = civic_atmospheric_pollution
+                }
+                authority = auth_imperial
+                species = event_target:xenophile_fallen_empire.owner_species
+                flag = {
+                    icon = {
+                        category = "pre_ftl"
+                        file = "preftl_industrial_age.dds"
+                    }
+                    background= {
+                        category = "backgrounds"
+                        file = "new_dawn.dds"
+                    }
+                    colors={
+                        "turquoise"
+                        "green"
+                        "null"
+                        "null"
+                    }
+                }
+                origin = "origin_default"
+                type = primitive
+            }
+            last_created_country = {
+                set_graphical_culture = industrial_01
+                set_country_flag = industrial_age
+                set_country_flag = tech_frozen
+                set_pre_ftl_age = industrial_age
+                save_global_event_target_as = fallen_per_ftl_country
+                change_country_flag = {
+                    icon = {
+                        category = "pre_ftl"
+                        file = "preftl_industrial_age.dds"
+                    }
+                    background= {
+                        category = "backgrounds"
+                        file = "new_dawn.dds"
+                    }
+                    colors={
+                        "beige"
+                        "yellow"
+                        "null"
+                        "null"
+                    }
+                }
+            }
+            set_pre_ftl_origin = yes
+            set_owner = last_created_country
+            set_capital = yes
+            remove_building = building_colony_shelter
+            add_building = building_primitive_farm
+			add_building = building_primitive_factory
+			add_building = building_primitive_mine
+			add_building = building_primitive_power_plant
+			add_building = building_primitive_capital
+			add_building = building_urban_dwellings
+			remove_building = building_colony_shelter
+			while = {
+				count = @industrial_age_pops
+				create_pop_group = {
+					species = event_target:xenophile_fallen_empire.owner_species
+				}
+			}
+            save_global_event_target_as = fallen_per_ftl_planet
+            add_deposit = fallen_pre_ftl_ship
+        }
+    }
+    planet = {
+        count = 3
+        class = random_non_colonizable
+        orbit_distance = { min = 30 max = 70 }
+        orbit_angle = random
+        size = { min = 10 max = 25 }
+        has_ring = no
+    }
+    init_effect = {
+        save_global_event_target_as = fallen_per_ftl_system
+    }
+}

@@ -1,0 +1,1446 @@
+namespace = tech_fallen_events
+
+country_event = {
+	id = tech_fallen_events.1
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		is_country_type = fallen_empire
+		is_materialist = yes
+	}
+
+	immediate = {
+		save_global_event_target_as = materialist_fallen_empire
+		set_global_flag = has_materialist_fallen_empire
+	}
+}
+
+fleet_event = {
+	id = tech_fallen_events.2
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		mid_game_years_passed >= 15
+		has_global_flag = has_materialist_fallen_empire
+		from = {
+			is_inside_border = root.owner
+		}
+		owner = {
+        	is_ai = no
+		}
+		NOT = {
+			has_global_flag = fallen_tech_key_found
+		}
+    }
+
+	immediate = {
+		set_global_flag = fallen_tech_key_found
+		from = {
+			spawn_system = { 
+				min_distance = 5
+				max_distance = 10
+				min_orientation_angle = 0
+				max_orientation_angle = 360
+				initializer = tech_fallen_ship_system
+			}
+		}
+		set_location = {
+			target = event_target:tech_fallen_ship_place.star
+		}
+		clear_orders = yes
+		fleet_event = {
+			id = tech_fallen_events.3
+			days = 1
+		}
+	}
+}
+
+fleet_event = {
+	id = tech_fallen_events.3
+	title = tech_fallen_events.3.title
+	desc = tech_fallen_events.3.desc
+	picture = GFX_evt_astral_rift_vortex
+	location = event_target:tech_fallen_ship_place
+	show_sound = select_click
+	is_triggered_only = yes
+
+	option = {
+		name = tech_fallen_events.3.a
+		event_target:tech_fallen_ship_place.star = {
+			create_archaeological_site = tech_fallen_ship_site
+		}
+	}
+
+	option = {
+		name = tech_fallen_events.3.b
+		event_target:tech_fallen_ship_place.star = {
+			add_deposit = d_alloys_25
+			add_deposit = d_volatile_motes_5
+			add_deposit = d_rare_crystals_5
+			add_deposit = d_nanites_deposit
+			add_deposit = d_living_metal_deposit
+			add_deposit = d_minerals_10
+		}
+	}
+}
+
+fleet_event = {
+	id = tech_fallen_events.4
+	title = tech_fallen_events.4.title
+	desc = tech_fallen_events.4.desc
+	picture = GFX_evt_archaeological_dig
+	show_sound = event_dig_site
+	location = from
+
+	archaeology = yes
+
+	is_triggered_only = yes
+
+	immediate = {
+		from = { set_site_progress_locked = yes }
+	}
+
+	option = {
+		name = tech_fallen_events.4.a
+		custom_tooltip = "tech_fallen_events.4.a.desc"
+		hidden_effect = {
+			from = {
+				planet = {
+					planet_event = {
+						id = tech_fallen_events.7
+						days = 30
+					}
+					set_planet_flag = tech_fallen_events_flag_1
+				}
+			}
+		}
+	}
+
+	option = {
+		name = tech_fallen_events.4.b
+		custom_tooltip = "tech_fallen_events.4.b.desc"
+		hidden_effect = {
+			from = {
+				planet = {
+					planet_event = {
+						id = tech_fallen_events.7
+						days = 360
+					}
+					set_planet_flag = tech_fallen_events_flag_2
+				}
+			}
+		}
+	}
+
+	option = {
+		name = tech_fallen_events.4.c
+		custom_tooltip = "tech_fallen_events.4.c.desc"
+		hidden_effect = {
+			from = {
+				planet = {
+					planet_event = {
+						id = tech_fallen_events.7
+						days = 720
+					}
+					set_planet_flag = tech_fallen_events_flag_3
+				}
+			}
+		}
+	}
+}
+
+fleet_event = {
+	id = tech_fallen_events.5
+	title = tech_fallen_events.5.title
+	desc = tech_fallen_events.5.desc
+	picture = GFX_evt_archaeological_dig
+	show_sound = event_dig_site
+	location = from
+
+	archaeology = yes
+
+	is_triggered_only = yes
+
+	immediate = {
+		from = { set_site_progress_locked = yes }
+	}
+
+	after = {
+		from = { set_site_progress_locked = no }
+	}
+
+	option = {
+		name = tech_fallen_events.5.a
+	}
+}
+
+fleet_event = {
+	id = tech_fallen_events.6
+	title = tech_fallen_events.6.title
+	desc = tech_fallen_events.6.desc
+	picture = GFX_evt_archaeological_dig
+	show_sound = event_dig_site
+	location = from
+
+	archaeology = yes
+
+	is_triggered_only = yes
+
+	immediate = {
+		from = { set_site_progress_locked = yes }
+	}
+
+	option = {
+		name = tech_fallen_events.6.a
+		owner = {
+			if = {
+				limit = {
+					from = {
+						planet = {
+							has_planet_flag = tech_fallen_events_flag_1
+						}
+					}
+				}
+				root.owner = {
+					if = {
+						limit = {
+							has_technology = tech_dark_matter_power_core
+							has_technology = tech_dark_matter_propulsion
+							has_technology = tech_dark_matter_deflector
+							has_technology = tech_cloaking_dark_matter
+						}
+						add_monthly_resource_mult = {
+							resource = engineering_research
+							value = 6
+							min = 1000
+						}
+					} else_if = {
+						limit = {
+							OR = {
+								has_tech_option = tech_dark_matter_power_core
+								has_tech_option = tech_dark_matter_power_core
+								has_tech_option = tech_dark_matter_power_core
+								has_tech_option = tech_cloaking_dark_matter
+							}
+						}
+						add_research_option = tech_dark_matter_power_core
+						add_research_option = tech_dark_matter_propulsion
+						add_research_option = tech_dark_matter_deflector
+						add_research_option = tech_cloaking_dark_matter
+						add_tech_progress = {
+							tech = tech_dark_matter_power_core
+							progress = 0.5
+						}
+						add_tech_progress = {
+							tech = tech_dark_matter_propulsion
+							progress = 0.5
+						}
+						add_tech_progress = {
+							tech = tech_dark_matter_deflector
+							progress = 0.5
+						}
+						add_tech_progress = {
+							tech = tech_cloaking_dark_matter
+							progress = 0.5
+						}
+					} else = {	
+						add_research_option = tech_dark_matter_power_core
+						add_research_option = tech_dark_matter_propulsion
+						add_research_option = tech_dark_matter_deflector
+						add_research_option = tech_cloaking_dark_matter
+					}
+				}
+			}
+			if = {
+				limit = {
+					from = {
+						planet = {
+							has_planet_flag = tech_fallen_events_flag_2
+						}
+					}
+				}
+				root.owner = {
+					if = {
+						limit = {
+							has_technology = tech_dark_matter_power_core
+							has_technology = tech_dark_matter_propulsion
+							has_technology = tech_dark_matter_deflector
+							has_technology = tech_cloaking_dark_matter
+						}
+						add_monthly_resource_mult = {
+							resource = engineering_research
+							value = 12
+							min = 2000
+						}
+					} else_if = {
+						limit = {
+							OR = {
+								has_tech_option = tech_dark_matter_power_core
+								has_tech_option = tech_dark_matter_power_core
+								has_tech_option = tech_dark_matter_power_core
+								has_tech_option = tech_cloaking_dark_matter
+							}
+						}
+						give_technology = {
+							tech = tech_dark_matter_power_core
+							message = yes
+						}
+						give_technology = {
+							tech = tech_dark_matter_propulsion
+							message = yes
+						}
+						give_technology = {
+							tech = tech_dark_matter_deflector
+							message = yes
+						}
+						give_technology = {
+							tech = tech_cloaking_dark_matter
+							message = yes
+						}
+					} else = {	
+						add_research_option = tech_dark_matter_power_core
+						add_research_option = tech_dark_matter_propulsion
+						add_research_option = tech_dark_matter_deflector
+						add_research_option = tech_cloaking_dark_matter
+						add_tech_progress = {
+							tech = tech_dark_matter_power_core
+							progress = 0.5
+						}
+						add_tech_progress = {
+							tech = tech_dark_matter_propulsion
+							progress = 0.5
+						}
+						add_tech_progress = {
+							tech = tech_dark_matter_deflector
+							progress = 0.5
+						}
+						add_tech_progress = {
+							tech = tech_cloaking_dark_matter
+							progress = 0.5
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					from = {
+						planet = {
+							has_planet_flag = tech_fallen_events_flag_3
+						}
+					}
+				}
+				root.owner = {
+					if = {
+						limit = {
+							has_technology = tech_dark_matter_power_core
+							has_technology = tech_dark_matter_propulsion
+							has_technology = tech_dark_matter_deflector
+							has_technology = tech_cloaking_dark_matter
+						}
+						add_monthly_resource_mult = {
+							resource = engineering_research
+							value = 30
+							min = 5000
+						}
+					} else_if = {
+						limit = {
+							OR = {
+								has_tech_option = tech_dark_matter_power_core
+								has_tech_option = tech_dark_matter_power_core
+								has_tech_option = tech_dark_matter_power_core
+								has_tech_option = tech_cloaking_dark_matter
+							}
+						}
+						give_technology = {
+							tech = tech_dark_matter_power_core
+							message = yes
+						}
+						give_technology = {
+							tech = tech_dark_matter_propulsion
+							message = yes
+						}
+						give_technology = {
+							tech = tech_dark_matter_deflector
+							message = yes
+						}
+						give_technology = {
+							tech = tech_cloaking_dark_matter
+							message = yes
+						}
+						add_monthly_resource_mult = {
+							resource = engineering_research
+							value = 12
+							min = 2000
+						}
+					} else = {	
+						give_technology = {
+							tech = tech_dark_matter_power_core
+							message = yes
+						}
+						give_technology = {
+							tech = tech_dark_matter_propulsion
+							message = yes
+						}
+						give_technology = {
+							tech = tech_dark_matter_deflector
+							message = yes
+						}
+						give_technology = {
+							tech = tech_cloaking_dark_matter
+							message = yes
+						}
+					}
+				}
+			}
+		}
+	}
+
+	after = {
+		from = {
+			set_site_progress_locked = no
+			planet = {
+				add_deposit = d_engineering_10
+				add_deposit = d_engineering_10
+				add_deposit = d_engineering_10
+				add_deposit = d_engineering_10
+				add_deposit = d_engineering_10
+			}
+		}
+		owner = {
+			if = {
+				limit = {
+					any_country = {
+						is_fallen_empire_materialist = yes
+					}
+				}
+				hidden_effect = {
+					establish_communications = event_target:materialist_fallen_empire
+				}
+				country_event = {
+					id = tech_fallen_events.8
+				}
+			} else = {
+				if = {
+					limit = {
+						any_controlled_planet = {
+							has_building = building_master_archive
+						}
+					}
+					every_controlled_planet = {
+						limit = {
+							has_building = building_master_archive
+						}
+						add_modifier = {
+							modifier = planet_has_tech_fallen_key
+						}
+					}
+				} else = {
+					capital_scope = {
+						add_modifier = {
+							modifier = planet_has_tech_fallen_key
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+planet_event = {
+	id = tech_fallen_events.7
+	hide_window = yes
+	is_triggered_only = yes
+
+	immediate = {
+		archaeological_site = {
+			set_site_progress_locked = no
+		}
+	}
+}
+
+country_event = {
+	id = tech_fallen_events.8
+	title = tech_fallen_events.8.name
+	location = event_target:materialist_fallen_empire.capital_scope
+
+	diplomatic = yes
+	is_triggered_only = yes
+
+	picture_event_data = {
+		portrait = event_target:materialist_fallen_empire
+		planet_background = event_target:materialist_fallen_empire
+		graphical_culture = event_target:materialist_fallen_empire
+		city_level = event_target:materialist_fallen_empire
+		room = event_target:materialist_fallen_empire.ruler
+	}
+
+	desc = tech_fallen_events.8.desc
+
+	option = {
+		name = tech_fallen_events.8.a
+		hidden_effect = {
+			country_event = {
+				id = tech_fallen_events.9
+			}
+		}
+	}
+	option = {
+		name = tech_fallen_events.8.b
+		response_text = "tech_fallen_events.8.b.response"
+		is_dialog_only = yes
+	}
+	option = {
+		name = tech_fallen_events.8.c
+		allow = {
+			custom_tooltip = {
+				fail_text = "rebuilt_computer_events.ap"
+				NOR = {
+					has_civic = civic_inwards_perfection
+					has_civic = civic_pompous_purists
+					has_civic = civic_fanatic_purifiers
+					has_civic = civic_hive_devouring_swarm
+					has_civic = civic_machine_terminator
+					has_ascension_perk = ap_nihilistic_acquisition
+				}
+			}
+		}
+		hidden_effect = {
+			country_event = {
+				id = tech_fallen_events.10
+			}
+		}
+	}
+	option = {
+		name = tech_fallen_events.8.d
+		hidden_effect = {
+			country_event = {
+				id = tech_fallen_events.11
+			}
+		}
+	}
+}
+
+country_event = {
+	id = tech_fallen_events.9
+	title = tech_fallen_events.8.name
+	location = event_target:materialist_fallen_empire.capital_scope
+
+	diplomatic = yes
+	is_triggered_only = yes
+
+	picture_event_data = {
+		portrait = event_target:materialist_fallen_empire
+		planet_background = event_target:materialist_fallen_empire
+		graphical_culture = event_target:materialist_fallen_empire
+		city_level = event_target:materialist_fallen_empire
+		room = event_target:materialist_fallen_empire.ruler
+	}
+
+	desc = tech_fallen_events.9.desc
+
+	option = {
+		name = tech_fallen_events.9.a
+		response_text = "tech_fallen_events.9.a.response"
+		is_dialog_only = yes
+	}
+	option = {
+		name = tech_fallen_events.9.b
+		response_text = "tech_fallen_events.9.b.response"
+		is_dialog_only = yes
+	}
+	option = {
+		name = tech_fallen_events.9.c
+		response_text = "tech_fallen_events.9.c.response"
+		is_dialog_only = yes
+	}
+	option = {
+		name = tech_fallen_events.9.d
+		response_text = "tech_fallen_events.9.d.response"
+		is_dialog_only = yes
+	}
+	option = {
+		name = tech_fallen_events.9.e
+		hidden_effect = {
+			country_event = {
+				id = tech_fallen_events.8
+			}
+		}
+	}
+}
+
+country_event = {
+	id = tech_fallen_events.10
+	title = tech_fallen_events.8.name
+	location = event_target:materialist_fallen_empire.capital_scope
+
+	diplomatic = yes
+	is_triggered_only = yes
+
+	picture_event_data = {
+		portrait = event_target:materialist_fallen_empire
+		planet_background = event_target:materialist_fallen_empire
+		graphical_culture = event_target:materialist_fallen_empire
+		city_level = event_target:materialist_fallen_empire
+		room = event_target:materialist_fallen_empire.ruler
+	}
+
+	desc = tech_fallen_events.10.desc
+
+	option = {
+		name = tech_fallen_events.10.a
+		hidden_effect = {
+			set_country_flag = returned_tech_fallen_key
+		}
+		capital_scope = {
+			create_fleet = {
+				effect = {
+					set_owner = root
+					while = {
+						count = 8
+						create_ship = {
+							name = random
+							design = "NAME_Scholar"
+							graphical_culture = event_target:materialist_fallen_empire
+						}
+					}
+					while = {
+						count = 15
+						create_ship = {
+							name = random
+							design = "NAME_Sage"
+							graphical_culture = event_target:materialist_fallen_empire
+						}
+					}					
+					set_location = {
+						target = prev
+						distance = 30
+						angle = random
+					}
+				}
+			}
+		}
+		event_target:materialist_fallen_empire = {
+			if = {
+				limit = {
+					any_controlled_planet = {
+						has_building = building_master_archive
+					}
+				}
+				every_controlled_planet = {
+					limit = {
+						has_building = building_master_archive
+					}
+					add_modifier = {
+						modifier = planet_has_tech_fallen_key
+					}
+				}
+			} else = {
+				capital_scope = {
+					add_modifier = {
+						modifier = planet_has_tech_fallen_key
+					}
+				}
+			}
+		}
+	}
+	option = {
+		name = tech_fallen_events.10.b
+		hidden_effect = {
+			set_country_flag = returned_tech_fallen_key
+		}
+		add_modifier = {
+			modifier = with_tech_fallen_help
+			years = 50
+		}
+		event_target:materialist_fallen_empire = {
+			if = {
+				limit = {
+					any_controlled_planet = {
+						has_building = building_master_archive
+					}
+				}
+				every_controlled_planet = {
+					limit = {
+						has_building = building_master_archive
+					}
+					add_modifier = {
+						modifier = planet_has_tech_fallen_key
+					}
+				}
+			} else = {
+				capital_scope = {
+					add_modifier = {
+						modifier = planet_has_tech_fallen_key
+					}
+				}
+			}
+		}
+	}
+	option = {
+		name = tech_fallen_events.10.c
+		hidden_effect = {
+			country_event = {
+				id = tech_fallen_events.8
+			}
+		}
+	}
+}
+
+country_event = {
+	id = tech_fallen_events.11
+	title = tech_fallen_events.8.name
+	location = event_target:materialist_fallen_empire.capital_scope
+
+	diplomatic = yes
+	is_triggered_only = yes
+
+	picture_event_data = {
+		portrait = event_target:materialist_fallen_empire
+		planet_background = event_target:materialist_fallen_empire
+		graphical_culture = event_target:materialist_fallen_empire
+		city_level = event_target:materialist_fallen_empire
+		room = event_target:materialist_fallen_empire.ruler
+	}
+
+	desc = tech_fallen_events.11.desc
+
+	option = {
+		name = tech_fallen_events.11.a
+		if = {
+			limit = {
+				any_controlled_planet = {
+					has_building = building_master_archive
+				}
+			}
+			every_controlled_planet = {
+				limit = {
+					has_building = building_master_archive
+				}
+				add_modifier = {
+					modifier = planet_has_tech_fallen_key
+				}
+			}
+		} else = {
+			capital_scope = {
+				add_modifier = {
+					modifier = planet_has_tech_fallen_key
+				}
+			}
+		}
+		event_target:materialist_fallen_empire = {
+			declare_war = {
+				target = root
+				attacker_war_goal = wg_fe_humiliation
+			}
+		}
+		add_resource = {
+			unity = 10000
+		}
+	}
+	option = {
+		name = tech_fallen_events.11.b
+		hidden_effect = {
+			country_event = {
+				id = tech_fallen_events.8
+			}
+		}
+	}
+}
+
+country_event = {
+	id = tech_fallen_events.12
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		from = {
+			is_fallen_empire_materialist = yes
+		}
+	}
+
+	immediate = {
+		from = {
+			if = {
+				limit = {
+					any_controlled_planet = {
+						has_modifier = planet_has_tech_fallen_key
+						NOT = {
+							has_building = building_master_archive2
+						}
+					}
+				}
+				every_controlled_planet = {
+					remove_modifier = planet_has_tech_fallen_key
+				}
+				if = {
+					limit = {
+						any_controlled_planet = {
+							has_building = building_master_archive
+						}
+					}
+					every_controlled_planet = {
+						limit = {
+							has_building = building_master_archive
+						}
+						add_modifier = {
+							modifier = planet_has_tech_fallen_key
+						}
+					}
+				} else = {
+					capital_scope = {
+						add_modifier = {
+							modifier = planet_has_tech_fallen_key
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+event = {
+	id = tech_fallen_events.13
+	hide_window = yes
+	is_triggered_only = yes
+
+	immediate = {
+		every_country = {
+			limit = {
+				is_country_type = fallen_empire
+				has_ethic = ethic_fanatic_materialist
+				any_controlled_planet = {
+					has_modifier = planet_has_tech_fallen_key
+				}
+				any_controlled_planet = {
+					OR = {
+						has_building = building_master_archive
+						has_building = building_master_archive2
+					}
+				}
+				NOT = {
+					has_country_flag = tech_fallen_empire_awaken_yunfan
+				}
+			}
+			set_country_flag = tech_fallen_empire_awaken_yunfan
+			if = {
+				limit = {
+					any_controlled_planet = {
+						has_building = building_master_archive
+					}
+				}
+				every_controlled_planet = {
+					remove_modifier = planet_has_tech_fallen_key
+				}
+				every_controlled_planet = {
+					limit = {
+						has_building = building_master_archive
+					}
+					add_modifier = {
+						modifier = planet_has_tech_fallen_key
+					}
+				}
+			}
+			if = {
+				limit = {
+					is_country_type = fallen_empire
+				}
+				country_event = {
+					id = balanced_fallen_empire_events.7
+				}
+			}
+		}
+	}
+}
+
+fleet_event = {
+	id = tech_fallen_events.14
+	title = tech_fallen_events.14.title
+	desc = tech_fallen_events.14.desc
+	picture = GFX_evt_archaeological_dig
+	show_sound = event_dig_site
+	location = from
+
+	archaeology = yes
+
+	is_triggered_only = yes
+
+	immediate = {
+		from = { set_site_progress_locked = yes }
+	}
+
+	after = {
+		from = { set_site_progress_locked = no }
+	}
+
+	option = {
+		name = tech_fallen_events.14.a
+	}
+}
+
+country_event = {
+	id = tech_fallen_events.15
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		is_ai = no
+		has_technology = tech_virus_based_genetic_engineering
+		NOT = {
+			any_situation = {
+				is_situation_type = situation_genetic_engineering_caused_virus
+			}
+		}
+		NOR = {
+			has_country_flag = has_vaccine_of_virus
+			has_country_flag = has_medicine_of_virus
+		}
+	}
+
+	immediate = {
+		country_event = {
+			id = tech_fallen_events.16
+			days = 1
+			random = 3598
+		}
+	}
+}
+
+country_event = {
+	id = tech_fallen_events.16
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		NOR = {
+			has_country_flag = has_vaccine_of_virus
+			has_country_flag = has_medicine_of_virus
+		}
+	}
+
+	immediate = {
+		every_owned_planet = {
+			if = {
+				limit = {
+					OR = {
+						any_owned_pop_group = {
+							is_job_of_pop_category = { job = healthcare category = specialist }
+						}
+						AND = {
+							any_owned_pop_group = {
+								is_job_of_pop_category = { job = maintenance_drone category = simple_drone }
+							}
+							free_amenities > 0
+						}
+					}
+				}
+				set_planet_flag = has_enough_doctor
+			}
+			if = {
+				limit = {
+					any_owned_pop_group = {
+						has_trait = using_cirus_traits1
+					}
+				}
+				random_list = {
+					90 = {}
+					10 = {
+						modifier = {
+							add = 5
+							NOT = {
+								has_planet_flag = has_enough_doctor
+							}
+						}
+						modifier = {
+							add = 5
+							free_amenities < 0
+						}
+						random_owned_pop_group = {
+							set_pop_group_flag = using_virus_make_illness
+						}
+						if = {
+							limit = {
+								has_planet_flag = has_enough_doctor
+							}
+							planet_event = {
+								id = tech_fallen_events.18
+							}
+						}
+						owner = {
+							if = {
+								limit = {
+									OR = {
+										has_modifier = mod_has_vaccine_of_virus
+										has_modifier = mod_has_medicine_of_virus
+									}
+								}
+								country_event = {
+									id = tech_fallen_events.19
+								}
+							}
+							hidden_effect = {
+								country_event = {
+									id = tech_fallen_events.21
+									days = 1
+									random = 30
+								}	
+							}
+						}
+					}
+				}
+			}
+			remove_planet_flag = has_enough_doctor
+		}
+	}
+}
+
+planet_event = {
+	id = tech_fallen_events.17
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		any_owned_pop_group = {
+			has_pop_group_flag = using_virus_make_illness
+		}
+	}
+
+	immediate = {
+		if = {
+			limit = {
+				any_targeting_situation = {
+					is_situation_type = situation_genetic_engineering_caused_virus
+				}
+			}
+			set_planet_flag = has_viru_situation
+		}
+		if = {
+			limit = {
+				OR = {
+					any_owned_pop_group = {
+						is_job_of_pop_category = { job = healthcare category = specialist }
+					}
+					AND = {
+						any_owned_pop_group = {
+							is_job_of_pop_category = { job = maintenance_drone category = simple_drone }
+						}
+						free_amenities > 0
+					}
+				}
+			}
+			set_planet_flag = has_enough_doctor
+		}
+		if = {
+			limit = {
+				any_targeting_situation = {
+					is_situation_type = situation_genetic_engineering_caused_virus
+					OR = {
+						current_stage = genetic_engineering_caused_virus_3
+						current_stage = genetic_engineering_caused_virus_4
+					}
+				}
+			}
+			set_planet_flag = viru_situation_34
+		}
+		if = {
+			limit = {
+				NOT = {
+					has_planet_flag = has_viru_situation
+				}
+				has_planet_flag = has_enough_doctor
+			}
+			planet_event = {
+				id = tech_fallen_events.18
+			}
+			owner = {
+				if = {
+					limit = {
+						OR = {
+							has_modifier = mod_has_vaccine_of_virus
+							has_modifier = mod_has_medicine_of_virus
+						}
+					}
+					country_event = {
+						id = tech_fallen_events.19
+					}
+				}
+			}
+		}
+		export_trigger_value_to_variable = {
+			trigger = count_owned_pop_group
+			parameters = {
+				has_pop_group_flag = using_virus_make_illness
+			 }
+			variable = num_using_virus_make_illness
+		}
+		if = {
+			limit = {
+				free_housing < 0
+			}
+			multiply_variable = {
+				which = num_using_virus_make_illness
+				value = 1.5
+			}
+		}
+		if = {
+			limit = {
+				free_amenities < 0
+			}
+			multiply_variable = {
+				which = num_using_virus_make_illness
+				value = 1.5
+			}
+		}
+		if = {
+			limit = {
+				has_planet_flag = has_enough_doctor
+			}
+			multiply_variable = {
+				which = num_using_virus_make_illness
+				value = 0.5
+			}
+		}
+		if = {
+			limit = {
+				has_modifier = stay_home_caused_virus
+			}
+			multiply_variable = {
+				which = num_using_virus_make_illness
+				value = 0.25
+			}
+		}
+		multiply_variable = {
+			which = num_using_virus_make_illness
+			value = 0.75
+		}
+		if = {
+			limit = {
+				owner = {
+					NOT = {
+						has_country_flag = has_vaccine_of_virus
+					}
+				}
+			}
+			while = {
+				limit = {
+					check_variable = {
+						which = num_using_virus_make_illness
+						value > 0
+					}
+				}
+				random_owned_pop_group = {
+					limit = {
+						NOT = {
+							has_pop_group_flag = using_virus_make_illness
+						}
+						if = {
+							limit = {
+								planet = {
+									NOT = {
+										has_planet_flag = viru_situation_34
+									}
+								}
+							}
+							has_trait = using_cirus_traits1
+						}
+						species = {
+							is_archetype = BIOLOGICAL
+						}
+					}
+					set_pop_group_flag = using_virus_make_illness
+				}
+				change_variable = {
+					which = num_using_virus_make_illness
+					value = -1
+				}
+			}
+		}
+		if = {
+			limit = {
+				any_owned_pop_group = {
+					has_pop_group_flag = using_virus_make_illness
+				}
+			}
+			random_list = {
+				80 = {}
+				20 = {
+					modifier = {
+						add = num_using_virus_make_illness
+						always = yes
+					}
+					if = {
+						limit = {
+							NOT = {
+								has_planet_flag = has_viru_situation
+							}
+						}
+						planet_event = {
+							id = tech_fallen_events.20
+						}
+						owner = {
+							if = {
+								limit = {
+									OR = {
+										has_modifier = mod_has_vaccine_of_virus
+										has_modifier = mod_has_medicine_of_virus
+									}
+								}
+								country_event = {
+									id = tech_fallen_events.19
+								}
+							}
+						}
+					}
+					random_owned_pop_group = {
+						limit = {
+							has_pop_group_flag = using_virus_make_illness
+						}
+						kill_all_pop = yes
+					}
+				}
+			}
+		}
+		remove_planet_flag = has_viru_situation
+		remove_planet_flag = has_enough_doctor
+		remove_planet_flag = viru_situation_34
+	}
+}
+
+planet_event = {
+	id = tech_fallen_events.18
+	title = tech_fallen_events.18.title
+	desc = tech_fallen_events.18.desc
+	picture = GFX_evt_emergency_workers
+	location = this
+	is_triggered_only = yes
+
+	option = {
+		name = tech_fallen_events.18.a
+		owner = {
+			start_situation = {
+				type = situation_genetic_engineering_caused_virus
+				target = root
+			}
+		}
+	}
+}
+
+country_event = {
+	id = tech_fallen_events.19
+	title = tech_fallen_events.19.title
+	desc = tech_fallen_events.19.desc
+	picture = GFX_evt_microscopic_life
+	location = this
+	is_triggered_only = yes
+
+	option = {
+		name = tech_fallen_events.19.a
+		remove_modifier = mod_has_vaccine_of_virus
+		remove_modifier = mod_has_medicine_of_virus
+		if = {
+			limit = {
+				has_special_project = research_medicine_of_virus
+			}
+			abort_special_project = {
+				type = research_medicine_of_virus
+			}
+		}
+	}
+}
+
+planet_event = {
+	id = tech_fallen_events.20
+	title = tech_fallen_events.20.title
+	desc = tech_fallen_events.20.desc
+	picture = GFX_evt_disease_outbreak
+	location = this
+	is_triggered_only = yes
+
+	option = {
+		name = tech_fallen_events.20.a
+		owner = {
+			start_situation = {
+				type = situation_genetic_engineering_caused_virus
+				target = root
+			}
+		}
+		every_targeting_situation = {
+			limit = {
+				is_situation_type = situation_genetic_engineering_caused_virus
+			}
+			add_situation_progress = 25
+		}
+	}
+}
+
+country_event = {
+	id = tech_fallen_events.21
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		NOT = {
+			has_country_flag = has_medicine_of_virus
+		}
+	}
+
+	immediate = {
+		every_owned_planet = {
+			planet_event = {
+				id = tech_fallen_events.17
+			}
+		}
+		country_event = {
+			id = tech_fallen_events.21
+			days = 1
+			random = 30
+		}
+	}
+}
+
+planet_event = {
+	id = tech_fallen_events.22
+	title = tech_fallen_events.22.title
+	desc = tech_fallen_events.22.desc
+	picture = GFX_evt_worrying_signal
+	location = this
+	is_triggered_only = yes
+
+	option = {
+		name = tech_fallen_events.22.a
+		every_owned_pop_group = {
+			limit = {
+				has_trait = using_cirus_traits1
+			}
+			set_pop_group_flag = using_virus_make_illness
+		}
+	}
+}
+
+planet_event = {
+	id = tech_fallen_events.23
+	title = tech_fallen_events.23.title
+	desc = tech_fallen_events.23.desc
+	picture = GFX_evt_colony_settlement
+	location = this
+	is_triggered_only = yes
+
+	option = {
+		name = tech_fallen_events.23.a
+		every_owned_pop_group = {
+			limit = {
+				species = {
+					is_archetype = BIOLOGICAL
+				}
+			}
+			set_pop_group_flag = using_virus_make_illness
+		}
+	}
+}
+
+planet_event = {
+	id = tech_fallen_events.24
+	title = tech_fallen_events.24.title
+	desc = tech_fallen_events.24.desc
+	picture = GFX_evt_zro_5
+	location = this
+	is_triggered_only = yes
+
+	option = {
+		name = tech_fallen_events.24.a
+		every_owned_pop_group = {
+			limit = {
+				species = {
+					is_archetype = BIOLOGICAL
+				}
+			}
+			kill_all_pop = yes
+		}
+		add_deposit = illness_of_virus_destory_environment
+	}
+}
+
+country_event = {
+	id = tech_fallen_events.25
+	title = tech_fallen_events.25.title
+	desc = tech_fallen_events.25.desc
+	picture = GFX_evt_microscopic_life
+	location = this
+	is_triggered_only = yes
+
+	option = {
+		name = tech_fallen_events.25.a
+		add_modifier ={
+			modifier = mod_has_vaccine_of_virus
+		}
+		enable_special_project = {
+			name = research_medicine_of_virus
+		}
+		hidden_effect = {
+			set_timed_country_flag = {
+				flag = has_vaccine_of_virus
+				years = 50
+			}
+		}
+	}
+}
+
+country_event = {
+	id = tech_fallen_events.26
+	title = tech_fallen_events.26.title
+	desc = tech_fallen_events.26.desc
+	picture = GFX_evt_analyzing_artifacts
+	location = this
+	is_triggered_only = yes
+
+	option = {
+		name = tech_fallen_events.26.a
+		add_modifier ={
+			modifier = mod_has_medicine_of_virus
+		}
+		every_situation = {
+			limit = {
+				is_situation_type = situation_genetic_engineering_caused_virus
+			}
+			set_situation_flag = situation_genetic_engineering_caused_virus_end
+		}
+		hidden_effect = {
+			every_owned_pop_group = {
+				limit = {
+					has_pop_group_flag = using_virus_make_illness
+				}
+				remove_pop_group_flag = using_virus_make_illness
+			}
+			set_timed_country_flag = {
+				flag = has_medicine_of_virus
+				years = 50
+			}
+		}
+	}
+}
+
+planet_event = {
+	id = tech_fallen_events.27
+	title = tech_fallen_events.27.title
+	desc = tech_fallen_events.27.desc
+	picture = GFX_evt_astral_rift_desert_ruins_first_chamber
+	location = this
+	is_triggered_only = yes
+
+	trigger = {
+		NOT = {
+			has_global_flag = not_show_tech_fallen_events14
+		}
+	}
+
+	option = {
+		name = tech_fallen_events.27.a
+	}
+	option = {
+		name = tech_fallen_events.27.b
+		hidden_effect = {
+			set_global_flag = not_show_tech_fallen_events14
+		}
+	}
+}

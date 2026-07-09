@@ -1,0 +1,5 @@
+civic_lgate_grander = {
+    icon = gfx/interface/icons/governments/civics/civic_machine_factory_overclock.dds
+    description = civic_lgate_effect
+    modification = no
+}

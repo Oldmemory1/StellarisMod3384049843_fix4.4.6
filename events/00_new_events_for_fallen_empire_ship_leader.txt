@@ -1,0 +1,227 @@
+namespace = fallen_leader_events
+
+country_event = {
+	id = fallen_leader_events.1
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		is_country_type = fallen_empire
+		is_xenophobe = yes
+	}
+
+	immediate = {
+		save_global_event_target_as = xenophobe_fallen_empire
+		create_country = {
+			type = global_event
+			species = event_target:fallen_4_species
+			flag = prev
+			effect = {
+				set_name = {
+						key = name_xenophobe_fallen
+						variable_string = "[xenophobe_fallen_empire.GetName]"
+					}
+				save_global_event_target_as = xenophobe_fallen_empire_leader_country
+				every_country = {
+					establish_communications_no_message = event_target:xenophobe_fallen_empire_leader_country
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = fallen_leader_events.2
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		is_ai = no
+		from = {
+			is_fallen_empire_xenophobe = yes
+		}
+		NOT = {
+			has_global_flag = tubonerian_caught
+		}
+	}
+
+	immediate = {
+		random_list = {
+			80 = {}
+			20 = {
+				set_global_flag = tubonerian_caught
+				country_event = {
+					days = 1
+					id = fallen_leader_events.4
+				}
+				hidden_effect = {
+					event_target:xenophobe_fallen_empire_leader_country = {
+						create_leader = {
+							class = commander
+							species = event_target:fallen_4_species
+							name = NAME_Tubonerian
+							skill = 10
+							background_ethic = ethic_xenophobe
+							custom_description = tubonerian_leader_desc
+							hide_age = no
+							randomize_traits = no
+							event_leader = yes	# prevents this leader from leading factions and winning elections
+							gender = male
+							effect = {
+								set_age = 39
+								save_global_event_target_as = tubonerian_leader
+								set_leader_flag = renowned_leader
+								set_leader_flag = is_in_recruit_window
+								add_trait = subclass_commander_admiral
+								add_trait = leader_trait_master_gunner
+								add_trait = leader_trait_aggressive_2
+								add_trait = leader_trait_wrecker_3
+								add_trait = leader_trait_commanding_presence_3
+								add_trait = leader_trait_resilient_2
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = fallen_leader_events.3
+	title = "NAME_Tubonerian"
+	desc = "fallen_leader_events.3.desc"
+	show_sound = event_custodian_greeting
+	picture = GFX_leader_recruitment_bg_renowned
+	event_window_type = leader_recruit
+	is_triggered_only = yes
+
+	picture_event_data = {
+		portrait = event_target:tubonerian_leader
+		room = ethic_spaceship_room
+	}
+
+	option = {
+		name = "fallen_leader_events.3.a"
+		response_text = "fallen_leader_events.3.a.response"
+		is_dialog_only = yes
+	}
+	option = {
+		name = "fallen_leader_events.3.b"
+		response_text = "fallen_leader_events.3.b.response"
+		is_dialog_only = yes
+	}
+	option = {
+		name = "fallen_leader_events.3.c"
+		response_text = "fallen_leader_events.3.c.response"
+		is_dialog_only = yes
+	}
+	option = {
+		name = "fallen_leader_events.3.d"
+		hidden_effect = {
+			country_event = {
+				id = fallen_leader_events.5
+			}
+		}
+	}
+	option = {
+		tag = hire_leader
+		name = "fallen_leader_events.3.e"
+		add_research_option = tech_art_of_war
+		add_research_option = tech_use_weapen_as_shield
+		hidden_effect = {
+			hire_event_leader_effect = {
+				LEADER = tubonerian_leader
+			}
+		}
+	}
+	option = {
+		name = "fallen_leader_events.3.f"
+		tag = dismiss_leader
+		add_resource = {
+			unity = 10000
+		}
+	}
+}
+
+country_event = {
+	id = fallen_leader_events.4
+	title = fallen_leader_events.4.title
+	desc = fallen_leader_events.4.desc
+	picture = GFX_evt_cover_blown
+	show_sound = select_click
+
+	is_triggered_only = yes
+
+	option = {
+		name = fallen_leader_events.4.a
+		add_resource = {
+			unity = 1000
+		}
+		country_event = {
+			id = fallen_leader_events.3
+		}
+	}
+}
+
+country_event = {
+	id = fallen_leader_events.5
+	title = "NAME_Tubonerian"
+	desc = "fallen_leader_events.5.desc"
+	show_sound = event_custodian_greeting
+	picture = GFX_leader_recruitment_bg_renowned
+	event_window_type = leader_recruit
+	is_triggered_only = yes
+
+	picture_event_data = {
+		portrait = event_target:tubonerian_leader
+		room = ethic_spaceship_room
+	}
+
+	option = {
+		name = "fallen_leader_events.5.a"
+		response_text = "fallen_leader_events.5.a.response"
+		is_dialog_only = yes
+	}
+	option = {
+		name = "fallen_leader_events.5.b"
+		response_text = "fallen_leader_events.5.b.response"
+		is_dialog_only = yes
+	}
+	option = {
+		name = "fallen_leader_events.5.c"
+		response_text = "fallen_leader_events.5.c.response"
+		is_dialog_only = yes
+	}
+	option = {
+		name = "fallen_leader_events.5.d"
+		response_text = "fallen_leader_events.5.d.response"
+		is_dialog_only = yes
+	}
+	option = {
+		name = "fallen_leader_events.5.e"
+		hidden_effect = {
+			country_event = {
+				id = fallen_leader_events.3
+			}
+		}
+	}
+	option = {
+		tag = hire_leader
+		name = "fallen_leader_events.3.e"
+		add_research_option = tech_art_of_war
+		add_research_option = tech_use_weapen_as_shield
+		hidden_effect = {
+			hire_event_leader_effect = {
+				LEADER = tubonerian_leader
+			}
+		}
+	}
+	option = {
+		name = "fallen_leader_events.3.f"
+		tag = dismiss_leader
+		add_resource = {
+			unity = 10000
+		}
+	}
+}

@@ -1,0 +1,120 @@
+namespace = change_fallen_empire_power
+
+country_event = {
+	id = change_fallen_empire_power.1
+	title = title_of_change_fallen_empire_power1
+	desc = desc_of_change_fallen_empire_power1
+	picture = GFX_evt_alien_city
+	location = root
+	show_sound = select_click
+	is_triggered_only = yes
+
+	trigger = {
+        is_ai = no
+    }
+
+	immediate = {
+		remove_global_flag = unlimited_fallen_empire_power
+	}
+
+	option = {
+		name = option_of_change_fallen_empire_power_0
+		custom_tooltip = efect_of_change_fallen_empire_power_0
+		hidden_effect = {
+			set_global_flag = unlimited_fallen_empire_power
+		}
+	}
+
+	option = {
+		name = option_of_change_fallen_empire_power_1
+		custom_tooltip = efect_of_change_fallen_empire_power_1
+		hidden_effect = {
+			event_target:global_event_country = {
+				set_variable = {
+					which = fallen_empire_power
+					value = 1000000
+				}
+			}
+		}
+	}
+
+	option = {
+		name = option_of_change_fallen_empire_power_2
+		custom_tooltip = efect_of_change_fallen_empire_power_2
+		hidden_effect = {
+			event_target:global_event_country = {
+				set_variable = {
+					which = fallen_empire_power
+					value = 500000
+				}
+			}
+		}
+	}
+
+	option = {
+		name = option_of_change_fallen_empire_power_3
+		custom_tooltip = efect_of_change_fallen_empire_power_3
+		hidden_effect = {
+			event_target:global_event_country = {
+				set_variable = {
+					which = fallen_empire_power
+					value = 100000
+				}
+			}
+		}
+	}
+
+	option = {
+		name = option_of_change_fallen_empire_power_4
+		custom_tooltip = efect_of_change_fallen_empire_power_4
+		hidden_effect = {
+			event_target:global_event_country = {
+				set_variable = {
+					which = fallen_empire_power
+					value = 50000
+				}
+			}
+		}
+	}
+
+	option = {
+		name = option_of_change_fallen_empire_power_5
+		custom_tooltip = efect_of_change_fallen_empire_power_5
+		hidden_effect = {
+			event_target:global_event_country = {
+				set_variable = {
+					which = fallen_empire_power
+					value = 10000
+				}
+			}
+		}
+	}
+
+	option = {
+		name = option_of_change_fallen_empire_power_6
+		custom_tooltip = efect_of_change_fallen_empire_power_6
+		hidden_effect = {
+			event_target:global_event_country = {
+				set_variable = {
+					which = fallen_empire_power
+					value = 0
+				}
+			}
+		}
+	}
+
+	after = {
+		hidden_effect = {
+			event_target:global_event_country = {
+				get_galaxy_setup_value = {
+					which = fallen_empire_crsis_level
+					setting = crisis_strength_scale
+				}
+				multiply_variable = {
+					which = fallen_empire_power
+					value = fallen_empire_crsis_level
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,79 @@
+balanced_fallen_empire_modifier = {
+	ship_hull_mult = 0.05
+	ship_armor_mult = 0.05
+	ship_shield_mult = 0.05
+	ship_weapon_damage = 0.05
+	ship_fire_rate_mult = 0.05
+	ship_military_upkeep_mult = -0.90
+	country_naval_cap_add = 9999
+}
+
+fallen_contingency_calculation = {
+	starbase_shipyard_build_speed_mult = 0.3
+}
+
+fallen_drums_of_war = {
+	ship_weapon_damage = 0.3
+	ship_fire_rate_mult = 0.3
+}
+
+mod_fallen_omnicodex = {
+	all_technology_research_speed = 0.2
+}
+
+mod_fallen_continuum = {
+	species_leader_exp_gain = 0.3
+}
+
+has_new_computer = {
+	planet_jobs_produces_mult = 0.3
+	planet_jobs_upkeep_mult = -0.3
+}
+
+with_tech_fallen_help = {
+	icon = "gfx/interface/icons/modifiers/cost_of_freedom_bonus.dds"
+	country_produces_mult = 0.1
+	all_technology_research_speed = 0.1
+	num_tech_alternatives_add = 5
+}
+
+planet_has_tech_fallen_key = {
+	icon = "gfx/interface/icons/planet_modifiers/planet_has_tech_fallen_key_mod.dds"
+	custom_tooltip = "planet_has_tech_fallen_key_effect"
+}
+
+stay_home_caused_virus = {
+	icon = "gfx/interface/icons/planet_modifiers/pm_penal_colony.dds"
+	pop_housing_usage_mult = 0.25
+	planet_jobs_produces_mult = -0.75
+	trade_value_mult = -0.80
+}
+
+mod_has_vaccine_of_virus = {
+	icon = "gfx/interface/icons/modifiers/mod_country_local_trade_protection_add.dds"
+	custom_tooltip = "mod_has_vaccine_of_virus_effect"
+}
+
+mod_has_medicine_of_virus = {
+	icon = "gfx/interface/icons/modifiers/mod_country_custodian.dds"
+	custom_tooltip = "mod_has_medicine_of_virus_effect"
+}
+
+mod_fallen_lgater = {
+	country_base_nanites_produces_add = 10000
+	country_produces_mult = 2.5
+	planet_stability_add = 25
+	planet_housing_add = 200
+}
+mod_research_reduce_lgate = {
+	all_technology_research_speed = -0.25
+}
+mod_produces_reduce_lgate = {
+	country_produces_mult = -0.2
+}
+mod_graygoo_kill_gater = {
+	damage_vs_country_type_awakened_fallen_empire_mult = 100
+}
+mod_lgater_helping = {
+	country_produces_mult = 0.15
+}

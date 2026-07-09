@@ -1,0 +1,581 @@
+namespace = fallen_per_ftl_events
+
+country_event = {
+	id = fallen_per_ftl_events.1
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		is_fallen_empire_xenophile = yes
+	}
+
+	immediate = {
+		set_country_flag = protected_from_queen_storm
+		save_global_event_target_as = xenophile_fallen_empire
+		random_playable_country = {
+			limit = {
+				is_ai = no
+			}
+			capital_scope.solar_system = {
+				random_system = {
+					limit = {
+						NAND = {
+							exists = owner
+							owner = {
+								is_ai = yes
+							}
+						}
+						distance = {
+							source = prev
+							type = hyperlane
+							min_jumps = 5
+							max_jumps = 10
+						}
+					}
+					spawn_system = {
+						min_distance = 5 
+						max_distance = 10 
+						min_orientation_angle = 0 
+						max_orientation_angle = 360 
+						initializer = fallen_per_ftl_events_system
+					}
+					set_global_flag = fallen_per_ftl_created
+				}
+				if = {
+					limit = {
+						has_global_flag = fallen_per_ftl_created
+					}
+					remove_global_flag = fallen_per_ftl_created
+				} else = {
+					spawn_system = {
+						min_distance = 5 
+						max_distance = 10 
+						min_orientation_angle = 0 
+						max_orientation_angle = 360 
+						initializer = fallen_per_ftl_events_system
+					}
+				}
+			}
+		}
+	}
+}
+
+ship_event = {
+    id = fallen_per_ftl_events.2
+    title = fallen_per_ftl_events.2.name
+    desc = fallen_per_ftl_events.2.desc
+    picture = GFX_evt_alien_ruins
+    location = this
+    show_sound = select_click
+
+    is_triggered_only = yes
+
+    option = {
+        name = fallen_per_ftl_events.2.a
+    }
+
+	option = {
+        name = fallen_per_ftl_events.2.b
+    }
+
+	after = {
+		if = {
+			limit = {
+				from = {
+					exists = owner
+					owner = {
+						is_same_empire = event_target:fallen_per_ftl_country
+					}
+				}
+			}
+			owner = {
+				start_situation = {
+					type = situation_do_with_fallen_per_ftl
+					target = root.from
+				}
+			}
+		} else = {
+			enable_special_project = {
+				name = research_fallen_per_ftl_fallen_ship
+				owner = root.owner
+				location = root.from
+			}
+			owner = {
+				set_country_flag = never_saw_fallen_per_ftl
+			}
+		}
+	}
+}
+
+ship_event = {
+    id = fallen_per_ftl_events.3
+	hide_window = yes
+
+    is_triggered_only = yes
+
+	trigger = {
+		fromfrom = { is_ai = no }
+		from = {
+			is_same_value = event_target:fallen_per_ftl_system
+		}
+		NOT = {
+			has_global_flag = fallen_per_ftl_found
+		}
+	}
+
+	immediate = {
+		event_target:fallen_per_ftl_planet = {
+			add_anomaly = {
+				category = find_fallen_pre_ftl
+				target = root.owner
+			}
+		}
+		set_global_flag = fallen_per_ftl_found
+	}
+}
+
+situation_event = {
+	id = fallen_per_ftl_events.4
+	title = fallen_per_ftl_events.4.name
+    desc = fallen_per_ftl_events.4.desc
+    picture = GFX_evt_victorious_army
+    location = event_target:fallen_per_ftl_planet
+    show_sound = select_click
+
+    is_triggered_only = yes
+
+    option = {
+        name = fallen_per_ftl_events.4.a
+		target = {
+			set_owner = root.owner
+		}
+		enable_special_project = {
+			name = research_fallen_per_ftl_fallen_ship
+			owner = root.owner
+			location = event_target:fallen_per_ftl_planet
+		}
+		destroy_situation = this
+    }
+}
+
+situation_event = {
+	id = fallen_per_ftl_events.5
+	title = fallen_per_ftl_events.5.name
+    desc = fallen_per_ftl_events.5.desc
+    picture = GFX_evt_city_ruins
+    location = event_target:fallen_per_ftl_planet
+    show_sound = select_click
+
+    is_triggered_only = yes
+
+    option = {
+        name = fallen_per_ftl_events.4.a
+		enable_special_project = {
+			name = research_fallen_per_ftl_fallen_ship
+			owner = root.owner
+			location = event_target:fallen_per_ftl_planet
+		}
+		destroy_situation = this
+    }
+}
+
+situation_event = {
+	id = fallen_per_ftl_events.6
+	title = fallen_per_ftl_events.6.name
+    desc = fallen_per_ftl_events.6.desc
+    picture = GFX_evt_alien_abduction
+    location = event_target:fallen_per_ftl_planet
+    show_sound = select_click
+
+    is_triggered_only = yes
+
+    option = {
+        name = fallen_per_ftl_events.6.a
+		owner = {
+			add_monthly_resource_mult = {
+				resource = society_research
+				value = 12
+				min = 1000
+			}
+		}
+    }
+}
+
+situation_event = {
+	id = fallen_per_ftl_events.7
+	title = fallen_per_ftl_events.7.name
+    desc = fallen_per_ftl_events.7.desc
+    picture = GFX_evt_alien_hieroglyphics
+    location = event_target:fallen_per_ftl_planet
+    show_sound = select_click
+
+    is_triggered_only = yes
+
+    option = {
+        name = fallen_per_ftl_events.7.a
+		owner = {
+			add_monthly_resource_mult = {
+				resource = society_research
+				value = 12
+				min = 1000
+			}
+		}
+    }
+}
+
+situation_event = {
+	id = fallen_per_ftl_events.8
+	title = fallen_per_ftl_events.8.name
+    desc = fallen_per_ftl_events.8.desc
+    picture = GFX_evt_alien_propaganda
+    location = event_target:fallen_per_ftl_planet
+    show_sound = select_click
+
+    is_triggered_only = yes
+
+    option = {
+        name = fallen_per_ftl_events.8.a
+		owner = {
+			add_monthly_resource_mult = {
+				resource = society_research
+				value = 12
+				min = 1000
+			}
+		}
+		enable_special_project = {
+			name = research_fallen_per_ftl_fallen_ship
+			owner = root.owner
+			location = event_target:fallen_per_ftl_planet
+		}
+		destroy_situation = this
+    }
+}
+
+country_event = {
+	id = fallen_per_ftl_events.9
+	title = fallen_per_ftl_events.9.name
+	desc = fallen_per_ftl_events.9.desc
+	picture = GFX_evt_archaeological_dig
+	location = event_target:fallen_per_ftl_planet
+	show_sound = select_click
+
+	is_triggered_only = yes
+
+	option = {
+		name = fallen_per_ftl_events.9.a
+		add_monthly_resource_mult = {
+			resource = engineering_research
+			value = 30
+			min = 5000
+		}
+		enable_special_project = {
+			name = restart_fallen_per_ftl_fallen_ship_conmunity
+			owner = root
+			location = event_target:fallen_per_ftl_planet
+		}
+		hidden_effect = {
+			event_target:fallen_per_ftl_country = {
+				remove_country_flag = tech_frozen
+			}
+		}
+	}
+}
+
+country_event = {
+	id = fallen_per_ftl_events.10
+	title = fallen_per_ftl_events.10.name
+	desc = fallen_per_ftl_events.10.desc
+	show_sound = select_click
+
+	diplomatic = yes
+	is_triggered_only = yes
+
+	picture_event_data = {
+		portrait = event_target:xenophile_fallen_empire
+		planet_background = event_target:xenophile_fallen_empire
+		graphical_culture = event_target:xenophile_fallen_empire
+		city_level = event_target:xenophile_fallen_empire
+		room = event_target:xenophile_fallen_empire.ruler
+	}
+
+	option = {
+		name = fallen_per_ftl_events.10.a
+	}
+	option = {
+		name = fallen_per_ftl_events.10.b
+	}
+
+	after = {
+		hidden_effect = {
+			country_event = {
+				id = fallen_per_ftl_events.11
+			}
+		}
+	}
+}
+
+country_event = {
+	id = fallen_per_ftl_events.11
+	title = fallen_per_ftl_events.10.name
+	desc = fallen_per_ftl_events.11.desc
+	show_sound = select_click
+
+	diplomatic = yes
+	is_triggered_only = yes
+
+	picture_event_data = {
+		portrait = event_target:xenophile_fallen_empire
+		planet_background = event_target:xenophile_fallen_empire
+		graphical_culture = event_target:xenophile_fallen_empire
+		city_level = event_target:xenophile_fallen_empire
+		room = event_target:xenophile_fallen_empire.ruler
+	}
+
+	option = {
+		name = fallen_per_ftl_events.11.a
+		response_text = "fallen_per_ftl_events.11.a.response"
+		is_dialog_only = yes
+	}
+	option = {
+		name = fallen_per_ftl_events.11.b
+		response_text = "fallen_per_ftl_events.11.b.response"
+		is_dialog_only = yes
+	}
+	option = {
+		name = fallen_per_ftl_events.11.c
+		response_text = "fallen_per_ftl_events.11.c.response"
+		is_dialog_only = yes
+	}
+	option = {
+		name = fallen_per_ftl_events.11.d
+		response_text = "fallen_per_ftl_events.11.d.response"
+		is_dialog_only = yes
+	}
+
+	option = {
+		name = fallen_per_ftl_events.11.e
+		hidden_effect = {
+			country_event = {
+				id = fallen_per_ftl_events.12
+			}
+		}
+	}
+}
+
+country_event = {
+	id = fallen_per_ftl_events.12
+	title = fallen_per_ftl_events.10.name
+	desc = {
+		trigger = {
+			OR = {
+				has_country_flag = destoried_fallen_per_ftl
+				has_country_flag = let_fallen_per_ftl_gone
+				has_country_flag = never_saw_fallen_per_ftl
+			}
+		}
+		text = fallen_per_ftl_events.12.1.desc
+	}
+	desc = {
+		trigger = {
+			NOR = {
+				has_country_flag = destoried_fallen_per_ftl
+				has_country_flag = let_fallen_per_ftl_gone
+				has_country_flag = never_saw_fallen_per_ftl
+			}
+		}
+		text = fallen_per_ftl_events.12.2.desc
+	}
+	show_sound = select_click
+
+	diplomatic = yes
+	is_triggered_only = yes
+
+	picture_event_data = {
+		portrait = event_target:xenophile_fallen_empire
+		planet_background = event_target:xenophile_fallen_empire
+		graphical_culture = event_target:xenophile_fallen_empire
+		city_level = event_target:xenophile_fallen_empire
+		room = event_target:xenophile_fallen_empire.ruler
+	}
+
+	option = {
+		trigger = {
+			OR = {
+				has_country_flag = destoried_fallen_per_ftl
+				has_country_flag = let_fallen_per_ftl_gone
+				has_country_flag = never_saw_fallen_per_ftl
+			}
+		}
+		name = fallen_per_ftl_events.12.a
+		if = {
+			limit = {
+				has_country_flag = never_saw_fallen_per_ftl
+			}
+			hidden_effect = {
+				country_event = {
+					id = fallen_per_ftl_events.13
+				}
+			}
+		} else = {
+			hidden_effect = {
+				country_event = {
+					id = fallen_per_ftl_events.14
+				}
+			}
+		}
+	}
+
+	option = {
+		trigger = {
+			has_country_flag = destoried_fallen_per_ftl
+		}
+		name = fallen_per_ftl_events.12.b
+		hidden_effect = {
+			country_event = {
+				id = fallen_per_ftl_events.15
+			}
+		}
+	}
+
+	option = {
+		trigger = {
+			has_country_flag = let_fallen_per_ftl_gone
+		}
+		name = fallen_per_ftl_events.12.c
+		hidden_effect = {
+			country_event = {
+				id = fallen_per_ftl_events.13
+			}
+		}
+	}
+
+	option = {
+		trigger = {
+			NOR = {
+				has_country_flag = destoried_fallen_per_ftl
+				has_country_flag = let_fallen_per_ftl_gone
+				has_country_flag = never_saw_fallen_per_ftl
+			}
+		}
+		name = fallen_per_ftl_events.12.d
+		response_text = "fallen_per_ftl_events.12.d.response"
+		is_dialog_only = yes
+	}
+
+	option = {
+		trigger = {
+			NOR = {
+				has_country_flag = destoried_fallen_per_ftl
+				has_country_flag = let_fallen_per_ftl_gone
+				has_country_flag = never_saw_fallen_per_ftl
+			}
+		}
+		name = fallen_per_ftl_events.12.e
+		give_technology = {
+			tech = tech_fallen_lost_nano_machine
+		}
+	}
+}
+
+country_event = {
+	id = fallen_per_ftl_events.13
+	title = fallen_per_ftl_events.10.name
+	desc = fallen_per_ftl_events.13.desc
+	show_sound = select_click
+
+	diplomatic = yes
+	is_triggered_only = yes
+
+	picture_event_data = {
+		portrait = event_target:xenophile_fallen_empire
+		planet_background = event_target:xenophile_fallen_empire
+		graphical_culture = event_target:xenophile_fallen_empire
+		city_level = event_target:xenophile_fallen_empire
+		room = event_target:xenophile_fallen_empire.ruler
+	}
+
+	option = {
+		name = fallen_per_ftl_events.13.a
+		response_text = "fallen_per_ftl_events.12.d.response"
+		is_dialog_only = yes
+	}
+
+	option = {
+		name = fallen_per_ftl_events.12.e
+		give_technology = {
+			tech = tech_fallen_lost_nano_machine
+		}
+	}
+}
+
+country_event = {
+	id = fallen_per_ftl_events.14
+	title = fallen_per_ftl_events.10.name
+	desc = fallen_per_ftl_events.14.desc
+	show_sound = select_click
+
+	diplomatic = yes
+	is_triggered_only = yes
+
+	picture_event_data = {
+		portrait = event_target:xenophile_fallen_empire
+		planet_background = event_target:xenophile_fallen_empire
+		graphical_culture = event_target:xenophile_fallen_empire
+		city_level = event_target:xenophile_fallen_empire
+		room = event_target:xenophile_fallen_empire.ruler
+	}
+
+	option = {
+		name = fallen_per_ftl_events.14.a
+		event_target:xenophile_fallen_empire = {
+			declare_war = {
+				target = root
+				attacker_war_goal = wg_fe_humiliation
+			}
+		}
+	}
+}
+
+country_event = {
+	id = fallen_per_ftl_events.15
+	title = fallen_per_ftl_events.10.name
+	desc = fallen_per_ftl_events.15.desc
+	show_sound = select_click
+
+	diplomatic = yes
+	is_triggered_only = yes
+
+	picture_event_data = {
+		portrait = event_target:xenophile_fallen_empire
+		planet_background = event_target:xenophile_fallen_empire
+		graphical_culture = event_target:xenophile_fallen_empire
+		city_level = event_target:xenophile_fallen_empire
+		room = event_target:xenophile_fallen_empire.ruler
+	}
+
+	option = {
+		name = fallen_per_ftl_events.14.a
+		event_target:xenophile_fallen_empire = {
+			declare_war = {
+				target = root
+				attacker_war_goal = wg_fe_humiliation
+			}
+		}
+	}
+}
+
+planet_event = {
+	id = fallen_per_ftl_events.16
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		is_planet_class = pc_gray_goo
+		planet_devastation = 100
+	}
+
+	immediate = {
+		destroy_colony = yes
+		change_pc = pc_broken
+	}
+}

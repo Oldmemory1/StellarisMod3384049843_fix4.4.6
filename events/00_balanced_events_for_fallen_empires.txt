@@ -1,0 +1,214 @@
+# Sleepers Awake
+country_event = {
+	id = fallen_empires_awakening.1
+	title = OK
+	desc = OK
+	hide_window = yes
+	trigger = {
+		is_country_type = fallen_empire
+		NOT = { has_country_flag = awakening_not_allowed }
+		OR = {
+			# Fragged a holy world
+			has_country_flag = holy_world_killed
+			# Original trigger
+			AND = {
+				NOT = { has_global_flag = sleepers_awake_happened }
+				NOT = { has_global_flag = guardians_of_the_galaxy_happened }
+				end_game_years_passed >= 0
+				is_machine_empire = no
+				is_at_war = no
+				fleet_power > 60000
+				# Wake up if regular empire is growing too strong or has started to conquer other fallen empires
+				any_playable_country = {
+					OR = {
+						fleet_power > 70000
+						AND = {
+							has_federation = yes
+							federation = {
+								fleet_power > 90000
+							}
+						}
+						any_owned_planet = {
+							has_carrier_flag = fallen_empire_world
+						}
+					}
+				}
+			}
+		}
+		OR = {
+			has_origin = origin_fallen_empire
+			AND = {
+				has_origin = origin_fallen_empire_hive
+				is_same_empire = event_target:strongest_fragment
+			}
+		}
+	}
+
+	mean_time_to_happen = {
+		years = 10
+		modifier = {
+			factor = 0.5
+			any_playable_country = {
+				fleet_power > 120000
+			}
+		}
+		modifier = {
+			factor = 1.5
+			num_fallen_empires > 1
+			num_fallen_empires < 3
+		}
+		modifier = {
+			factor = 2.0
+			num_fallen_empires > 2
+			num_fallen_empires < 4
+		}
+		modifier = {
+			factor = 2.5
+			num_fallen_empires > 3
+		}
+		modifier = {
+			factor = 0.1
+			any_playable_country = {
+				any_owned_planet = {
+					has_carrier_flag = fallen_empire_world
+					NOT = { is_original_owner = root }
+				}
+			}
+		}
+		modifier = {
+			factor = 0.1
+			has_origin = origin_fallen_empire_hive
+			event_target:fallen_empire_hive_forgotten = {
+				num_fleets = 0
+			}
+		}
+	}
+
+	immediate = {
+		set_country_code_flags = { colonizer = yes }
+		set_global_flag = sleepers_awake_happened
+
+		if = {
+			limit = {
+				is_hive_empire = no
+			}
+			country_event = { id = fallen_empires_awakening.3 }
+			save_event_target_as = first_awakener
+		}
+		else_if = {
+			limit = { # Making an extra if check here to not break mods too badly
+				is_hive_empire = yes
+			}
+			awaken_strongest_fe_fragment = yes
+		}
+
+		# Notify players
+		every_country = {
+			limit = {
+				is_ai = no
+			}
+			country_event = { id = fallen_empires_awakening.2 }
+		}
+		observer_event = { id = observer.73 }
+
+		# Fragged a holy world
+		if = {
+			limit = {
+				has_country_flag = holy_world_killed
+			}
+			country_event = { id = planet_destruction.611 days = 5 }
+		}
+
+		# War in Heaven
+		if = {
+			limit = {
+				host_has_dlc = "Leviathans Story Pack"
+				event_target:first_awakener = {
+					NOT = { has_country_flag = fallen_empire_hive_growth } #The devouring swarm does not need a war in heaven to have fun
+				}
+			}
+			random_list = {
+				40 = { # War in Heaven with Fallen Empire of opposing ethos
+					random_country = {
+						limit = {
+							NOT = { is_same_value = event_target:first_awakener }
+							is_country_type = fallen_empire
+							is_machine_empire = no
+							OR = {
+								AND = {
+									is_fanatic_xenophobe = yes
+									event_target:first_awakener = { is_fanatic_xenophile = yes }
+								}
+								AND = {
+									is_fanatic_xenophile = yes
+									event_target:first_awakener = { is_fanatic_xenophobe = yes }
+								}
+								AND = {
+									is_fanatic_spiritualist = yes
+									event_target:first_awakener = { is_fanatic_materialist = yes }
+								}
+								AND = {
+									is_fanatic_materialist = yes
+									event_target:first_awakener = { is_fanatic_spiritualist = yes }
+								}
+								AND = {
+									is_same_empire = event_target:strongest_fragment
+									has_country_flag = fallen_empire_hive_war
+									event_target:first_awakener = { is_fanatic_xenophobe = yes }
+								}
+								AND = {
+									is_same_empire = event_target:strongest_fragment
+									has_country_flag = fallen_empire_hive_control
+									event_target:first_awakener = { is_fanatic_xenophile = yes }
+								}
+								AND = {
+									event_target:first_awakener = { has_country_flag = fallen_empire_hive_war }
+									is_fanatic_xenophobe = yes
+								}
+								AND = {
+									event_target:first_awakener = { has_country_flag = fallen_empire_hive_control }
+									is_fanatic_xenophile = yes
+								}
+							}
+						}
+						set_country_flag = sleepers_awake_ancient_rival
+						set_timed_country_flag = { flag = timed_ancient_rival days = 3600 }
+						set_timed_country_flag = { flag = ai_no_wars days = 3600 }
+						event_target:first_awakener = { set_timed_country_flag = { flag = ai_no_wars days = 3600 } }
+						every_country = {
+							limit = { is_country_type = default }
+							set_timed_country_flag = { flag = ai_no_wars days = 3600 }
+						}
+					}
+				}
+				20 = { # War in Heaven with Fallen Empire of different ethos
+					random_country = {
+						limit = {
+							NOT = { is_same_value = event_target:first_awakener }
+							is_country_type = fallen_empire
+							is_machine_empire = no
+							OR = {
+								is_hive_empire = no
+								is_same_empire = event_target:strongest_fragment
+							}
+						}
+						set_country_flag = sleepers_awake_ancient_rival
+						set_timed_country_flag = { flag = timed_ancient_rival days = 3600 }
+						set_timed_country_flag = { flag = ai_no_wars days = 3600 }
+						root = { set_timed_country_flag = { flag = ai_no_wars days = 3600 } }
+						every_country = {
+							limit = {
+								is_country_type = default
+							}
+							set_timed_country_flag = { flag = ai_no_wars days = 3600 }
+						}
+					}
+				}
+				40 = { # No War in Heaven
+					set_global_flag = no_war_in_heaven
+				}
+			}
+		}
+		else = { set_global_flag = no_war_in_heaven }
+	}
+}

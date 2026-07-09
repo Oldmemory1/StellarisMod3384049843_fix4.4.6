@@ -1,0 +1,21 @@
+find_new_computer_system = {
+	desc = find_new_computer_system_desc
+	picture = GFX_evt_astral_rift_ancient_battlegrounds
+	level = 10
+
+	spawn_chance = {
+		base = 0
+	}
+
+	on_success = rebuilt_computer_events.2
+}
+
+find_fallen_pre_ftl = {
+	desc = find_fallen_pre_ftl_desc
+	picture = GFX_evt_alien_ruins
+	level = 3
+	spawn_chance = {
+		base = 0
+	}
+	on_success = fallen_per_ftl_events.2
+}

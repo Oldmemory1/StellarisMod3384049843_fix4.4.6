@@ -1,0 +1,1810 @@
+namespace = rebuilt_computer_events
+
+country_event = {
+	id = rebuilt_computer_events.1
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		is_fallen_empire_machine = yes
+	}
+
+	immediate = {
+		save_global_event_target_as = machine_fallen_empire2
+		every_system_within_border = {
+			limit = { 
+				is_star_class = sc_black_hole
+			}
+			set_star_flag = super_computer_system
+		}
+	}
+}
+
+ship_event = {
+    id = rebuilt_computer_events.2
+    title = rebuilt_computer_events.2.name
+    desc = rebuilt_computer_events.2.desc
+    picture = GFX_evt_astral_rift_ancient_battlegrounds
+    location = this
+    show_sound = select_click
+
+    is_triggered_only = yes
+
+    option = {
+        name = rebuilt_computer_events.2.option
+		owner.capital_scope = {
+			spawn_system = { 
+				min_distance = 5 
+				max_distance = 10 
+				min_orientation_angle = 0 
+				max_orientation_angle = 360 
+				initializer = cpu_plan_b
+			}
+		}
+    }
+}
+
+ship_event = {
+    id = rebuilt_computer_events.3
+    title = rebuilt_computer_events.3.name
+    desc = rebuilt_computer_events.3.desc
+    picture = GFX_evt_astral_rift_ancient_battlegrounds
+    location = this
+    show_sound = select_click
+
+    is_triggered_only = yes
+
+	trigger = {
+		fromfrom = { is_ai = no }
+		from = { has_star_flag = super_computer_system }
+		NOT = {
+			has_global_flag = new_computer_system_found
+		}
+	}
+
+	immediate = {
+		solar_system = {
+			star = {
+				add_anomaly = {
+					category = find_new_computer_system
+					target = root.owner
+				}
+			}
+			create_country = {
+				type = global_flag
+				effect = {
+					set_name = {
+						key = name_machine_fallen
+						variable_string = "[machine_fallen_empire2.GetName]"
+					}
+					save_global_event_target_as = machine_fallen_empire
+				}
+			}
+			every_country = {
+				establish_communications_no_message = event_target:machine_fallen_empire
+			}
+		}
+		set_global_flag = new_computer_system_found
+	}
+
+    option = {
+        name = rebuilt_computer_events.3.option
+    }
+}
+
+fleet_event = {
+	id = rebuilt_computer_events.4
+	title = rebuilt_computer_events.4.title
+	desc = rebuilt_computer_events.4.desc
+	picture = GFX_evt_archaeological_dig
+	show_sound = event_dig_site
+	location = from
+
+	archaeology = yes
+
+	is_triggered_only = yes
+
+	immediate = {
+		from = { set_site_progress_locked = yes }
+	}
+
+	after = {
+		from = { set_site_progress_locked = no }
+	}
+
+	option = {
+		name = rebuilt_computer_events.4.a
+	}
+}
+
+fleet_event = {
+	id = rebuilt_computer_events.5
+	title = rebuilt_computer_events.5.title
+	desc = rebuilt_computer_events.5.desc
+	picture = GFX_evt_archaeological_dig
+	show_sound = event_dig_site
+	location = from
+
+	archaeology = yes
+
+	is_triggered_only = yes
+
+	immediate = {
+		from = { set_site_progress_locked = yes }
+	}
+
+	after = {
+		from = { set_site_progress_locked = no }
+	}
+
+	option = {
+		name = rebuilt_computer_events.5.a
+	}
+}
+
+fleet_event = {
+	id = rebuilt_computer_events.6
+	title = rebuilt_computer_events.6.title
+	desc = rebuilt_computer_events.6.desc
+	picture = GFX_evt_archaeological_dig
+	show_sound = event_dig_site
+	location = from
+
+	archaeology = yes
+
+	is_triggered_only = yes
+
+	immediate = {
+		from = { set_site_progress_locked = yes }
+	}
+
+	after = {
+		from = { set_site_progress_locked = no }
+	}
+
+	option = {
+		name = rebuilt_computer_events.6.a
+		owner = {
+			add_modifier = {
+				modifier = has_new_computer
+			}
+		}
+	}
+
+	option = {
+
+		name = rebuilt_computer_events.6.b
+		
+		owner = {
+			country_event = {
+				id = rebuilt_computer_events.7
+			}
+		}
+	}
+}
+
+country_event = {
+	id = rebuilt_computer_events.7
+	title = rebuilt_computer_events.7.title
+	desc = rebuilt_computer_events.7.desc
+	picture = GFX_evt_baol_datacrystals
+	location = root
+	show_sound = select_click
+
+	is_triggered_only = yes
+
+	option = {
+		name = rebuilt_computer_events.7.a
+		start_situation = {
+			type = situation_rebuilding_computer
+			target = event_target:rebuild_computer_place
+		}
+	}
+
+	option = {
+		allow = {
+			custom_tooltip = {
+				fail_text = "rebuilt_computer_events.civic"
+				NOR = {
+					has_civic = civic_inwards_perfection
+					has_civic = civic_pompous_purists
+					has_civic = civic_fanatic_purifiers
+					has_civic = civic_hive_devouring_swarm
+					has_civic = civic_machine_terminator
+				}
+			}
+			custom_tooltip = {
+				fail_text = "rebuilt_computer_events.machine_fallen_empire_alive"
+				any_country = {
+					is_fallen_empire_machine = yes
+				}
+			}
+			custom_tooltip = {
+				fail_text = "rebuilt_computer_events.machine_fallen_empire_broken"
+				NOT = {
+					any_country = {
+						is_fallen_empire_berserk_machine = yes
+					}
+				}
+			}
+		}
+
+		name = rebuilt_computer_events.7.b
+
+		country_event = {
+			id = rebuilt_computer_events.8
+		}
+	}
+}
+
+country_event = {
+	id = rebuilt_computer_events.8
+	title = rebuilt_computer_events.8.title
+	desc = rebuilt_computer_events.8.desc
+	diplomatic_title = rebuilt_computer_events.8.title
+	diplomatic = yes
+	is_triggered_only = yes
+
+	picture_event_data = { #外交界面图片声明，本质为图层的组合
+		room = event_target:machine_fallen_empire2 #房间图层，在gfx\portraits\city_sets放入，直接使用名称即可
+		#可使用基础Scope(Country)，也可承接Target
+		portrait = event_target:machine_fallen_empire2 #肖像图层，可承接Target(Leader)
+		city_level = event_target:machine_fallen_empire2 #城市图层，可使用基础Scope(Planet,Country,Species)，可承接Target
+		graphical_culture = event_target:machine_fallen_empire2 #城市显示的图像文化，可承接基础Scope(Country)，可承接Target
+	}
+
+	option = {
+        name = rebuilt_computer_events.8.a
+			random_list = {
+				80 = {
+					country_event = {
+						id = rebuilt_computer_events.9
+					}
+				}
+				20 = {
+					country_event = {
+						id = rebuilt_computer_events.10
+					}
+				}
+			}
+    }
+}
+
+country_event = {
+	id = rebuilt_computer_events.9
+	title = rebuilt_computer_events.9.title
+	desc = rebuilt_computer_events.9.desc
+	diplomatic_title = rebuilt_computer_events.9.title
+	diplomatic = yes
+	is_triggered_only = yes
+
+	picture_event_data = { #外交界面图片声明，本质为图层的组合
+		room = event_target:machine_fallen_empire2 #房间图层，在gfx\portraits\city_sets放入，直接使用名称即可
+		#可使用基础Scope(Country)，也可承接Target
+		portrait = event_target:machine_fallen_empire2 #肖像图层，可承接Target(Leader)
+		city_level = event_target:machine_fallen_empire2 #城市图层，可使用基础Scope(Planet,Country,Species)，可承接Target
+		graphical_culture = event_target:machine_fallen_empire2 #城市显示的图像文化，可承接基础Scope(Country)，可承接Target
+	}
+
+	option = {
+        name = rebuilt_computer_events.9.a
+		hidden_effect = {
+			country_event = {
+				id = rebuilt_computer_events.11
+			}
+		}
+    }
+	option = {
+        name = rebuilt_computer_events.9.c
+		hidden_effect = {
+			set_country_flag = machine_fallen_empire_help
+		}
+		start_situation = {
+			type = situation_rebuilding_computer
+			target = event_target:rebuild_computer_place
+		}
+		give_technology = {
+			tech = tech_singularity_computer_theory
+			message = yes
+		}
+		give_technology = {
+			tech = tech_string_resonating_theory
+			message = yes
+		}
+    }
+}
+
+country_event = {
+	id = rebuilt_computer_events.10
+	title = rebuilt_computer_events.10.title
+	desc = rebuilt_computer_events.10.desc
+	diplomatic_title = rebuilt_computer_events.10.title
+	diplomatic = yes
+	is_triggered_only = yes
+
+	picture_event_data = { #外交界面图片声明，本质为图层的组合
+		room = event_target:machine_fallen_empire2 #房间图层，在gfx\portraits\city_sets放入，直接使用名称即可
+		#可使用基础Scope(Country)，也可承接Target
+		portrait = event_target:machine_fallen_empire2 #肖像图层，可承接Target(Leader)
+		city_level = event_target:machine_fallen_empire2 #城市图层，可使用基础Scope(Planet,Country,Species)，可承接Target
+		graphical_culture = event_target:machine_fallen_empire2 #城市显示的图像文化，可承接基础Scope(Country)，可承接Target
+	}
+
+	option = {
+        name = rebuilt_computer_events.10.a
+		start_situation = {
+			type = situation_rebuilding_computer
+			target = event_target:rebuild_computer_place
+		}
+    }
+}
+
+country_event = {
+	id = rebuilt_computer_events.11
+	title = rebuilt_computer_events.11.title
+	desc = rebuilt_computer_events.11.desc
+	diplomatic_title = rebuilt_computer_events.11.title
+	diplomatic = yes
+	is_triggered_only = yes
+
+	picture_event_data = { #外交界面图片声明，本质为图层的组合
+		room = event_target:machine_fallen_empire2 #房间图层，在gfx\portraits\city_sets放入，直接使用名称即可
+		#可使用基础Scope(Country)，也可承接Target
+		portrait = event_target:machine_fallen_empire2 #肖像图层，可承接Target(Leader)
+		city_level = event_target:machine_fallen_empire2 #城市图层，可使用基础Scope(Planet,Country,Species)，可承接Target
+		graphical_culture = event_target:machine_fallen_empire2 #城市显示的图像文化，可承接基础Scope(Country)，可承接Target
+	}
+
+	option = {
+        name = rebuilt_computer_events.11.a
+		start_situation = {
+			type = situation_rebuilding_computer
+			target = event_target:rebuild_computer_place
+		}
+    }
+	option = {
+        name = rebuilt_computer_events.11.b
+		hidden_effect = {
+			set_country_flag = machine_fallen_empire_help
+		}
+		start_situation = {
+			type = situation_rebuilding_computer
+			target = event_target:rebuild_computer_place
+		}
+		give_technology = {
+			tech = tech_singularity_computer_theory
+			message = yes
+		}
+		give_technology = {
+			tech = tech_string_resonating_theory
+			message = yes
+		}
+    }
+}
+
+country_event = {
+	id = rebuilt_computer_events.12
+	title = rebuilt_computer_events.12.title
+	desc = rebuilt_computer_events.12.desc
+	picture = GFX_evt_ai_planet
+	show_sound = select_click
+
+	is_triggered_only = yes
+
+	option = {
+		name = rebuilt_computer_events.12.a
+		add_resource = {
+			unity = 100000
+		}
+		if = {
+			limit = {
+				has_country_flag = machine_fallen_empire_help
+				any_country = {
+					is_fallen_empire_machine = yes
+					is_fallen_empire_berserk_machine = no
+				}
+			}
+			custom_tooltip = "we_lied_to_machine_fallen_empire"
+			event_target:machine_fallen_empire2 = {
+				declare_war = {
+					target = root
+					attacker_war_goal = wg_fe_humiliation
+				}
+			}
+		}
+	}
+
+	option = {
+		allow = {
+			custom_tooltip = {
+				fail_text = "rebuilt_computer_events.civic"
+				NOR = {
+					has_civic = civic_inwards_perfection
+					has_civic = civic_pompous_purists
+					has_civic = civic_fanatic_purifiers
+					has_civic = civic_hive_devouring_swarm
+					has_civic = civic_machine_terminator
+				}
+			}
+			custom_tooltip = {
+				fail_text = "rebuilt_computer_events.ap"
+				NOT = {
+					has_ascension_perk = ap_nihilistic_acquisition
+				}
+			}
+			custom_tooltip = {
+				fail_text = "rebuilt_computer_events.machine_fallen_empire_alive"
+				any_country = {
+					is_fallen_empire_machine = yes
+				}
+			}
+			custom_tooltip = {
+				fail_text = "rebuilt_computer_events.machine_fallen_empire_broken"
+				NOT = {
+					any_country = {
+						is_fallen_empire_berserk_machine = yes
+					}
+				}
+			}
+		}
+
+		name = rebuilt_computer_events.12.b
+		
+		set_country_flag = returned_computer_to_machine_fallen_empire
+
+		event_target:machine_fallen_empire2 = {
+			set_country_flag = recived_computer_machine_fallen_empire
+		}
+	}
+}
+
+country_event = {
+	id = rebuilt_computer_events.13
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		from = {
+			is_fallen_empire_machine = yes
+			is_fallen_empire_berserk_machine = no
+		}
+		event_target:rebuild_computer_place = {
+			is_inside_border = root
+		}
+	}
+
+	immediate = {
+		event_target:rebuild_computer_place.starbase = {
+			set_owner = root.from
+		}
+	}
+}
+
+event = {
+	id = rebuilt_computer_events.14
+	hide_window = yes
+	is_triggered_only = yes
+
+	immediate = {
+		every_country = {
+			limit = {
+				is_fallen_empire_machine = yes
+				is_fallen_empire_berserk_machine = no
+				OR = {
+					has_country_flag = recived_computer_machine_fallen_empire
+					event_target:rebuild_computer_place = {
+						is_inside_border = prev
+					}
+				}
+				NOT = {
+					has_country_flag = fallen_machine_empire_awaken_yunfan
+				}
+			}
+			set_country_flag = fallen_machine_empire_awaken_1
+			remove_country_flag = fallen_machine_empire_awaken_2
+			set_country_flag = fallen_machine_empire_awaken_yunfan
+			save_event_target_as = awakened_machine_empire
+			if = {
+				limit = {
+					is_country_type = fallen_empire
+				}
+				country_event = {
+					id = rebuilt_computer_events.15
+				}
+			} else = {
+				country_event = {
+					id = rebuilt_computer_events.17
+					days = 360
+				}
+			}
+			every_country = {
+				limit = {
+					is_ai = no
+				}
+				country_event = { id = rebuilt_computer_events.16 }
+			}
+		}
+	}
+}
+
+country_event = {
+	id = rebuilt_computer_events.15
+	title = OK
+	desc = OK
+
+	hide_window = yes
+
+	is_triggered_only = yes
+
+	immediate = {
+		set_country_type = awakened_fallen_empire
+
+		change_government = {
+			civics = {
+				civic = civic_awakened_machine
+				civic = civic_final_defense_protocols
+			}
+		}
+
+		# Changing country type resets resources, so give them full stores
+		add_awakened_fallen_empire_resources = yes
+		add_awakened_fallen_empire_fleet = yes #also some more fleet
+
+		# Establish communications
+		every_country = {
+			limit = {
+				OR = {
+					is_country_type = default
+					is_country_type = fallen_empire
+					is_country_type = awakened_fallen_empire
+				}
+				NOT = { has_communications = root }
+			}
+
+			establish_communications_no_message = root
+		}
+
+		country_event = {
+			id = rebuilt_computer_events.17
+			days = 360
+		}
+	}
+}
+
+country_event = {
+	id = rebuilt_computer_events.16
+	title = fallen_machine_empire.2.name
+	location = event_target:awakened_machine_empire.capital_scope
+
+	diplomatic = yes
+	is_triggered_only = yes
+
+	picture_event_data = {
+		portrait = event_target:awakened_machine_empire
+		planet_background = event_target:awakened_machine_empire
+		graphical_culture = event_target:awakened_machine_empire
+		city_level = event_target:awakened_machine_empire
+		room = event_target:awakened_machine_empire.ruler
+	}
+
+	desc = rebuilt_computer_events.16.desc
+
+	option = {
+		name = fallen_machine_empire.2.a
+	}
+}
+
+country_event = {
+	id = rebuilt_computer_events.17
+
+	hide_window = yes
+
+	is_triggered_only = yes
+
+	immediate = {
+		random_owned_megastructure = {
+			limit = {
+				is_megastructure_type = ring_world_ruined
+			}
+			set_graphical_culture = owner
+			solar_system = {
+				every_system_ambient_object = {
+					limit = {
+						OR = {
+							is_ambient_object_type = large_debris_object
+							is_ambient_object_type = medium_debris_01_object
+							is_ambient_object_type = medium_debris_02_object
+							is_ambient_object_type = small_debris_object
+						}
+					}
+					destroy_ambient_object = this
+				}
+				spawn_planet = {
+					class = "pc_ringworld_tech"
+					location = prev
+					orbit_angle_offset = -30
+					init_effect = {
+						set_name = "NAME_Ring_Section"
+						set_planet_entity = {
+							entity = "ringworld_tech_entity_01_entity"
+							graphical_culture = prevprev
+						}
+						set_surveyed = {
+							surveyed = yes
+							surveyor = prevprev.owner
+						}
+						set_all_comms_surveyed = yes
+						set_planet_flag = megastructure
+					}
+				}
+				spawn_planet = {
+					class = "pc_ringworld_seam"
+					location = prev
+		
+					init_effect = {
+						set_name = "NAME_Ring_Section"
+						set_planet_entity = {
+							entity = "ringworld_seam_entity_01_entity"
+							graphical_culture = prevprev
+						}
+						set_surveyed = {
+							surveyed = yes
+							surveyor = prevprev.owner
+						}
+						set_all_comms_surveyed = yes
+						set_planet_flag = megastructure
+					}
+				}
+				spawn_planet = {
+					class = "pc_ringworld_habitable"
+					location = prev
+					orbit_angle_offset = 30
+					init_effect = {
+						set_name = "NAME_Habitable_Section_A"
+						set_planet_entity = {
+							entity = "ringworld_habitable_entity_01_entity"
+							graphical_culture = prevprev
+						}
+						set_surveyed = {
+							surveyed = yes
+							surveyor = prevprev.owner
+						}
+						set_all_comms_surveyed = yes
+						clear_blockers = yes
+						save_event_target_as = ring_section
+						trigger_megastructure_icon = yes
+						set_planet_flag = megastructure
+						set_owner = prevprev.owner
+						add_building = building_ancient_control_center
+						add_building = building_fe_assembly_2
+						add_building = building_fe_administration_machine_2
+						add_building = building_affluence_center
+						add_building = building_affluence_center
+						add_building = building_affluence_center
+						add_building = building_nourishment_center
+						add_building = building_nourishment_center
+						add_building = building_nourishment_center
+						add_building = building_new_organic_paradise_for_fallen_machine
+						add_building = building_new_organic_paradise_for_fallen_machine
+						add_building = building_new_organic_paradise_for_fallen_machine
+						while = {
+							count = 5
+							add_district = district_rw_science
+						}
+						while = {
+							count = 5
+							add_district = district_rw_nexus
+						}
+						create_pop_group = {
+							species = prevprev.owner_main_species
+							size = 5000
+						}
+					}
+				}
+				prev.owner = {
+					set_country_flag = has_built_or_repaired_megastructure
+					country_event = { id = utopia.2017 }
+				}
+				if = {
+					limit = {
+						NOT = { has_star_flag = ring_section_1 }
+					}
+					set_star_flag = ring_section_1
+					event_target:ring_section = {
+						set_name = {
+							key = name_rebuilt_ring_of_machine_fallen1
+							variable_string = "[Prev.GetName]"
+						}
+					}
+				} else_if = {
+					limit = {
+						has_star_flag = ring_section_1
+						NOT = { has_star_flag = ring_section_2 }
+					}
+					set_star_flag = ring_section_2
+					event_target:ring_section = {
+						set_name = {
+							key = name_rebuilt_ring_of_machine_fallen2
+							variable_string = "[Prev.GetName]"
+						}
+					}
+				} else_if = {
+					limit = {
+						has_star_flag = ring_section_2
+						NOT = { has_star_flag = ring_section_3 }
+					}
+					set_star_flag = ring_section_3
+					event_target:ring_section = {
+						set_name = {
+							key = name_rebuilt_ring_of_machine_fallen3
+							variable_string = "[Prev.GetName]"
+						}
+					}
+				} else_if = {
+					limit = { has_star_flag = ring_section_3 }
+					remove_star_flag = ring_section_1
+					remove_star_flag = ring_section_2
+					remove_star_flag = ring_section_3
+					event_target:ring_section = {
+						set_name = {
+							key = name_rebuilt_ring_of_machine_fallen4
+							variable_string = "[Prev.GetName]"
+						}
+					}
+				}
+				remove_megastructure = prev
+			}
+		}
+		if = {
+			limit = {
+				any_owned_megastructure = {
+					is_megastructure_type = ring_world_ruined
+				}
+			}
+			country_event = {
+				id = rebuilt_computer_events.18
+				days = 360
+			}
+		} else = {
+			every_playable_country = {
+				country_event = {
+					id = rebuilt_computer_events.20
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = rebuilt_computer_events.18
+
+	hide_window = yes
+
+	is_triggered_only = yes
+
+	immediate = {
+		random_owned_megastructure = {
+			limit = {
+				is_megastructure_type = ring_world_ruined
+			}
+			set_graphical_culture = owner
+			solar_system = {
+				every_system_ambient_object = {
+					limit = {
+						OR = {
+							is_ambient_object_type = large_debris_object
+							is_ambient_object_type = medium_debris_01_object
+							is_ambient_object_type = medium_debris_02_object
+							is_ambient_object_type = small_debris_object
+						}
+					}
+					destroy_ambient_object = this
+				}
+				spawn_planet = {
+					class = "pc_ringworld_tech"
+					location = prev
+					orbit_angle_offset = -30
+					init_effect = {
+						set_name = "NAME_Ring_Section"
+						set_planet_entity = {
+							entity = "ringworld_tech_entity_01_entity"
+							graphical_culture = prevprev
+						}
+						set_surveyed = {
+							surveyed = yes
+							surveyor = prevprev.owner
+						}
+						set_all_comms_surveyed = yes
+						set_planet_flag = megastructure
+					}
+				}
+				spawn_planet = {
+					class = "pc_ringworld_seam"
+					location = prev
+		
+					init_effect = {
+						set_name = "NAME_Ring_Section"
+						set_planet_entity = {
+							entity = "ringworld_seam_entity_01_entity"
+							graphical_culture = prevprev
+						}
+						set_surveyed = {
+							surveyed = yes
+							surveyor = prevprev.owner
+						}
+						set_all_comms_surveyed = yes
+						set_planet_flag = megastructure
+					}
+				}
+				spawn_planet = {
+					class = "pc_ringworld_habitable"
+					location = prev
+					orbit_angle_offset = 30
+					init_effect = {
+						set_name = "NAME_Habitable_Section_A"
+						set_planet_entity = {
+							entity = "ringworld_habitable_entity_01_entity"
+							graphical_culture = prevprev
+						}
+						set_surveyed = {
+							surveyed = yes
+							surveyor = prevprev.owner
+						}
+						set_all_comms_surveyed = yes
+						clear_blockers = yes
+						save_event_target_as = ring_section
+						trigger_megastructure_icon = yes
+						set_planet_flag = megastructure
+						set_owner = prevprev.owner
+						add_building = building_ancient_control_center
+						add_building = building_fe_administration_machine_2
+						add_building = building_dimensional_fabricator
+						add_building = building_dimensional_fabricator
+						add_building = building_dimensional_fabricator
+						add_building = building_dimensional_fabricator
+						add_building = building_fe_mine_2
+						add_building = building_nano_forge
+						add_building = building_nano_forge
+						add_building = building_nano_forge
+						add_building = building_nano_forge
+						add_building = building_nano_forge
+
+						while = {
+							count = 5
+							add_district = district_rw_nexus
+						}
+						create_pop_group = {
+							species = prevprev.owner_main_species
+							size = 5000
+						}
+					}
+				}
+				prev.owner = {
+					set_country_flag = has_built_or_repaired_megastructure
+					country_event = { id = utopia.2017 }
+				}
+				if = {
+					limit = {
+						NOT = { has_star_flag = ring_section_1 }
+					}
+					set_star_flag = ring_section_1
+					event_target:ring_section = {
+						set_name = {
+							key = name_rebuilt_ring_of_machine_fallen1
+							variable_string = "[Prev.GetName]"
+						}
+					}
+				} else_if = {
+					limit = {
+						has_star_flag = ring_section_1
+						NOT = { has_star_flag = ring_section_2 }
+					}
+					set_star_flag = ring_section_2
+					event_target:ring_section = {
+						set_name = {
+							key = name_rebuilt_ring_of_machine_fallen2
+							variable_string = "[Prev.GetName]"
+						}
+					}
+				} else_if = {
+					limit = {
+						has_star_flag = ring_section_2
+						NOT = { has_star_flag = ring_section_3 }
+					}
+					set_star_flag = ring_section_3
+					event_target:ring_section = {
+						set_name = {
+							key = name_rebuilt_ring_of_machine_fallen3
+							variable_string = "[Prev.GetName]"
+						}
+					}
+				} else_if = {
+					limit = { has_star_flag = ring_section_3 }
+					remove_star_flag = ring_section_1
+					remove_star_flag = ring_section_2
+					remove_star_flag = ring_section_3
+					event_target:ring_section = {
+						set_name = {
+							key = name_rebuilt_ring_of_machine_fallen4
+							variable_string = "[Prev.GetName]"
+						}
+					}
+				}
+				remove_megastructure = prev
+			}
+		}
+		if = {
+			limit = {
+				any_owned_megastructure = {
+					is_megastructure_type = ring_world_ruined
+				}
+			}
+			country_event = {
+				id = rebuilt_computer_events.19
+				days = 360
+			}
+		} else = {
+			every_playable_country = {
+				country_event = {
+					id = rebuilt_computer_events.20
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = rebuilt_computer_events.19
+
+	hide_window = yes
+
+	is_triggered_only = yes
+
+	immediate = {
+		random_owned_megastructure = {
+			limit = {
+				is_megastructure_type = ring_world_ruined
+			}
+			set_graphical_culture = owner
+			solar_system = {
+				every_system_ambient_object = {
+					limit = {
+						OR = {
+							is_ambient_object_type = large_debris_object
+							is_ambient_object_type = medium_debris_01_object
+							is_ambient_object_type = medium_debris_02_object
+							is_ambient_object_type = small_debris_object
+						}
+					}
+					destroy_ambient_object = this
+				}
+				spawn_planet = {
+					class = "pc_ringworld_tech"
+					location = prev
+					orbit_angle_offset = -30
+					init_effect = {
+						set_name = "NAME_Ring_Section"
+						set_planet_entity = {
+							entity = "ringworld_tech_entity_01_entity"
+							graphical_culture = prevprev
+						}
+						set_surveyed = {
+							surveyed = yes
+							surveyor = prevprev.owner
+						}
+						set_all_comms_surveyed = yes
+						set_planet_flag = megastructure
+					}
+				}
+				spawn_planet = {
+					class = "pc_ringworld_seam"
+					location = prev
+		
+					init_effect = {
+						set_name = "NAME_Ring_Section"
+						set_planet_entity = {
+							entity = "ringworld_seam_entity_01_entity"
+							graphical_culture = prevprev
+						}
+						set_surveyed = {
+							surveyed = yes
+							surveyor = prevprev.owner
+						}
+						set_all_comms_surveyed = yes
+						set_planet_flag = megastructure
+					}
+				}
+				spawn_planet = {
+					class = "pc_ringworld_habitable"
+					location = prev
+					orbit_angle_offset = 30
+					init_effect = {
+						set_name = "NAME_Habitable_Section_A"
+						set_planet_entity = {
+							entity = "ringworld_habitable_entity_01_entity"
+							graphical_culture = prevprev
+						}
+						set_surveyed = {
+							surveyed = yes
+							surveyor = prevprev.owner
+						}
+						set_all_comms_surveyed = yes
+						clear_blockers = yes
+						save_event_target_as = ring_section
+						trigger_megastructure_icon = yes
+						set_planet_flag = megastructure
+						set_owner = prevprev.owner
+						add_building = building_ancient_control_center
+						add_building = building_class_4_singularity
+						add_building = building_class_4_singularity
+						add_building = building_class_4_singularity
+						add_building = building_class_4_singularity
+						add_building = building_fe_assembly_2
+						add_building = building_fe_mine_2
+						add_building = building_fe_mine_2
+						add_building = building_fe_mine_2
+						add_building = building_fe_lab_2
+						add_building = building_fe_lab_2
+						add_building = building_fe_lab_2
+
+						while = {
+							count = 5
+							add_district = district_rw_generator
+						}
+
+						while = {
+							count = 5
+							add_district = district_rw_nexus
+						}
+						create_pop_group = {
+							species = prevprev.owner_main_species
+							size = 5000
+						}
+					}
+				}
+				prev.owner = {
+					set_country_flag = has_built_or_repaired_megastructure
+					country_event = { id = utopia.2017 }
+				}
+				if = {
+					limit = {
+						NOT = { has_star_flag = ring_section_1 }
+					}
+					set_star_flag = ring_section_1
+					event_target:ring_section = {
+						set_name = {
+							key = name_rebuilt_ring_of_machine_fallen1
+							variable_string = "[Prev.GetName]"
+						}
+					}
+				} else_if = {
+					limit = {
+						has_star_flag = ring_section_1
+						NOT = { has_star_flag = ring_section_2 }
+					}
+					set_star_flag = ring_section_2
+					event_target:ring_section = {
+						set_name = {
+							key = name_rebuilt_ring_of_machine_fallen2
+							variable_string = "[Prev.GetName]"
+						}
+					}
+				} else_if = {
+					limit = {
+						has_star_flag = ring_section_2
+						NOT = { has_star_flag = ring_section_3 }
+					}
+					set_star_flag = ring_section_3
+					event_target:ring_section = {
+						set_name = {
+							key = name_rebuilt_ring_of_machine_fallen3
+							variable_string = "[Prev.GetName]"
+						}
+					}
+				} else_if = {
+					limit = { has_star_flag = ring_section_3 }
+					remove_star_flag = ring_section_1
+					remove_star_flag = ring_section_2
+					remove_star_flag = ring_section_3
+					event_target:ring_section = {
+						set_name = {
+							key = name_rebuilt_ring_of_machine_fallen4
+							variable_string = "[Prev.GetName]"
+						}
+					}
+				}
+				remove_megastructure = prev
+			}
+		}
+		if = {
+			limit = {
+				any_owned_megastructure = {
+					is_megastructure_type = ring_world_ruined
+				}
+			}
+			country_event = {
+				id = rebuilt_computer_events.17
+				days = 360
+			}
+		} else = {
+			every_playable_country = {
+				country_event = {
+					id = rebuilt_computer_events.20
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = rebuilt_computer_events.20
+	title = rebuilt_computer_events.20.name
+	location = event_target:awakened_machine_empire.capital_scope
+
+	diplomatic = yes
+	is_triggered_only = yes
+
+	picture_event_data = {
+		portrait = event_target:awakened_machine_empire
+		planet_background = event_target:awakened_machine_empire
+		graphical_culture = event_target:awakened_machine_empire
+		city_level = event_target:awakened_machine_empire
+		room = event_target:awakened_machine_empire.ruler
+	}
+
+	desc = {
+		text = rebuilt_computer_events.20.desc.a
+		trigger = {
+			is_machine_empire = no
+		}
+	}
+
+	desc = {
+		text = rebuilt_computer_events.20.desc.b
+		trigger = {
+			is_machine_empire = yes
+		}
+	}
+
+	option = {
+		name = fallen_machine_empire.20.a
+		add_resource = {
+			minerals = 1000000
+			energy = 1000000
+			food = 1000000
+			alloys = 1000000
+			consumer_goods = 1000000
+		}
+		custom_tooltip = "move_2_pops_to_fallen_machine"
+		hidden_effect = {
+			random_owned_pop_group = {
+				limit = {
+					is_same_species = root.owner_main_species
+				}
+				kill_all_pop = yes
+			}
+			random_owned_pop_group = {
+				limit = {
+					is_same_species = root.owner_main_species
+				}
+				kill_all_pop = yes
+			}
+			event_target:machine_fallen_empire = {
+				random_owned_planet = {
+					limit = {
+						free_jobs_of_type = {
+							job = bio_trophy
+							value >= 2
+						}
+					}
+					create_pop_group = {
+						species = root.owner_main_species
+						size = 200
+					}
+				}
+			}
+		}
+	}
+
+	option = {
+		name = fallen_machine_empire.20.b
+		add_resource = {
+			physics_research = 1000000
+			engineering_research = 1000000
+			society_research = 1000000
+		}
+		if = {
+			limit = {
+				NOT = {
+					has_technology = tech_singularity_computer_theory
+				}
+			}
+			give_technology = {
+				tech = tech_singularity_computer_theory
+				message = yes
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					has_technology = tech_string_resonating_theory
+				}
+			}
+			give_technology = {
+				tech = tech_string_resonating_theory
+				message = yes
+			}
+		}
+		custom_tooltip = "move_2_pops_to_fallen_machine"
+		hidden_effect = {
+			random_owned_pop_group = {
+				limit = {
+					is_same_species = root.owner_main_species
+				}
+				kill_all_pop = yes
+			}
+			random_owned_pop_group = {
+				limit = {
+					is_same_species = root.owner_main_species
+				}
+				kill_all_pop = yes
+			}
+			event_target:machine_fallen_empire = {
+				random_owned_planet = {
+					limit = {
+						free_jobs_of_type = {
+							job = bio_trophy
+							value >= 2
+						}
+					}
+					create_pop_group = {
+						species = root.owner_main_species
+						size = 200
+					}
+				}
+			}
+		}
+	}
+
+	option = {
+		name = fallen_machine_empire.20.c
+		add_resource = {
+			unity = 10000
+		}
+		hidden_effect = {
+			set_country_flag = not_send_pops_to_fallen_empire
+		}
+	}
+
+	after = {
+		if = {
+			limit = {
+				NOT = {
+					has_country_flag = not_send_pops_to_fallen_empire
+				}
+				has_country_flag = returned_computer_to_machine_fallen_empire
+			}
+			country_event = {
+				id = rebuilt_computer_events.21
+			}
+		}
+	}
+}
+
+country_event = {
+	id = rebuilt_computer_events.21
+	title = rebuilt_computer_events.21.title
+	desc = rebuilt_computer_events.21.desc
+	picture = GFX_evt_ai_planet
+	show_sound = select_click
+
+	is_triggered_only = yes
+
+	immediate = {
+		remove_global_flag = yunfan_is_man
+		remove_global_flag = yunfan_is_woman
+	}
+
+	option = {
+		name = rebuilt_computer_events.21.a
+		custom_tooltip = rebuilt_computer_events.21.a.desc
+		set_global_flag = yunfan_is_man
+	}
+
+	option = {
+		name = rebuilt_computer_events.21.b
+		custom_tooltip = rebuilt_computer_events.21.b.desc
+		set_global_flag = yunfan_is_woman
+	}
+
+	after = {
+		hidden_effect = {
+			create_country = {
+				type = global_event
+				flag = event_target:machine_fallen_empire2
+				effect = {
+					set_name = {
+							key = name_xenophobe_fallen
+							variable_string = "[xenophobe_fallen_empire.GetName]"
+						}
+					save_global_event_target_as = yunfan_leader_country
+					every_country = {
+						establish_communications_no_message = event_target:xenophobe_fallen_empire_leader_country
+					}
+				}
+			}
+			event_target:yunfan_leader_country = {
+				create_species = {
+					name = "NAME_Unknown"
+					class = PARAGON
+					portrait = yunafn_leader_man
+					namelist = "PRT1"
+					traits = {
+						trait = trait_quick_learners
+						trait = trait_talented
+						trait = trait_docile
+						trait = trait_weak
+						trait = trait_plantoid_budding
+					}
+					effect = {
+						save_global_event_target_as = yunfan_species_man
+					}
+				}
+				create_species = {
+					name = "NAME_Unknown"
+					class = PARAGON
+					portrait = yunafn_leader_woman
+					namelist = "PRT1"
+					traits = {
+						trait = trait_quick_learners
+						trait = trait_talented
+						trait = trait_docile
+						trait = trait_weak
+						trait = trait_plantoid_budding
+					}
+					effect = {
+						save_global_event_target_as = yunfan_species_woman
+					}
+				}
+				if = {
+					limit = { has_global_flag = yunfan_is_man }
+					create_leader = {
+						class = scientist
+						species = event_target:yunfan_species_man
+						name = NAME_yunfan_leader
+						skill = 10
+						background_ethic = ethic_xenophile
+						custom_description = yunfan_leader_desc
+						hide_age = yes
+						randomize_traits = no
+						event_leader = yes	# prevents this leader from leading factions and winning elections
+						gender = male
+						immortal = yes
+						effect = {
+							set_age = 18888
+							save_global_event_target_as = yunfan_leader
+							set_leader_flag = legendary_leader
+							set_leader_flag = is_in_recruit_window
+							add_trait = leader_trait_front_lines_yunfan
+							add_trait = leader_trait_intelligent_assisted_computing_yunfan
+							add_trait = leader_trait_submissive_yunfan
+						}
+					}
+				}
+				if = {
+					limit = { has_global_flag = yunfan_is_woman }
+					create_leader = {
+						class = scientist
+						species = event_target:yunfan_species_woman
+						name = NAME_yunfan_leader
+						skill = 10
+						background_ethic = ethic_xenophile
+						custom_description = yunfan_leader_desc
+						hide_age = yes
+						randomize_traits = no
+						event_leader = yes	# prevents this leader from leading factions and winning elections
+						gender = male
+						immortal = yes
+						effect = {
+							set_age = 18888
+							save_global_event_target_as = yunfan_leader
+							set_leader_flag = legendary_leader
+							set_leader_flag = is_in_recruit_window
+							add_trait = leader_trait_front_lines_yunfan
+							add_trait = leader_trait_intelligent_assisted_computing_yunfan
+							add_trait = leader_trait_submissive_yunfan
+						}
+					}
+				}
+			}
+			country_event = {
+				id = rebuilt_computer_events.22
+			}
+		}
+	}
+}
+
+country_event = {
+	id = rebuilt_computer_events.22
+	title = "NAME_yunfan_leader"
+	desc = "rebuilt_computer_events.22.desc"
+	show_sound = event_custodian_greeting
+	picture = GFX_leader_recruitment_bg_legendary_skrand
+	event_window_type = leader_recruit
+	is_triggered_only = yes
+
+	picture_event_data = {
+		portrait = event_target:yunfan_leader
+		room = ethic_spaceship_room
+	}
+
+	option = {
+		name = "rebuilt_computer_events.22.a"
+		response_text = "rebuilt_computer_events.22.a.response"
+		is_dialog_only = yes
+	}
+	option = {
+		name = "rebuilt_computer_events.22.b"
+		response_text = "rebuilt_computer_events.22.b.response"
+		is_dialog_only = yes
+	}
+	option = {
+		name = "rebuilt_computer_events.22.d"
+		hidden_effect = {
+			set_country_flag = has_yunfan_leader
+			country_event = {
+				id = rebuilt_computer_events.23
+			}
+		}
+	}
+	option = {
+		tag = hire_leader
+		name = "rebuilt_computer_events.22.e"
+		hidden_effect = {
+			set_country_flag = has_yunfan_leader
+			hire_event_leader_effect = {
+				LEADER = yunfan_leader
+			}
+		}
+	}
+	option = {
+		name = "rebuilt_computer_events.22.f"
+		tag = dismiss_leader
+		add_resource = {
+			unity = 10000
+		}
+	}
+}
+
+country_event = {
+	id = rebuilt_computer_events.23
+	title = "NAME_yunfan_leader"
+	desc = "rebuilt_computer_events.23.desc"
+	show_sound = event_custodian_greeting
+	picture = GFX_leader_recruitment_bg_legendary_skrand
+	event_window_type = leader_recruit
+	is_triggered_only = yes
+
+	picture_event_data = {
+		portrait = event_target:yunfan_leader
+		room = ethic_spaceship_room
+	}
+
+	immediate = {
+		event_target:yunfan_leader = {
+			kill_leader = {
+				show_notification = no
+				fire = yes
+			}
+		}
+		event_target:yunfan_leader_country = {
+			if = {
+				limit = { has_global_flag = yunfan_is_man }
+				create_leader = {
+					class = scientist
+					species = event_target:yunfan_species_man
+					name = NAME_yunfan_leader
+					skill = 10
+					background_ethic = ethic_xenophile
+					custom_description = yunfan_leader_desc
+					hide_age = yes
+					randomize_traits = no
+					event_leader = yes	# prevents this leader from leading factions and winning elections
+					gender = male
+					immortal = yes
+					effect = {
+						set_age = 18888
+						save_global_event_target_as = yunfan_leader
+						set_leader_flag = legendary_leader
+						set_leader_flag = is_in_recruit_window
+						add_trait = leader_trait_front_lines_yunfan
+						add_trait = leader_trait_intelligent_assisted_computing_yunfan
+						add_trait = leader_trait_submissive_yunfan
+					}
+				}
+			}
+			if = {
+				limit = { has_global_flag = yunfan_is_woman }
+				create_leader = {
+					class = scientist
+					species = event_target:yunfan_species_woman
+					name = NAME_yunfan_leader
+					skill = 10
+					background_ethic = ethic_xenophile
+					custom_description = yunfan_leader_desc
+					hide_age = yes
+					randomize_traits = no
+					event_leader = yes	# prevents this leader from leading factions and winning elections
+					gender = male
+					immortal = yes
+					effect = {
+						set_age = 18888
+						save_global_event_target_as = yunfan_leader
+						set_leader_flag = legendary_leader
+						set_leader_flag = is_in_recruit_window
+						add_trait = leader_trait_front_lines_yunfan
+						add_trait = leader_trait_intelligent_assisted_computing_yunfan
+						add_trait = leader_trait_submissive_yunfan
+					}
+				}
+			}
+		}
+	}
+
+	option = {
+		name = "rebuilt_computer_events.23.a"
+		hidden_effect = {
+			country_event = {
+				id = rebuilt_computer_events.24
+			}
+		}
+	}
+	option = {
+		name = "rebuilt_computer_events.23.b"
+		hidden_effect = {
+			country_event = {
+				id = rebuilt_computer_events.25
+			}
+		}
+	}
+	option = {
+		tag = hire_leader
+		name = "rebuilt_computer_events.23.e"
+		hidden_effect = {
+			hire_event_leader_effect = {
+				LEADER = yunfan_leader
+			}
+		}
+	}
+	option = {
+		name = "rebuilt_computer_events.23.e"
+		tag = dismiss_leader
+		hidden_effect = {
+			hire_event_leader_effect = {
+				LEADER = yunfan_leader
+			}
+		}
+	}
+}
+
+country_event = {
+	id = rebuilt_computer_events.24
+	title = "NAME_yunfan_leader"
+	desc = "rebuilt_computer_events.24.desc"
+	show_sound = event_custodian_greeting
+	picture = GFX_leader_recruitment_bg_legendary_skrand
+	event_window_type = leader_recruit
+	is_triggered_only = yes
+
+	picture_event_data = {
+		portrait = event_target:yunfan_leader
+		room = ethic_spaceship_room
+	}
+
+	immediate = {
+		event_target:yunfan_leader = {
+			kill_leader = {
+				show_notification = no
+				fire = yes
+			}
+		}
+		event_target:yunfan_leader_country = {
+			if = {
+				limit = { has_global_flag = yunfan_is_man }
+				create_leader = {
+					class = commander
+					species = event_target:yunfan_species_man
+					name = NAME_yunfan_leader
+					skill = 10
+					background_ethic = ethic_xenophile
+					custom_description = yunfan_leader_desc
+					hide_age = yes
+					randomize_traits = no
+					event_leader = yes	# prevents this leader from leading factions and winning elections
+					gender = male
+					immortal = yes
+					effect = {
+						set_age = 18888
+						save_global_event_target_as = yunfan_leader
+						set_leader_flag = legendary_leader
+						set_leader_flag = is_in_recruit_window
+						add_trait = leader_trait_front_lines_yunfan
+						add_trait = leader_trait_intelligent_assisted_computing_yunfan
+						add_trait = leader_trait_submissive_yunfan
+					}
+				}
+			}
+			if = {
+				limit = { has_global_flag = yunfan_is_woman }
+				create_leader = {
+					class = commander
+					species = event_target:yunfan_species_woman
+					name = NAME_yunfan_leader
+					skill = 10
+					background_ethic = ethic_xenophile
+					custom_description = yunfan_leader_desc
+					hide_age = yes
+					randomize_traits = no
+					event_leader = yes	# prevents this leader from leading factions and winning elections
+					gender = male
+					immortal = yes
+					effect = {
+						set_age = 18888
+						save_global_event_target_as = yunfan_leader
+						set_leader_flag = legendary_leader
+						set_leader_flag = is_in_recruit_window
+						add_trait = leader_trait_front_lines_yunfan
+						add_trait = leader_trait_intelligent_assisted_computing_yunfan
+						add_trait = leader_trait_submissive_yunfan
+					}
+				}
+			}
+		}
+	}
+
+	option = {
+		name = "rebuilt_computer_events.24.a"
+		hidden_effect = {
+			country_event = {
+				id = rebuilt_computer_events.23
+			}
+		}
+	}
+	option = {
+		name = "rebuilt_computer_events.24.b"
+		hidden_effect = {
+			country_event = {
+				id = rebuilt_computer_events.25
+			}
+		}
+	}
+	option = {
+		tag = hire_leader
+		name = "rebuilt_computer_events.23.e"
+		hidden_effect = {
+			hire_event_leader_effect = {
+				LEADER = yunfan_leader
+			}
+		}
+	}
+	option = {
+		name = "rebuilt_computer_events.23.e"
+		tag = dismiss_leader
+		hidden_effect = {
+			hire_event_leader_effect = {
+				LEADER = yunfan_leader
+			}
+		}
+	}
+}
+
+country_event = {
+	id = rebuilt_computer_events.25
+	title = "NAME_yunfan_leader"
+	desc = "rebuilt_computer_events.25.desc"
+	show_sound = event_custodian_greeting
+	picture = GFX_leader_recruitment_bg_legendary_skrand
+	event_window_type = leader_recruit
+	is_triggered_only = yes
+
+	picture_event_data = {
+		portrait = event_target:yunfan_leader
+		room = ethic_spaceship_room
+	}
+
+	immediate = {
+		event_target:yunfan_leader = {
+			kill_leader = {
+				show_notification = no
+				fire = yes
+			}
+		}
+		event_target:yunfan_leader_country = {
+			if = {
+				limit = { has_global_flag = yunfan_is_man }
+				create_leader = {
+					class = official
+					species = event_target:yunfan_species_man
+					name = NAME_yunfan_leader
+					skill = 10
+					background_ethic = ethic_xenophile
+					custom_description = yunfan_leader_desc
+					hide_age = yes
+					randomize_traits = no
+					event_leader = yes	# prevents this leader from leading factions and winning elections
+					gender = male
+					immortal = yes
+					effect = {
+						set_age = 18888
+						save_global_event_target_as = yunfan_leader
+						set_leader_flag = legendary_leader
+						set_leader_flag = is_in_recruit_window
+						add_trait = leader_trait_front_lines_yunfan
+						add_trait = leader_trait_intelligent_assisted_computing_yunfan
+						add_trait = leader_trait_submissive_yunfan
+					}
+				}
+			}
+			if = {
+				limit = { has_global_flag = yunfan_is_woman }
+				create_leader = {
+					class = official
+					species = event_target:yunfan_species_woman
+					name = NAME_yunfan_leader
+					skill = 10
+					background_ethic = ethic_xenophile
+					custom_description = yunfan_leader_desc
+					hide_age = yes
+					randomize_traits = no
+					event_leader = yes	# prevents this leader from leading factions and winning elections
+					gender = male
+					immortal = yes
+					effect = {
+						set_age = 18888
+						save_global_event_target_as = yunfan_leader
+						set_leader_flag = legendary_leader
+						set_leader_flag = is_in_recruit_window
+						add_trait = leader_trait_front_lines_yunfan
+						add_trait = leader_trait_intelligent_assisted_computing_yunfan
+						add_trait = leader_trait_submissive_yunfan
+					}
+				}
+			}
+		}
+	}
+
+	option = {
+		name = "rebuilt_computer_events.25.a"
+		hidden_effect = {
+			country_event = {
+				id = rebuilt_computer_events.23
+			}
+		}
+	}
+	option = {
+		name = "rebuilt_computer_events.25.b"
+		hidden_effect = {
+			country_event = {
+				id = rebuilt_computer_events.24
+			}
+		}
+	}
+	option = {
+		tag = hire_leader
+		name = "rebuilt_computer_events.23.e"
+		hidden_effect = {
+			hire_event_leader_effect = {
+				LEADER = yunfan_leader
+			}
+		}
+	}
+	option = {
+		name = "rebuilt_computer_events.23.e"
+		tag = dismiss_leader
+		hidden_effect = {
+			hire_event_leader_effect = {
+				LEADER = yunfan_leader
+			}
+		}
+	}
+}

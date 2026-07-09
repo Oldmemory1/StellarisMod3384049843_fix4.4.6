@@ -1,0 +1,62 @@
+greetings = {
+    01_FALLEN_MACHINE_GRANDER_ENIGMATIC_GREETING_ALL = {
+        weight = { weight = 10000 }
+        trigger = {
+            is_country_type = fallen_empire
+            has_country_flag = fallen_empire_machine_LgateGrander
+            NOT = { is_at_war_with = FROM }
+            is_enigmatic_to = FROM
+        }
+    }
+    02_FALLEN_MACHINE_GRANDER_ENIGMATIC_GREETING_ALL = {
+        weight = { weight = 10000 }
+        trigger = {
+            is_country_type = fallen_empire
+            has_country_flag = fallen_empire_machine_LgateGrander
+            NOT = { is_at_war_with = FROM }
+            is_enigmatic_to = FROM
+        }
+    }
+    03_FALLEN_MACHINE_GRANDER_ENIGMATIC_GREETING_ALL = {
+        weight = { weight = 10000 }
+        trigger = {
+            is_country_type = fallen_empire
+            has_country_flag = fallen_empire_machine_LgateGrander
+            NOT = { is_at_war_with = FROM }
+            is_enigmatic_to = FROM
+        }
+    }
+    04_FALLEN_MACHINE_GRANDER_ENIGMATIC_GREETING_ALL = {
+        weight = { weight = 10000 }
+        trigger = {
+            is_country_type = fallen_empire
+            has_country_flag = fallen_empire_machine_LgateGrander
+            NOT = { is_at_war_with = FROM }
+            is_enigmatic_to = FROM
+        }
+    }
+
+    01_FALLEN_MACHINE_GRANDER_WAR_GREETING = {
+        weight = { weight = 10000 }
+        trigger = {
+            has_country_flag = fallen_empire_machine_LgateGrander
+            is_at_war_with = FROM
+            NOT = { is_berserker_to = FROM }
+        }
+    }
+    02_FALLEN_MACHINE_GRANDER_WAR_GREETING = {
+        weight = { weight = 10000 }
+        trigger = {
+            has_country_flag = fallen_empire_machine_LgateGrander
+            is_at_war_with = FROM
+            NOT = { is_berserker_to = FROM }
+        }
+    }
+    03_FALLEN_MACHINE_GRANDER_CUSTODIAL_GREETING = {
+        weight = { weight = 10000 }
+        trigger = {
+            has_country_flag = fallen_empire_machine_LgateGrander
+            is_custodial_to = FROM
+        }
+    }
+}

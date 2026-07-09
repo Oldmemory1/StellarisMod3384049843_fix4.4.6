@@ -1,0 +1,609 @@
+situation_rebuilding_computer = {
+	picture = GFX_evt_ai_planet
+	complete_icon_frame = GFX_situation_outcome_frame_green
+	complete_icon = GFX_situation_outcome_ascension
+	category = positive
+	on_start = {
+		owner = {
+			if = {
+				limit = {
+					NOT = {
+						has_technology = tech_singularity_computer_theory
+					}
+				}
+				add_research_option = tech_singularity_computer_theory
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_technology = tech_string_resonating_theory
+					}
+				}
+				add_research_option = tech_string_resonating_theory
+			}
+		}
+	}
+	on_progress_complete = {
+		owner = {
+			country_event = {
+				id = rebuilt_computer_events.12
+			}
+		}
+		destroy_situation = this
+	}
+	progress_direction = monodirectional
+	stages = {
+		rebuild_researching = {
+			icon = GFX_situation_stage_1
+			icon_background = GFX_situation_stage_frame_green
+			end = 25
+		}
+		rebuild_dismantle_building = {
+			icon = GFX_situation_stage_2
+			icon_background = GFX_situation_stage_frame_green
+			end = 50
+		}
+		rebuild_building = {
+			icon = GFX_situation_stage_3
+			icon_background = GFX_situation_stage_frame_green
+			end = 90
+			on_first_enter = {
+				event_target:rebuild_computer_place = {
+					every_system_planet = {
+						limit = { is_star = no }
+						remove_planet = yes
+					}
+					set_asteroid_belt = { radius = 0 }
+				}
+			}
+		}
+		rebuild_programming = {
+			icon = GFX_situation_stage_4
+			icon_background = GFX_situation_stage_frame_green
+			end = 100
+			on_first_enter = {
+				event_target:rebuild_computer_place = {
+					spawn_megastructure = {
+						type = rebuilt_computer
+						owner = root.owner
+						planet = star
+					}
+				}
+			}
+		}
+	}
+	approach = {
+		name = rebuild_doing_nothing
+		icon = GFX_situation_approach_shrug
+		icon_background = GFX_situation_approach_bg_yellow
+		default = yes
+		resources = {
+			category = situations
+			upkeep = {
+				trigger = {
+					current_stage = rebuild_dismantle_building
+				}
+				energy = 100
+			}
+			upkeep = {
+				trigger = {
+					current_stage = rebuild_building
+				}
+				energy = 500
+			}
+			upkeep = {
+				trigger = {
+					current_stage = rebuild_programming
+				}
+				energy = 800
+			}
+		}
+	}
+	approach = {
+		name = rebuilding_self
+		icon = GFX_situation_approach_fist
+		icon_background = GFX_situation_approach_bg_green
+		allow = {
+			custom_tooltip = {
+				fail_text = "has_tech_singularity_computer_theory"
+				owner = {
+					has_technology = tech_singularity_computer_theory
+				}
+			}
+			custom_tooltip = {
+				fail_text = "has_tech_string_resonating_theory"
+				owner = {
+					has_technology = tech_string_resonating_theory
+				}
+			}
+			custom_tooltip = {
+				fail_text = "has_tech_mega_engineering"
+				owner = {
+					has_technology = tech_mega_engineering
+				}
+			}
+			custom_tooltip = {
+				fail_text = "cpu_inside_border"
+				event_target:rebuild_computer_place = {
+					is_inside_border = root.owner
+				}
+			}
+			if = {
+				limit = {
+					OR = {
+						current_stage = rebuild_researching
+						current_stage = rebuild_programming
+					}
+				}
+				custom_tooltip = {
+					fail_text = "require_5000_engineering_research_per_month"
+					OR = {
+						AND = {
+							owner = {
+								resource_income_compare = {
+									resource = engineering_research
+									value >= 0
+								}
+							}
+							current_situation_approach = rebuilding_self
+						}
+						owner = {
+							resource_income_compare = {
+								resource = engineering_research
+								value >= 5000
+							}
+						}
+					}
+				}
+			}
+		}
+		resources = {
+			category = situations
+			upkeep = {
+				trigger = {
+					OR = {
+						current_stage = rebuild_researching
+						current_stage = rebuild_programming
+					}
+				}
+				engineering_research = 5000
+			}
+			upkeep = {
+				trigger = {
+					current_stage = rebuild_dismantle_building
+				}
+				energy = 200
+			}
+			upkeep = {
+				trigger = {
+					current_stage = rebuild_building
+				}
+				energy = 1000
+				alloys = 1000
+			}
+			upkeep = {
+				trigger = {
+					current_stage = rebuild_programming
+				}
+				energy = 1600
+			}
+		}
+	}
+	approach = {
+		name = rebuilding_with_machine_fallen_empire
+		icon = GFX_situation_approach_handshake
+		icon_background = GFX_situation_approach_bg_green
+		allow = {
+			custom_tooltip = {
+				fail_text = "machine_fallen_empire_agree_help"
+				any_country = {
+					is_fallen_empire_machine = yes
+				}
+				owner = {
+					has_country_flag = machine_fallen_empire_help
+				}
+			}
+			custom_tooltip = {
+				fail_text = "rebuilt_computer_events.machine_fallen_empire_broken"
+				NOT = {
+					any_country = {
+						is_fallen_empire_berserk_machine = yes
+					}
+				}
+			}
+			custom_tooltip = {
+				fail_text = "cpu_inside_border"
+				event_target:rebuild_computer_place = {
+					is_inside_border = root.owner
+				}
+			}
+		}
+		resources = {
+			category = situations
+			upkeep = {
+				trigger = {
+					current_stage = rebuild_dismantle_building
+				}
+				energy = 200
+			}
+			upkeep = {
+				trigger = {
+					current_stage = rebuild_building
+				}
+				energy = 1000
+				alloys = 1000
+			}
+			upkeep = {
+				trigger = {
+					current_stage = rebuild_programming
+				}
+				energy = 1600
+			}
+		}
+	}
+	monthly_progress = {
+		base = 0
+		modifier = {
+			add = 2
+			desc = situation_rebuilding_self
+			current_situation_approach = rebuilding_self
+		}
+		modifier = {
+			add = 5
+			desc = situation_rebuilding_with_help
+			current_situation_approach = rebuilding_with_machine_fallen_empire
+		}
+		modifier = {
+			add = 2
+			desc = situation_rebuilding_ap
+			OR = {
+				current_situation_approach = rebuilding_self
+				current_situation_approach = rebuilding_with_machine_fallen_empire
+			}
+			owner = {
+				OR = {
+					has_ascension_perk = ap_master_builders
+					has_ascension_perk = ap_galactic_wonders_utopia
+					has_ascension_perk = ap_galactic_wonders_megacorp
+					has_ascension_perk = ap_galactic_wonders_utopia_and_megacorp
+				}
+			}
+		}
+	}
+}
+
+situation_genetic_engineering_caused_virus = {
+	picture = GFX_evt_circuitry_modification
+	complete_icon_frame = GFX_situation_outcome_frame_red
+	complete_icon = GFX_situation_outcome_negative
+	category = negative
+	on_start = {
+		owner = {
+			if = {
+				limit = {
+					NOR = {
+						has_special_project = research_vaccine_of_virus
+						has_modifier = mod_has_vaccine_of_virus
+					}
+				}
+				enable_special_project = {
+					name = research_vaccine_of_virus
+					owner = this
+				}
+			}
+		}
+	}
+	on_progress_complete = {
+		target = {
+			planet_event = {
+				id = tech_fallen_events.24
+			}
+			remove_modifier = stay_home_caused_virus
+		}
+		destroy_situation = this
+	}
+	abort_trigger = {
+		has_situation_flag = situation_genetic_engineering_caused_virus_end
+	}
+	on_abort = {
+		target = {
+			remove_modifier = stay_home_caused_virus
+		}
+	}
+	progress_direction = monodirectional
+	stages = {
+		genetic_engineering_caused_virus_1 = {
+			icon = GFX_situation_stage_1
+			icon_background = GFX_situation_stage_frame_red
+			end = 20
+		}
+		genetic_engineering_caused_virus_2 = {
+			icon = GFX_situation_stage_2
+			icon_background = GFX_situation_stage_frame_red
+			end = 40
+		}
+		genetic_engineering_caused_virus_3 = {
+			icon = GFX_situation_stage_3
+			icon_background = GFX_situation_stage_frame_red
+			end = 60
+			on_first_enter = {
+				target = {
+					planet_event = {
+						id = tech_fallen_events.22
+					}
+				}
+			}
+		}
+		genetic_engineering_caused_virus_4 = {
+			icon = GFX_situation_stage_4
+			icon_background = GFX_situation_stage_frame_red
+			end = 100
+			on_first_enter = {
+				target = {
+					planet_event = {
+						id = tech_fallen_events.23
+					}
+				}
+			}
+		}
+	}
+	approach = {
+		name = virus_doing_nothing
+		icon = GFX_situation_approach_shrug
+		icon_background = GFX_situation_approach_bg_red
+		default = yes
+		resources = {
+			category = situations
+			produces = {
+				unity = 500
+			}
+		}
+		on_select = {
+			target = {
+				if = {
+					limit = {
+						has_modifier = stay_home_caused_virus
+					}
+					remove_modifier = stay_home_caused_virus
+				}
+			}
+		}
+	}
+	approach = {
+		name = action_of_lockdown_and_isolation
+		icon = GFX_situation_approach_scales
+		icon_background = GFX_situation_approach_bg_green
+		resources = {
+			category = situations
+			upkeep = {
+				unity = 500
+			}
+		}
+		on_select = {
+			target = {
+				if = {
+					limit = {
+						NOT = {
+							has_modifier = stay_home_caused_virus
+						}
+					}
+					add_modifier = {
+						modifier = stay_home_caused_virus
+					}
+				}
+			}
+		}
+	}
+	monthly_progress = {
+		base = 2
+		modifier = {
+			add = 3
+			desc = we_doing_nothing
+			current_situation_approach = virus_doing_nothing
+		}
+		modifier = {
+			mult = 0
+			desc = we_have_vaccine
+			owner = {
+				has_country_flag = has_vaccine_of_virus
+			}
+		}
+	}
+}
+
+situation_do_with_fallen_per_ftl = {
+	picture = GFX_evt_alien_cavemen
+	complete_icon_frame = GFX_situation_outcome_frame_green
+	complete_icon = GFX_situation_outcome_positive
+	fail_icon_frame = GFX_situation_outcome_frame_green
+	fail_icon = GFX_situation_outcome_positive
+	category = positive
+
+	on_progress_complete = {
+		situation_event = {
+			id = fallen_per_ftl_events.8
+		}
+	}
+
+	on_fail = {
+		hidden_effect = {
+			owner = {
+				set_country_flag = destoried_fallen_per_ftl
+			}	
+		}
+		target = {
+			set_owner = root.owner
+		}
+		situation_event = {
+			id = fallen_per_ftl_events.4
+		}
+	}
+
+	on_abort = {
+		hidden_effect = {
+			owner = {
+				set_country_flag = let_fallen_per_ftl_gone
+			}	
+		}
+		situation_event = {
+			id = fallen_per_ftl_events.5
+		}
+	}
+	abort_trigger = {
+		target = {
+			if = {
+				limit = {
+					exists = owner
+				}
+				owner = {
+					NOT = {
+						is_same_empire = event_target:fallen_per_ftl_country
+					}
+				}
+			}
+		}
+	}
+
+	start_value = 50
+	progress_direction = bidirectional
+	complete_category = positive
+	fail_category = positive
+
+	stages = {
+		situation_do_with_fallen_per_ftl_stage_0 = {
+			icon = GFX_situation_stage_1
+			icon_background = GFX_situation_stage_frame_green
+			end = 50
+		}
+
+		situation_do_with_fallen_per_ftl_stage_1 = {
+			icon = GFX_situation_stage_1
+			icon_background = GFX_situation_stage_frame_green
+			end = 70
+		}
+
+		situation_do_with_fallen_per_ftl_stage_2 = {
+			icon = GFX_situation_stage_2
+			icon_background = GFX_situation_stage_frame_green
+			end = 90
+			on_first_enter = {
+				situation_event = {
+					id = fallen_per_ftl_events.6
+				}
+			}
+		}
+
+		situation_do_with_fallen_per_ftl_stage_3 = {
+			icon = GFX_situation_stage_3
+			icon_background = GFX_situation_stage_frame_green
+			end = 100
+			on_first_enter = {
+				situation_event = {
+					id = fallen_per_ftl_events.7
+				}
+			}
+		}
+	}
+
+	monthly_progress = {
+		base = 0
+		modifier = {
+			add = -3
+			desc = we_attacking_fallen_per_ftl
+			current_situation_approach = attack_fallen_per_ftl
+		}
+		modifier = {
+			add = 3
+			desc = we_researching_fallen_per_ftl
+			current_situation_approach = research_fallen_per_ftl
+		}
+	}
+
+	approach = {
+		name = doing_nothing_with_fallen_per_ftl
+		icon = GFX_situation_approach_shrug
+		icon_background = GFX_situation_approach_bg_yellow
+		default = yes
+	}
+	approach = {
+		name = attack_fallen_per_ftl
+		icon = GFX_situation_approach_sword
+		icon_background = GFX_situation_approach_bg_green
+		allow = {
+			custom_tooltip = {
+				fail_text = "we_need_army_here"
+				target = {
+					any_fleet_in_orbit = {
+						owner = {
+							is_same_empire = root.owner
+						}
+						any_owned_ship = {
+							is_ship_class = shipclass_transport
+						}
+					}
+				}
+			}
+			custom_tooltip = {
+				fail_text = "we_chose_another"
+				owner = {
+					NOT = {
+						has_country_flag = researching_fallen_per_ftl
+					} 
+				}
+			}
+		}
+		on_select = {
+			owner = {
+				set_country_flag = attacking_fallen_per_ftl
+			}
+		}
+	}
+	approach = {
+		name = research_fallen_per_ftl
+		icon = GFX_situation_approach_pop
+		icon_background = GFX_situation_approach_bg_green
+		allow = {
+			custom_tooltip = {
+				fail_text = "need_observation_here"
+				target = {
+					has_observation_outpost = yes
+					observation_outpost_owner = {
+						is_same_empire = root.owner
+					}
+				}
+			}
+			custom_tooltip = {
+				fail_text = "we_chose_another"
+				owner = {
+					NOT = {
+						has_country_flag = attacking_fallen_per_ftl
+					} 
+				}
+			}
+			custom_tooltip = {
+				fail_text = "need_spynetwork_30"
+				if = {
+					limit = {
+						OR = {
+							current_stage = situation_do_with_fallen_per_ftl_stage_2
+							current_stage = situation_do_with_fallen_per_ftl_stage_3
+						}
+					}
+					owner = {
+						any_spynetwork = {
+							target = {
+								is_same_empire = event_target:fallen_per_ftl_country
+							}
+							has_spy_power >= 30
+						}
+					}
+				}
+			}
+		}
+		on_select = {
+			owner = {
+				set_country_flag = researching_fallen_per_ftl
+			}
+		}
+	}
+}

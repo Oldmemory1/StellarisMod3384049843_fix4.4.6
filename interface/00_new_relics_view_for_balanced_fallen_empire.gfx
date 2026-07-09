@@ -1,0 +1,246 @@
+spriteTypes = {
+
+	SpriteType = {
+		name = "GFX_relic_fallen_contingency_core"
+		texturefile = "gfx/interface/icons/relics/r_fallen_contingency_core.dds"			
+		effectFile = "gfx/FX/buttonstate.shader"
+		animation = {
+			animationmaskfile = "gfx/interface/icons/relics/r_fallen_contingency_core_shine.dds"			
+			animationtexturefile = "gfx/interface/icons/relics/glow_overlay.dds" 	# <- the animated file
+			animationrotation = 90.0		# -90 clockwise 90 counterclockwise(by default)
+			animationlooping = yes			# yes or no ;)
+			animationtime = 11				# in seconds
+			animationdelay = 0			# in seconds
+			animationblendmode = "add"       #add, multiply, overlay
+			animationtype = "rotating"      #scrolling, rotating, pulsing
+			animationrotationoffset = { x = 0.0 y = 0.0 }
+			animationtexturescale = { x = 1.0 y = 1.0 }
+		}
+		legacy_lazy_load = no
+	}
+
+	SpriteType = {
+		name = "GFX_relic_fallen_khans_throne"
+		texturefile = "gfx/interface/icons/relics/r_fallen_khans_throne.dds"			
+		effectFile = "gfx/FX/buttonstate.shader"
+		animation = {
+			animationmaskfile = "gfx/interface/icons/relics/r_fallen_khans_throne_shine.dds"			
+			animationtexturefile = "gfx/interface/icons/relics/glow_overlay.dds" 	# <- the animated file
+			animationrotation = 90.0		# -90 clockwise 90 counterclockwise(by default)
+			animationlooping = yes			# yes or no ;)
+			animationtime = 4.75				# in seconds
+			animationdelay = 0			# in seconds
+			animationblendmode = "add"       #add, multiply, overlay
+			animationtype = "pulsing"      #scrolling, rotating, pulsing
+			animationrotationoffset = { x = 0.0 y = 0.0 }
+			animationtexturescale = { x = 1.0 y = 1.0 }
+		}
+		animation = {
+			animationmaskfile = "gfx/interface/icons/relics/r_fallen_khans_throne_shine.dds"			
+			animationtexturefile = "gfx/interface/icons/relics/shine_overlay.dds" 	# <- the animated file
+			animationrotation = 90.0		# -90 clockwise 90 counterclockwise(by default)
+			animationlooping = yes			# yes or no ;)
+			animationtime = 0.6				# in seconds
+			animationdelay = 8			# in seconds
+			animationblendmode = "add"       #add, multiply, overlay
+			animationtype = "scrolling"      #scrolling, rotating, pulsing
+			animationrotationoffset = { x = 0.0 y = 0.0 }
+			animationtexturescale = { x = 1.0 y = 1.0 }
+		}
+		legacy_lazy_load = no
+	}
+
+	SpriteType = {
+		name = "GFX_fallen_relic_omnicodex"
+		texturefile = "gfx/interface/icons/relics/r_fallen_omnicodex.dds"			
+		effectFile = "gfx/FX/buttonstate.shader"
+		animation = {
+			animationmaskfile = "gfx/interface/icons/relics/r_fallen_omnicodex_shine.dds"			
+			animationtexturefile = "gfx/interface/icons/relics/shine_overlay_02.dds" 	# <- the animated file
+			animationrotation = 185.0		# -90 clockwise 90 counterclockwise(by default)
+			animationlooping = yes			# yes or no ;)
+			animationtime = 4				# in seconds
+			animationdelay = 1.5			# in seconds
+			animationblendmode = "add"       #add, multiply, overlay
+			animationtype = "scrolling"      #scrolling, rotating, pulsing
+			animationrotationoffset = { x = 0.0 y = 0.0 }
+			animationtexturescale = { x = 1.0 y = 1.0 }
+		}
+		legacy_lazy_load = no
+		
+		animation = {
+			animationmaskfile = "gfx/interface/icons/relics/r_fallen_omnicodex_shine.dds"			
+			animationtexturefile = "gfx/interface/icons/relics/shine_overlay_02.dds" 	# <- the animated file
+			animationrotation = 185.0		# -90 clockwise 90 counterclockwise(by default)
+			animationlooping = yes			# yes or no ;)
+			animationtime = 10				# in seconds
+			animationdelay = 0			# in seconds
+			animationblendmode = "add"       #add, multiply, overlay
+			animationtype = "scrolling"      #scrolling, rotating, pulsing
+			animationrotationoffset = { x = 0.0 y = 0.0 }
+			animationtexturescale = { x = 1.0 y = 1.0 }
+		}
+		legacy_lazy_load = no
+	}
+
+	SpriteType = {
+		name = "GFX_relic_fallen_unbidden_warlock"
+		texturefile = "gfx/interface/icons/relics/r_fallen_unbidden_warlock.dds"			
+		effectFile = "gfx/FX/buttonstate.shader"
+		animation = {
+			animationmaskfile = "gfx/interface/icons/relics/r_fallen_unbidden_warlock_shine.dds"			
+			animationtexturefile = "gfx/interface/icons/relics/glow_overlay.dds" 	# <- the animated file
+			animationrotation = 180.0		# -90 clockwise 90 counterclockwise(by default)
+			animationlooping = yes			# yes or no ;)
+			animationtime = 22				# in seconds
+			animationdelay = 0			# in seconds
+			animationblendmode = "add"       #add, multiply, overlay
+			animationtype = "scrolling"      #scrolling, rotating, pulsing
+			animationrotationoffset = { x = 0.0 y = 0.0 }
+			animationtexturescale = { x = 1.0 y = 1.0 } 
+		}
+		legacy_lazy_load = no
+	}
+
+	SpriteType = {
+		name = "GFX_fallen_continuum"
+		texturefile = "gfx/interface/icons/relics/r_fallen_continuum.dds"
+		effectFile = "gfx/FX/buttonstate.shader"
+		animation = {
+			animationmaskfile = "gfx/interface/icons/relics/r_fallen_continuum_shine.dds"
+			animationtexturefile = "gfx/interface/icons/relics/crystal_overlay.dds" 	# <- the animated file
+			animationrotation = 90.0		# -90 clockwise 90 counterclockwise(by default)
+			animationlooping = yes			# yes or no ;)
+			animationtime = 15				# in seconds
+			animationdelay = 0				# in seconds
+			animationblendmode = "add"		#add, multiply, overlay
+			animationtype = "rotating"		#scrolling, rotating, pulsing
+			animationrotationoffset = { x = 0.0 y = 0.0 }
+			animationtexturescale = { x = 1.0 y = 1.0 }
+		}
+		legacy_lazy_load = no
+		
+		animation = {
+		animationmaskfile = "gfx/interface/icons/relics/r_continuum_shine.dds"
+		animationtexturefile = "gfx/interface/icons/relics/shine_overlay.dds" 		# <- the animated file
+		animationrotation = -90.0			# -90 clockwise 90 counterclockwise(by default)
+		animationlooping = yes				# yes or no ;)
+		animationtime = 20					# in seconds
+		animationdelay = 0					# in seconds
+		animationblendmode = "add"			#add, multiply, overlay
+		animationtype = "scrolling"			#scrolling, rotating, pulsing
+		animationrotationoffset = { x = 0.0 y = 0.0 }
+		animationtexturescale = { x = 1.0 y = 1.0 }
+		}
+		legacy_lazy_load = no
+	}
+
+	spriteType = {
+		name = "GFX_mod_job_nano_maker_produces_mult"
+		texturefile = "gfx/interface/icons/modifiers/mod_job_nano_maker_add.dds"
+	}
+	spriteType = {
+		name = "GFX_mod_job_nano_maker_produces_add"
+		texturefile = "gfx/interface/icons/modifiers/mod_job_nano_maker_add.dds"
+	}
+	spriteType = {
+		name = "GFX_job_nano_maker"
+		textureFile = "gfx/interface/icons/jobs/job_nano_maker.dds"
+	}
+	spriteType = {
+		name = "GFX_mod_job_nano_maker_add"
+		textureFile = "gfx/interface/icons/modifiers/mod_job_nano_maker_add.dds"
+	}
+	spriteType = {
+		name = "GFX_job_gestal_nano_maker"
+		textureFile = "gfx/interface/icons/jobs/job_gestal_nano_maker.dds"
+	}
+	spriteType = {
+		name = "GFX_mod_job_gestal_nano_maker_add"
+		textureFile = "gfx/interface/icons/modifiers/mod_job_gestal_nano_maker_add.dds"
+	}
+
+	spriteType = {
+		name = "GFX_fallen_lost_nano_gun_set"
+		texturefile = "gfx/interface/icons/ship_parts/fallen_lost_nano_gun_set.dds"
+	}
+	spriteType = {
+		name = "GFX_fallen_lost_nano_armor_set"
+		texturefile = "gfx/interface/icons/ship_parts/fallen_lost_nano_armor_set.dds"
+	}
+	spriteType = {
+		name = "GFX_fallen_lost_nano_cloud_set"
+		texturefile = "gfx/interface/icons/ship_parts/fallen_lost_nano_cloud_set.dds"
+	}
+
+	spriteType = {
+		name = "GFX_ship_part_computer_far_fire_basic"
+		texturefile = "gfx/interface/icons/ship_parts/computers/ship_part_computer_far_fire_basic.dds"
+	}
+	spriteType = {
+		name = "GFX_ship_part_computer_far_fire_advanced"
+		texturefile = "gfx/interface/icons/ship_parts/computers/ship_part_computer_far_fire_advanced.dds"
+	}
+	spriteType = {
+		name = "GFX_ship_part_computer_far_fire_sapient"
+		texturefile = "gfx/interface/icons/ship_parts/computers/ship_part_computer_far_fire_sapient.dds"
+	}
+	spriteType = {
+		name = "GFX_ship_part_computer_far_fire_precog"
+		texturefile = "gfx/interface/icons/ship_parts/computers/ship_part_computer_far_fire_precog.dds"
+	}
+
+	spriteType = {
+		name = "GFX_ship_part_computer_GUERRILLA_basic"
+		texturefile = "gfx/interface/icons/ship_parts/computers/ship_part_computer_GUERRILLA_basic.dds"
+	}
+	spriteType = {
+		name = "GFX_ship_part_computer_GUERRILLA_advanced"
+		texturefile = "gfx/interface/icons/ship_parts/computers/ship_part_computer_GUERRILLA_advanced.dds"
+	}
+	spriteType = {
+		name = "GFX_ship_part_computer_GUERRILLA_sapient"
+		texturefile = "gfx/interface/icons/ship_parts/computers/ship_part_computer_GUERRILLA_sapient.dds"
+	}
+	spriteType = {
+		name = "GFX_ship_part_computer_GUERRILLA_precog"
+		texturefile = "gfx/interface/icons/ship_parts/computers/ship_part_computer_GUERRILLA_precog.dds"
+	}
+
+	spriteType = {
+		name = "GFX_ship_part_computer_FACE_FIRE_basic"
+		texturefile = "gfx/interface/icons/ship_parts/computers/ship_part_computer_FACE_FIRE_basic.dds"
+	}
+	spriteType = {
+		name = "GFX_ship_part_computer_FACE_FIRE_advanced"
+		texturefile = "gfx/interface/icons/ship_parts/computers/ship_part_computer_FACE_FIRE_advanced.dds"
+	}
+	spriteType = {
+		name = "GFX_ship_part_computer_FACE_FIRE_sapient"
+		texturefile = "gfx/interface/icons/ship_parts/computers/ship_part_computer_FACE_FIRE_sapient.dds"
+	}
+	spriteType = {
+		name = "GFX_ship_part_computer_FACE_FIRE_precog"
+		texturefile = "gfx/interface/icons/ship_parts/computers/ship_part_computer_FACE_FIRE_precog.dds"
+	}
+
+	spriteType = {
+		name = "GFX_rebuilt_computer_outliner_icon"
+		texturefile = "gfx/interface/icons/megastructures/rebuilt_computer.dds"
+	}
+
+	spriteType = {
+		name = "GFX_leader_trait_front_lines_yunfan"
+		texturefile = "gfx/interface/icons/traits/leader_trait_icons/leader_trait_front_lines_yunfan.dds"
+	}
+
+	spriteType = {
+		name = "GFX_leader_trait_intelligent_assisted_computing_yunfan"
+		texturefile = "gfx/interface/icons/traits/leader_trait_icons/leader_trait_intelligent_assisted_computing_yunfan.dds"
+	}
+
+	spriteType = {
+		name = "GFX_leader_trait_submissive_yunfan"
+		texturefile = "gfx/interface/icons/traits/leader_trait_icons/leader_trait_submissive_yunfan.dds"
+	}
+}

@@ -1,0 +1,55 @@
+namespace = fallen_machine_empire
+
+country_event = {
+	id = fallen_machine_empire.3
+	title = OK
+	desc = OK
+
+	hide_window = yes
+
+	is_triggered_only = yes
+
+	trigger = {
+		NOR = {
+			has_civic = civic_malfunctioning_custodian
+			has_country_flag = fallen_machine_empire_awaken_yunfan
+		}
+	}
+
+	immediate = {
+		set_country_flag = silence_destroy_event
+
+		every_controlled_fleet = {
+			limit = {
+				OR = {
+					is_ship_class = shipclass_constructor
+					is_ship_class = shipclass_transport
+					is_ship_class = shipclass_military_station
+					is_ship_class = shipclass_military
+				}
+			}
+			delete_fleet = this
+		}
+
+		every_controlled_fleet = {
+			limit = {
+				OR = {
+					is_ship_class = shipclass_military_station
+				}
+			}
+			destroy_fleet = this
+		}
+
+		every_owned_planet = {
+			destroy_colony = yes
+		}
+
+		# Notify players
+		every_country = {
+			limit = {
+				is_ai = no
+			}
+			country_event = { id = fallen_machine_empire.4 }
+		}
+	}
+}

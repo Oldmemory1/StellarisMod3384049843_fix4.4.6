@@ -1,0 +1,89 @@
+new_computer_site = {
+	desc = new_computer_site_desc
+	picture = GFX_evt_archaeological_dig
+	stages = 3
+	weight = 0
+
+	allow = {
+		is_ship_class = shipclass_science_ship
+		exists = leader
+	}
+
+	potential = {}
+
+	visible = {
+		default_site_visible_trigger = yes
+	}
+
+	stage = {
+		difficulty = 3
+		icon = GFX_archaeology_runes_A2
+		event = rebuilt_computer_events.4
+	}
+
+	stage = {
+		difficulty = 5
+		icon = GFX_archaeology_runes_B2
+		event = rebuilt_computer_events.5
+	}
+
+	stage = {
+		difficulty = 1
+		icon = GFX_archaeology_runes_C2
+		event = rebuilt_computer_events.6
+	}
+
+	on_roll_failed = {
+		from = {
+			standard_archaeological_site_on_roll_failed = { RANDOM_EVENTS = all_random_events }
+		}
+	}
+}
+
+tech_fallen_ship_site = {
+	desc = tech_fallen_ship_site_desc
+	picture = GFX_evt_archaeological_dig
+	stages = 3
+	weight = 0
+
+	allow = {
+		is_ship_class = shipclass_science_ship
+		exists = leader
+	}
+
+	potential = {}
+
+	visible = {
+		default_site_visible_trigger = yes
+	}
+
+	stage = {
+		difficulty = 5
+		icon = GFX_archaeology_runes_A2
+		event = tech_fallen_events.4
+	}
+
+	stage = {
+		difficulty = 1
+		icon = GFX_archaeology_runes_B2
+		event = tech_fallen_events.5
+	}
+
+	stage = {
+		difficulty = 5
+		icon = GFX_archaeology_runes_C2
+		event = tech_fallen_events.14
+	}
+
+	stage = {
+		difficulty = 8
+		icon = GFX_archaeology_runes_D2
+		event = tech_fallen_events.6
+	}
+
+	on_roll_failed = {
+		from = {
+			standard_archaeological_site_on_roll_failed = { RANDOM_EVENTS = all_random_events }
+		}
+	}
+}

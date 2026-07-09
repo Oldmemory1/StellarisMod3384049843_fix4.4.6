@@ -1,0 +1,52 @@
+rebuilt_computer = {
+	entity = "CVB_mega_mega_entity"
+	portrait = "GFX_megastructure_construction_background"
+	place_entity_on_planet_plane = no
+	scales_with_planet = yes
+
+	resources = {
+		category = megastructures
+		produces = {
+			trigger = {
+				owner = {
+					NOR = {
+						has_country_flag = returned_computer_to_machine_fallen_empire
+						any_situation = {
+							is_situation_type = situation_rebuilding_computer
+						}
+					}
+				}
+			}
+			physics_research = 5000
+			engineering_research = 5000
+			society_research = 5000
+		}
+		produces = {
+			trigger = {
+				owner = {
+					has_country_flag = returned_computer_to_machine_fallen_empire
+					NOT = {
+						any_situation = {
+							is_situation_type = situation_rebuilding_computer
+						}
+					}
+				}
+			}
+			physics_research = 1000
+			engineering_research = 1000
+			society_research = 1000
+		}
+		upkeep = {
+			energy = 1000
+		}
+	}
+
+	potential = {
+		always = no
+	}
+
+	country_modifier = {
+		all_technology_research_speed = 0.20
+	}
+
+}

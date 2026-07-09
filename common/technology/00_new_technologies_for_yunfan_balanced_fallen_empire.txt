@@ -1,0 +1,139 @@
+tech_singularity_computer_theory = {
+	cost = 200000
+	area = physics
+	tier = 5
+	category = { computing }
+	weight_modifier = {
+		base = 10
+		modifier = {
+			mult = 0
+			NOT = {
+				any_controlled_planet = {
+					has_building = building_master_archive2
+				}
+			}
+		}
+	}
+	is_rare = yes
+	modifier = {
+		all_technology_research_speed = 0.25
+		planet_researchers_upkeep_mult = 0.25
+	}
+}
+
+tech_string_resonating_theory = {
+	cost = 200000
+	area = physics
+	tier = 5
+	category = { particles }
+	weight_modifier = {
+		base = 10
+		modifier = {
+			mult = 0
+			NOT = {
+				any_controlled_planet = {
+					has_building = building_master_archive2
+				}
+			}
+		}
+	}
+	is_rare = yes
+	modifier = {
+		planet_jobs_upkeep_mult = -0.15
+		starbase_shipyard_build_cost_mult = -0.10
+	}
+}
+
+tech_use_weapen_as_shield = {
+	cost = 10000
+	area = engineering
+	tier = 5
+	category = { voidcraft }
+	weight_modifier = {
+		base = 10
+		modifier = {
+			mult = 0
+			NOT = {
+				any_controlled_planet = {
+					has_building = building_master_archive2
+				}
+			}
+		}
+	}
+	is_rare = yes
+	is_reverse_engineerable = no
+	prereqfor_desc = {
+		ship = {
+			title = "tech_use_weapen_as_shield_title"
+			desc = "tech_use_weapen_as_shield_ship_desc"
+		}
+	}
+}
+
+tech_art_of_war = {
+	cost = 10000
+	area = society
+	tier = 5
+	category = { military_theory }
+	weight_modifier = {
+		base = 10
+		modifier = {
+			mult = 0
+			NOT = {
+				any_controlled_planet = {
+					has_building = building_master_archive2
+				}
+			}
+		}
+	}
+	is_rare = yes
+	is_reverse_engineerable = no
+	prereqfor_desc = {
+		ship = {
+			title = "tech_art_of_war_title"
+			desc = "tech_art_of_war_ship_desc"
+		}
+	}
+}
+
+tech_virus_based_genetic_engineering = {
+	cost = 20000
+	area = society
+	tier = 5
+	category = { biology }
+	potential = {
+		any_controlled_planet = {
+			has_building = building_master_archive2
+		}
+		is_ai = no
+	}
+	weight_modifier = {
+		base = 10
+		modifier = {
+			mult = 0
+			NOT = {
+				any_controlled_planet = {
+					has_building = building_master_archive2
+				}
+			}
+		}
+	}
+	is_rare = yes
+	is_dangerous = yes
+	prereqfor_desc = {
+		ship = {
+			title = "tech_virus_based_genetic_engineering_title"
+			desc = "tech_virus_based_genetic_engineering_ship_desc"
+		}
+	}
+}
+
+tech_fallen_lost_nano_machine = {
+	cost = 10000
+	area = engineering
+	tier = 5
+	category = { materials }
+	weight = 0
+	is_rare = yes
+	is_reverse_engineerable = no
+}

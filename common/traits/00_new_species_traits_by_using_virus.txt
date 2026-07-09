@@ -1,0 +1,57 @@
+using_cirus_traits1 = { #ID应该以“trait”开头
+    cost = {
+		base = 1
+		modifier = {
+			add = 1
+			NOT = {
+				has_origin = origin_overtuned
+			}
+		}
+		modifier = {
+			add = 1
+			NOT = {
+				has_ascension_perk = ap_engineered_evolution
+			}
+		}
+	}
+	#opposites = { using_cirus_traits2 using_cirus_traits3 using_cirus_traits4 }
+    initial = no #能否在初始界面被选择
+    randomized = no #是否可以随机生成该特质
+    allowed_archetypes = { BIOLOGICAL } #允许的种族类别（有机，机械等）
+    prerequisites = { tech_virus_based_genetic_engineering }  #需要的前置科技
+
+	species_potential_add = {
+		from = {
+			has_technology = tech_virus_based_genetic_engineering
+		}
+	}
+	species_possible_merge_add = {
+		from = {
+			has_technology = tech_virus_based_genetic_engineering
+		}
+	}
+	species_possible_remove = {
+		always = no
+	}
+	species_possible_merge_remove = {
+		always = no
+	}
+
+    icon = "gfx/interface/icons/traits/using_cirus_traits1.dds" #用于定义图标，默认情况下是
+    #custom_tooltip = TRAIT_WOMEN_WEAR_EFFECT #显示的文本，注意：将会覆盖自动生成的修正器文本
+    potential_crossbreeding_chance = 3.0 #生育优先度，越高的数值代表越有可能是有该特质物种增长
+	custom_tooltip = "using_cirus_traits1_modifier"
+	triggered_pop_modifier = {
+		potential = {
+			NOT = {
+				has_pop_flag = using_virus_make_illness
+			}
+		}
+		planet_jobs_produces_mult = 0.5
+		habitability_floor_add = 1
+		pop_growth_speed = 0.25
+		pop_amenities_usage_mult = -0.33
+		pop_housing_usage_mult = -0.33
+		army_damage_mult = 0.80
+	}
+}

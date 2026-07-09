@@ -1,0 +1,7 @@
+﻿l_simp_chinese:
+ name_spiritualist_fallen_empire2: "[spiritualist_fallen_empire2.GetName]"
+ angle_of_end_events.2.title: "终末神使"
+ angle_of_end_events.2.desc.a: "晨曦继暮日，朝花复夜霜。我在[event_target:spiritualist_fallen_empire.GetName]铸造的监牢中熬过了数个世纪，如今终于能重见天日。时间一直站在我这一边。"
+ angle_of_end_events.2.desc.b: "晨曦继暮日，朝花复夜霜。我在[event_target:spiritualist_fallen_empire.GetName]铸造的监牢中熬过了数个世纪，又辗转来到你们的手中。好在这些精密复杂的装置长期缺乏必要的维护，我终于找到了封印的缺口。时间一直站在我这一边。"
+ angle_of_end_events.2.a: "你是什么人？"
+ angle_of_end_events.2.a.desc: ""

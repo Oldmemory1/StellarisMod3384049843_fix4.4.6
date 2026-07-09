@@ -1,0 +1,576 @@
+namespace = balanced_fallen_empire_events
+
+country_event = {
+	id = balanced_fallen_empire_events.1
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		is_country_type = fallen_empire
+	}
+
+	immediate = {
+		event_target:global_event_country = {
+			get_galaxy_setup_value = {
+				which = fallen_empire_crsis_level
+				setting = crisis_strength_scale
+			}
+		}
+        add_modifier = {
+            modifier = balanced_fallen_empire_modifier
+			mult = event_target:global_event_country.fallen_empire_crsis_level
+        }
+		capital_scope = {
+			if = {
+				limit = {
+					owner = { is_spiritualist = yes }
+				}
+				set_planet_flag = fallen_capital_unbidden_warlock
+			}
+			if = {
+				limit = {
+					owner = { is_materialist = yes }
+				}
+				set_planet_flag = fallen_capital_omnicodex
+			}
+			if = {
+				limit = {
+					owner = { is_xenophobe = yes }
+				}
+				set_planet_flag = fallen_capital_throne
+			}
+			if = {
+				limit = {
+					owner = { is_xenophile = yes }
+				}
+				set_planet_flag = fallen_capital_continuum
+			}
+			if = {
+				limit = {
+					owner = { is_fallen_empire_machine = yes }
+				}
+				set_planet_flag = fallen_capital_contingency_core
+			}
+			save_event_target_as = fallen_empire_first_capital
+		}
+		country_event = {
+			id = balanced_fallen_empire_events.6
+		}
+		country_event = {
+			id = balanced_fallen_empire_events.2
+		}
+	}
+}
+
+country_event = {
+	id = balanced_fallen_empire_events.2
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		is_country_type = fallen_empire
+	}
+
+	immediate = {
+		add_resource = {
+			minerals = 99999
+			energy = 99999
+			food = 99999
+			consumer_goods = 99999
+        	volatile_motes = 99999
+        	exotic_gases = 99999
+            rare_crystals = 99999
+            sr_zro = 99999
+            sr_dark_matter = 99999
+			nanites = 99999
+			sr_living_metal = 99999
+		}
+		if = {
+			limit = {
+				OR = {
+					has_global_flag = unlimited_fallen_empire_power
+					fleet_power < event_target:global_event_country.fallen_empire_power
+				}
+			}
+			capital_scope = {
+				if = {
+					limit = {
+						controller = {
+							is_same_empire = root
+						}
+					}
+					create_fleet = {
+						effect = {
+							set_owner = prev.owner
+							while = {
+							count = 5
+								create_fallen_empire_large_ship = yes
+							}
+							while = {
+								count = 10
+								create_fallen_empire_small_ship = yes
+							}							
+							set_location = {
+								target = owner.capital_scope
+								distance = 30
+								angle = random
+							}
+						}
+					}
+				}
+			}
+		}
+		country_event = {
+		id = balanced_fallen_empire_events.2
+			days = 1800
+			random = 60
+		}
+	}
+}
+
+country_event = {
+	id = balanced_fallen_empire_events.3
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		is_country_type = awakened_fallen_empire
+	}
+
+	immediate = {
+		add_resource = {
+			minerals = 99999
+			energy = 99999
+			food = 99999
+			consumer_goods = 99999
+        	volatile_motes = 99999
+        	exotic_gases = 99999
+            rare_crystals = 99999
+            sr_zro = 99999
+            sr_dark_matter = 99999
+			nanites = 99999
+			sr_living_metal = 99999
+		}
+		if = {
+			limit = { 
+				OR = {
+					has_global_flag = unlimited_fallen_empire_power
+					fleet_power < event_target:global_event_country.fallen_empire_power
+				}
+			}
+			if = {
+				limit = {
+					count_owned_planet = {
+						count > 2
+					}
+				}
+				capital_scope = {
+					if = {
+						limit = {
+							controller = {
+								is_same_empire = root
+							}
+						}
+						create_fleet = {
+							effect = {
+								set_owner = prev.owner
+								while = {
+									count = 2
+									create_fallen_empire_titan = yes
+								}						
+								set_location = {
+									target = prev
+									distance = 30
+									angle = random
+								}
+							}
+						}
+					}
+				}
+				every_owned_planet = {
+					limit = {
+						controller = {
+							is_same_empire = root
+						}
+					}
+					create_fleet = {
+						effect = {
+							set_owner = prev.owner
+							while = {
+								count = 2
+								create_fallen_empire_large_ship = yes
+							}
+							while = {
+								count = 5
+								create_fallen_empire_small_ship = yes
+							}
+							set_location = {
+								target = prev
+								distance = 30
+								angle = random
+							}
+						}
+					}
+				}
+			} else = {
+				capital_scope = {
+					if = {
+						limit = {
+							controller = {
+								is_same_empire = root
+							}
+						}
+						create_fleet = {
+							effect = {
+								set_owner = prev.owner
+								while = {
+								count = 5
+									create_fallen_empire_large_ship = yes
+								}
+								while = {
+									count = 10
+									create_fallen_empire_small_ship = yes
+								}							
+								set_location = {
+									target = owner.capital_scope
+									distance = 30
+									angle = random
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = balanced_fallen_empire_events.4
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		is_country_type = global_event
+	}
+
+	immediate = {
+		country_event = {
+			id = balanced_fallen_empire_events.4
+			days = 1800
+			random = 60
+		}
+		every_country = {
+			country_event = {
+				id = balanced_fallen_empire_events.3
+			}
+		}
+	}
+}
+
+country_event = {
+	id = balanced_fallen_empire_events.6
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		is_country_type = fallen_empire
+	}
+
+	immediate = {
+		if = {
+			limit = {
+				capital_scope = {
+					NOT = {
+						is_same_value = event_target:fallen_empire_first_capital
+					}
+				}
+			}
+			country_event = {
+				id = balanced_fallen_empire_events.7
+			}
+		}
+		country_event = {
+			id = balanced_fallen_empire_events.6
+			days = 30
+		}
+	}
+}
+
+country_event = {
+	id = balanced_fallen_empire_events.7
+	title = OK
+	desc = OK
+	hide_window = yes
+	is_triggered_only = yes
+	
+	immediate = {
+		set_global_flag = sleepers_awake_happened
+
+		country_event = { id = fallen_empires_awakening.3 }
+
+		# Notify players
+		every_country = {
+			limit = {
+				is_ai = no
+			}
+			country_event = { id = fallen_empires_awakening.2 }
+		}
+		observer_event = { id = observer.73 }
+
+		# Fragged a holy world
+		if = {
+			limit = {
+				has_country_flag = holy_world_killed
+			}
+			country_event = { id = planet_destruction.611 days = 5 }
+		}
+
+		# War in Heaven
+		if = {
+			limit = { host_has_dlc = "Leviathans Story Pack" }
+			random_list = {
+				40 = { # War in Heaven with Fallen Empire of opposing ethos
+					random_country = {
+						limit = {
+							NOT = { is_same_value = root }
+							is_country_type = fallen_empire
+							NOT = { has_ethic = ethic_gestalt_consciousness }
+							OR = {
+								AND = {
+									has_ethic = ethic_fanatic_xenophobe
+									root = { has_ethic = ethic_fanatic_xenophile }
+								}
+								AND = {
+									has_ethic = ethic_fanatic_xenophile
+									root = { has_ethic = ethic_fanatic_xenophobe }
+								}
+								AND = {
+									has_ethic = ethic_fanatic_spiritualist
+									root = { has_ethic = ethic_fanatic_materialist }
+								}
+								AND = {
+									has_ethic = ethic_fanatic_materialist
+									root = { has_ethic = ethic_fanatic_spiritualist }
+								}
+							}
+						}
+						set_country_flag = sleepers_awake_ancient_rival
+						set_timed_country_flag = { flag = timed_ancient_rival days = 3600 }
+						set_timed_country_flag = { flag = ai_no_wars days = 3600 }
+						root = { set_timed_country_flag = { flag = ai_no_wars days = 3600 } }
+						every_country = {
+							limit = { is_country_type = default }
+							set_timed_country_flag = { flag = ai_no_wars days = 3600 }
+						}
+					}
+				}
+				20 = { # War in Heaven with Fallen Empire of different ethos
+					random_country = {
+						limit = {
+							NOT = { is_same_value = root }
+							is_country_type = fallen_empire
+							NOT = { has_ethic = ethic_gestalt_consciousness }
+						}
+						set_country_flag = sleepers_awake_ancient_rival
+						set_timed_country_flag = { flag = timed_ancient_rival days = 3600 }
+						set_timed_country_flag = { flag = ai_no_wars days = 3600 }
+						root = { set_timed_country_flag = { flag = ai_no_wars days = 3600 } }
+						every_country = {
+							limit = {
+								is_country_type = default
+							}
+							set_timed_country_flag = { flag = ai_no_wars days = 3600 }
+						}
+					}
+				}
+			}
+		}
+		else = { set_global_flag = no_war_in_heaven }
+	}
+}
+
+country_event = {
+	id = balanced_fallen_empire_events.8
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		OR = {
+			is_country_type = fallen_empire
+			is_country_type = awakened_fallen_empire
+		}
+	}
+
+	immediate = {
+		every_country = {
+			limit = { 
+				is_country_type = fallen_empire
+				NOT = { is_fallen_empire_machine = yes }
+			}
+			country_event = {
+				id = balanced_fallen_empire_events.7
+			}
+		}
+	}
+}
+
+country_event = {
+	id = balanced_fallen_empire_events.9
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		fromfrom = {
+			carrier? = {
+				OR = {
+					has_planet_flag = fallen_capital_unbidden_warlock
+					has_planet_flag = fallen_capital_omnicodex
+					has_planet_flag = fallen_capital_throne
+					has_planet_flag = fallen_capital_continuum
+					has_planet_flag = fallen_capital_contingency_core
+				}
+			}
+		}
+	}
+
+	immediate = {
+		if = {
+			limit = {
+				fromfrom = { carrier? = { has_planet_flag = fallen_capital_unbidden_warlock } }
+			}
+			add_relic = r_fallen_unbidden_warlock
+			# hidden_effect = {
+			# 	country_event = {
+			# 		id = angle_of_end_events.2
+			# 		days = 7200
+			# 	}	
+			# }
+		}
+		if = {
+			limit = {
+				fromfrom = { carrier? = { has_planet_flag = fallen_capital_omnicodex } }
+			}
+			add_relic = r_fallen_omnicodex
+		}
+		if = {
+			limit = {
+				fromfrom = { carrier? = { has_planet_flag = fallen_capital_throne } }
+			}
+			add_relic = r_fallen_khans_throne
+		}
+		if = {
+			limit = {
+				fromfrom = { carrier? = { has_planet_flag = fallen_capital_continuum } }
+			}
+			add_relic = r_fallen_continuum
+		}
+		if = {
+			limit = {
+				fromfrom = { carrier? = { has_planet_flag = fallen_capital_contingency_core } }
+			}
+			add_relic = r_fallen_contingency_core
+		}
+		country_event = {
+			id = balanced_fallen_empire_events.10
+		}
+		fromfrom = {
+			carrier? = {
+				remove_planet_flag = fallen_capital_unbidden_warlock
+				remove_planet_flag = fallen_capital_omnicodex
+				remove_planet_flag = fallen_capital_throne
+				remove_planet_flag = fallen_capital_continuum
+				remove_planet_flag = fallen_capital_contingency_core
+			}
+		}
+	}
+}
+
+country_event = {
+    id = balanced_fallen_empire_events.10
+    title = balanced_fallen_empire_events.10.name
+    desc = balanced_fallen_empire_events.10.desc
+    picture = GFX_evt_victorious_army
+    location = fromfrom
+    show_sound = select_click
+
+    is_triggered_only = yes
+
+    option = {
+        name = balanced_fallen_empire_events.10.option
+    }
+}
+
+planet_event = {
+	id = balanced_fallen_empire_events.11
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		OR = {
+			has_planet_flag = fallen_capital_unbidden_warlock
+			has_planet_flag = fallen_capital_omnicodex
+			has_planet_flag = fallen_capital_throne
+			has_planet_flag = fallen_capital_continuum
+			has_planet_flag = fallen_capital_contingency_core
+		}
+	}
+
+	immediate = {
+		if = {
+			limit = {
+				has_planet_flag = fallen_capital_unbidden_warlock
+			}
+			owner = { add_relic = r_fallen_unbidden_warlock }
+		}
+		if = {
+			limit = {
+				has_planet_flag = fallen_capital_omnicodex
+			}
+			owner = { add_relic = r_fallen_omnicodex }
+		}
+		if = {
+			limit = {
+				has_planet_flag = fallen_capital_throne
+			}
+			owner = { add_relic = r_fallen_khans_throne }
+		}
+		if = {
+			limit = {
+				has_planet_flag = fallen_capital_continuum
+			}
+			owner = { add_relic = r_fallen_continuum }
+		}
+		if = {
+			limit = {
+				has_planet_flag = fallen_capital_contingency_core
+			}
+			owner = { add_relic = r_fallen_contingency_core }
+		}
+		owner = {
+			country_event = {
+				id = balanced_fallen_empire_events.12
+			}
+		}
+		remove_planet_flag = fallen_capital_unbidden_warlock
+		remove_planet_flag = fallen_capital_omnicodex
+		remove_planet_flag = fallen_capital_throne
+		remove_planet_flag = fallen_capital_continuum
+		remove_planet_flag = fallen_capital_contingency_core
+	}
+}
+
+country_event = {
+    id = balanced_fallen_empire_events.12
+    title = balanced_fallen_empire_events.12.name
+    desc = balanced_fallen_empire_events.12.desc
+    picture = GFX_evt_city_ruins
+    location = root
+    show_sound = select_click
+
+    is_triggered_only = yes
+
+    option = {
+        name = balanced_fallen_empire_events.10.option
+    }
+}

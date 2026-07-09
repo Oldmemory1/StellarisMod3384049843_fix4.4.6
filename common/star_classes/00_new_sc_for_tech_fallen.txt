@@ -1,0 +1,6 @@
+# sc_tech_fallen_ship_system_type = {
+# 	class = default
+# 	planet = { key = pc_yunfan_fallen_ship_of_star }
+# 	spawn_odds = 0
+# 	num_planets	= { min = 1 max = 1 }
+# }
