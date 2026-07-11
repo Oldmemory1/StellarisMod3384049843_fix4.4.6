@@ -935,7 +935,7 @@ country_event = {
 						}
 					}
 				}
-				set_planet_flag = has_enough_doctor
+				planet = { set_planet_flag = has_enough_doctor }
 			}
 			if = {
 				limit = {
@@ -949,7 +949,7 @@ country_event = {
 						modifier = {
 							add = 5
 							NOT = {
-								has_planet_flag = has_enough_doctor
+								planet = { has_planet_flag = has_enough_doctor }
 							}
 						}
 						modifier = {
@@ -961,10 +961,11 @@ country_event = {
 						}
 						if = {
 							limit = {
-								has_planet_flag = has_enough_doctor
+								planet = { has_planet_flag = has_enough_doctor }
 							}
-							planet_event = {
+							planet = { planet_event = {
 								id = tech_fallen_events.18
+							}
 							}
 						}
 						owner = {
@@ -990,7 +991,7 @@ country_event = {
 					}
 				}
 			}
-			remove_planet_flag = has_enough_doctor
+			planet = { remove_planet_flag = has_enough_doctor }
 		}
 	}
 }
