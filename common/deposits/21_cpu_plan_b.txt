@@ -11,9 +11,7 @@ d_cpu_b_flag = {
             exists = owner
             owner = { is_regular_empire = yes }
         }
-        modifier = {
-            job_researcher_add = 1
-        }
+        job_researcher_add = 1
     }
 
     triggered_planet_modifier = {
@@ -21,9 +19,7 @@ d_cpu_b_flag = {
             exists = owner
             owner = { is_hive_empire = yes }
         }
-        modifier = {
-            job_brain_drone_add = 1
-        }
+        job_brain_drone_add = 1
     }
 
     triggered_planet_modifier = {
@@ -31,34 +27,32 @@ d_cpu_b_flag = {
             exists = owner
             owner = { is_machine_empire = yes }
         }
-        modifier = {
-            job_calculator_add = 1
-        }
+        job_calculator_add = 1
     }
 }
 
 illness_of_virus_destory_environment = {
-	time = 1080
-	icon = d_boneyard
+    time = 1080
+    icon = d_boneyard
 
-	is_for_colonizable = yes
-	category = deposit_cat_blockers
+    is_for_colonizable = yes
+    category = deposit_cat_blockers
 
-	potential = { always = no }
+    potential = { always = no }
 
-	planet_modifier = {
-		habitability_ceil_add = -1
+    planet_modifier = {
+        habitability_ceil_add = -1
         pop_housing_usage_mult = 0.25
         planet_jobs_produces_mult = -0.75
-	}
+    }
 
-	resources = {
-		category = deposit_blockers
-		cost = {
-			energy = 5000
-			food = 5000
-		}
-	}
+    resources = {
+        category = deposit_blockers
+        cost = {
+            energy = 5000
+            food = 5000
+        }
+    }
 
     can_be_cleared = {
         owner = {
@@ -66,12 +60,12 @@ illness_of_virus_destory_environment = {
         }
     }
 
-	on_cleared = {
-	}
+    on_cleared = {
+    }
 
-	ai_weight = {
-		weight = 2
-	}
+    ai_weight = {
+        weight = 2
+    }
 }
 
 fallen_pre_ftl_ship = {
@@ -93,7 +87,6 @@ d_using_nano_machine = {
         pop_amenities_usage_mult = -0.15
         planet_crime_mult = -0.15
         planet_crime_no_happiness_mult = -0.15
-        defense_armies_add = 3
     }
     resources = {
         category = planet_deposits
