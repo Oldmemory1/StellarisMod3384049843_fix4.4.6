@@ -174,7 +174,7 @@ leader_trait_submissive_yunfan = {
     leader_class = all
 }
 
-leader_trait_graysky_scitist = {
+leader_trait_graysky_scientist = {
     cost = 0
     immortal_leaders = yes
     notify_on_gained = no
@@ -193,7 +193,7 @@ leader_trait_graysky_scitist = {
     councilor_modifier = {
         all_technology_research_speed = 0.1
     }
-    custom_tooltip = leader_trait_graysky_scitist.tooltip
+    custom_tooltip = leader_trait_graysky_scientist_tooltip
     leader_class = { scientist }
     initial = no
     randomized = no
@@ -221,7 +221,7 @@ leader_trait_graysky_commander = {
     randomized = no
 }
 
-leader_trait_gestle_graysky = {
+leader_trait_gestalt_graysky = {
     cost = 0
     icon = gfx/interface/icons/traits/trait_gestalt_machine.dds
     immortal_leaders = yes
