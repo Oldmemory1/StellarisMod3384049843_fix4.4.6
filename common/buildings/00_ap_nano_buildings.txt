@@ -226,7 +226,7 @@ building_new_organic_paradise_for_fallen_machine = {
 		physics_research = 20
 
 		trigger = {
-			has_unemployed_pop_of_category = bio_trophy
+			num_unemployed > 0
 
 			planet_resource_compare = {
 				resource = physics_research
@@ -242,7 +242,7 @@ building_new_organic_paradise_for_fallen_machine = {
 		alloys = 20
 
 		trigger = {
-			has_unemployed_pop_of_category = bio_trophy
+			num_unemployed > 0
 
 			planet_resource_compare = {
 				resource = alloys
@@ -258,7 +258,7 @@ building_new_organic_paradise_for_fallen_machine = {
 		consumer_goods = 20
 
 		trigger = {
-			has_unemployed_pop_of_category = bio_trophy
+			num_unemployed > 0
 
 			planet_resource_compare = {
 				resource = consumer_goods
