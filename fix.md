@@ -4,7 +4,7 @@
 
 本分支修复了原mod在Stellaris 4.4版本中与蜂群失落帝国(Hive Fallen Empire)、合成女王危机、级联觉醒逻辑、物种权利等方面的兼容性问题和bug。
 
-共修复 **8处bug**，涉及 **5个文件**。
+共修复 **10处bug**，涉及 **5个文件**。
 
 ---
 
@@ -31,15 +31,24 @@
 
 ---
 
-### 3. 合成女王(Cetana)风暴异常居中显示
-**文件**: `events/00_balanced_events_for_ciris_woman_king.txt` (事件 `crisis.8042`)
+### 3. 合成女王(Cetana)风暴异常 + 击败事件多处Bug
+**文件**: `events/00_balanced_events_for_ciris_woman_king.txt`
 
-**问题**: Mod覆盖了原版的 `crisis.8042`（合成女王对失落帝国的削弱事件），引入了三处与原版不一致的修改：
-- 添加了 `fog_machine_auto_tracking = yes` —— 原版游戏中**不存在**此命令，可能导致纳米风暴视觉异常
-- 步骤2删除了舰队摧毁代码（原版随机摧毁80%舰船），导致失落帝国舰队不受影响
+#### 3a. 事件 `crisis.8042`（FE削弱事件）
+Mod覆盖了原版的 `crisis.8042`，引入了三处与原版不一致的修改：
+- 添加了 `fog_machine_auto_tracking = yes` —— 原版游戏中**不存在**此命令
+- 步骤2删除了舰队摧毁代码（原版随机摧毁80%舰船）
 - 步骤3使用 `kill_all_pop` 替代原版的 `kill_single_pop`
 
-**修复**: 删除无效的 `fog_machine_auto_tracking`，恢复步骤2的舰队摧毁逻辑，步骤3对齐原版行为。
+**修复**: 删除无效的 `fog_machine_auto_tracking`，恢复步骤2的舰队摧毁逻辑，步骤3对齐原版。
+
+#### 3b. 事件 `crisis.23015`（合成女王击败事件）
+Mod版本是旧版代码，缺少4.0+版本的更新内容：
+- `has_planet_flag = synth_queen_bastille` — 原版使用 `has_carrier_flag`，标记类型不匹配导致**bastille星球清理永远不执行**
+- 缺少 `remove_global_flag = galactic_crisis_recently_fired` — 导致**击败Cetana后无法触发第二个危机**
+- 缺少 `remove_global_flag galactic_crisis_early_defeat_tracker_*` + `multiply_crisis_strength` — 导致**早期击败的危机强度缩放失效**
+
+**修复**: 修正flag类型、补回危机冷却清除、补回早期击败强度缩放逻辑。
 
 ---
 
@@ -106,7 +115,7 @@
 | 文件 | 修改次数 |
 |---|---|
 | `events/00_new_events_for_balanced_fallen_empire.txt` | 3 |
-| `events/00_balanced_events_for_ciris_woman_king.txt` | 1 |
+| `events/00_balanced_events_for_ciris_woman_king.txt` | 2 |
 | `events/00_new_events_for_rebuilt_computer.txt` | 2 |
 | `common/species_rights/citizenship_types/01_balanced_citizenship_types_for_rebuild_computer.txt` | 1 |
 | `common/species_rights/living_standards/01_balanced_living_standards_for_rebuild_computer.txt` | 1 |
