@@ -25,31 +25,31 @@ country_event = {
 				limit = {
 					owner = { is_spiritualist = yes }
 				}
-				set_planet_flag = fallen_capital_unbidden_warlock
+				planet = { set_planet_flag = fallen_capital_unbidden_warlock }
 			}
 			if = {
 				limit = {
 					owner = { is_materialist = yes }
 				}
-				set_planet_flag = fallen_capital_omnicodex
+				planet = { set_planet_flag = fallen_capital_omnicodex }
 			}
 			if = {
 				limit = {
 					owner = { is_xenophobe = yes }
 				}
-				set_planet_flag = fallen_capital_throne
+				planet = { set_planet_flag = fallen_capital_throne }
 			}
 			if = {
 				limit = {
 					owner = { is_xenophile = yes }
 				}
-				set_planet_flag = fallen_capital_continuum
+				planet = { set_planet_flag = fallen_capital_continuum }
 			}
 			if = {
 				limit = {
 					owner = { is_fallen_empire_machine = yes }
 				}
-				set_planet_flag = fallen_capital_contingency_core
+				planet = { set_planet_flag = fallen_capital_contingency_core }
 			}
 			save_event_target_as = fallen_empire_first_capital
 		}
