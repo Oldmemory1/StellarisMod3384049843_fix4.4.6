@@ -1,10 +1,10 @@
-# Stellaris 4.4.x 失落帝国平衡Mod — 修复说明
+# Stellaris 4.4.6 失落帝国平衡Mod — 修复说明
 
 ## 修复概述
 
 本分支修复了原mod在Stellaris 4.4版本中与蜂群失落帝国(Hive Fallen Empire)、合成女王危机、级联觉醒逻辑、物种权利等方面的兼容性问题和bug。
 
-共修复 **8处bug**，涉及 **5个文件**。
+共修复 **13处bug**，涉及 **9个文件**。
 
 ---
 
@@ -31,15 +31,24 @@
 
 ---
 
-### 3. 合成女王(Cetana)风暴异常居中显示
-**文件**: `events/00_balanced_events_for_ciris_woman_king.txt` (事件 `crisis.8042`)
+### 3. 合成女王(Cetana)风暴异常 + 击败事件多处Bug
+**文件**: `events/00_balanced_events_for_ciris_woman_king.txt`
 
-**问题**: Mod覆盖了原版的 `crisis.8042`（合成女王对失落帝国的削弱事件），引入了三处与原版不一致的修改：
-- 添加了 `fog_machine_auto_tracking = yes` —— 原版游戏中**不存在**此命令，可能导致纳米风暴视觉异常
-- 步骤2删除了舰队摧毁代码（原版随机摧毁80%舰船），导致失落帝国舰队不受影响
+#### 3a. 事件 `crisis.8042`（FE削弱事件）
+Mod覆盖了原版的 `crisis.8042`，引入了三处与原版不一致的修改：
+- 添加了 `fog_machine_auto_tracking = yes` —— 原版游戏中**不存在**此命令
+- 步骤2删除了舰队摧毁代码（原版随机摧毁80%舰船）
 - 步骤3使用 `kill_all_pop` 替代原版的 `kill_single_pop`
 
-**修复**: 删除无效的 `fog_machine_auto_tracking`，恢复步骤2的舰队摧毁逻辑，步骤3对齐原版行为。
+**修复**: 删除无效的 `fog_machine_auto_tracking`，恢复步骤2的舰队摧毁逻辑，步骤3对齐原版。
+
+#### 3b. 事件 `crisis.23015`（合成女王击败事件）
+Mod版本是旧版代码，缺少4.0+版本的更新内容：
+- `has_planet_flag = synth_queen_bastille` — 原版使用 `has_carrier_flag`，标记类型不匹配导致**bastille星球清理永远不执行**
+- 缺少 `remove_global_flag = galactic_crisis_recently_fired` — 导致**击败Cetana后无法触发第二个危机**
+- 缺少 `remove_global_flag galactic_crisis_early_defeat_tracker_*` + `multiply_crisis_strength` — 导致**早期击败的危机强度缩放失效**
+
+**修复**: 修正flag类型、补回危机冷却清除、补回早期击败强度缩放逻辑。
 
 ---
 
@@ -101,13 +110,84 @@
 
 ---
 
+### 9. 传奇提督领袖特质引用无效（4.x 领袖系统不兼容）
+**文件**: `events/00_new_events_for_fallen_empire_ship_leader.txt` (事件 `fallen_leader_events.2`)
+
+**问题**: Tubonerian 传奇提督使用了基于旧版 Stellaris（4.0前）三级特质系统的引用：
+- `leader_trait_aggressive_2` — 4.x中只有 `leader_trait_aggressive`（无后缀升级版）
+- `leader_trait_wrecker_3` — 4.x中最高 `leader_trait_wrecker_2`（Tier 2 老兵级）
+- `leader_trait_commanding_presence_3` — 4.x中最高 `leader_trait_commanding_presence_2`（Tier 2 老兵级）
+- `leader_trait_resilient_2` — 4.x中只有 `leader_trait_resilient`（无后缀升级版）
+
+4.0 领袖系统重做后，普通特质不再有级别后缀，老兵特质最多到 `_2`。
+
+**修复**: 
+- `_aggressive_2` → `leader_trait_aggressive`
+- `_wrecker_3` → `leader_trait_wrecker_2`（需 Paragon DLC + subclass_commander_admiral，领袖已有）
+- `_commanding_presence_3` → `leader_trait_commanding_presence_2`
+- `_resilient_2` → `leader_trait_resilient`
+
+---
+
+### 10. 机器FE活体陈设建筑使用不存在的触发条件
+**文件**: `common/buildings/00_ap_nano_buildings.txt`
+
+**问题**: `building_new_organic_paradise_for_fallen_machine` 的 `ai_resource_production` 的 `trigger` 块中使用了 `has_unemployed_pop_of_category = bio_trophy`，该条件在原版中不存在，CWTools 报错。
+
+Mod 作者意图：当星球上有失业的活体陈设人口时，AI 应重视在此建造该建筑。
+
+**修复**: 替换为最接近的合法触发条件 `num_unemployed > 0`（星球上有失业人口）。
+
+---
+
+### 11. 地块定义语法错误——无效的modifier包裹和defense_armies_add
+**文件**: `common/deposits/21_cpu_plan_b.txt`
+
+**问题**: 
+- `d_cpu_b_flag` 的 `triggered_planet_modifier` 中岗位键 `job_researcher_add`/`job_brain_drone_add`/`job_calculator_add` 被错误包裹在 `modifier = { }` 内；其中 `job_brain_drone_add` 和 `job_calculator_add` 在原版 deposits 中根本不存在
+- `d_using_nano_machine` 的 `planet_modifier` 中有 `defense_armies_add = 3`，该键在原版任何 deposit 中都不存在
+
+**修复**: 
+- 删除 `modifier = { }` 包裹，岗位键直接放在 `triggered_planet_modifier` 下
+- 蜂群/机器统一用 `is_gestalt = yes` + `job_calculator_engineer_add`（参照原版 deposits 的具体工种键名体系）
+- 删除无效的 `defense_armies_add`
+
+---
+
+### 12. 建筑岗位键名在triggered_planet_modifier中无效
+**文件**: `common/buildings/14_balanced_fallen_buildings.txt`
+
+**问题**: `building_master_archive` 和 `building_master_archive2` 的蜂群/机器 `triggered_planet_modifier` 块中使用了 `job_brain_drone_add` 和 `job_calculator_add`，这两个键在原版 buildings 中也不存在。且被错误包裹在 `modifier = { }` 内——原版蜂群/机器块中岗位键是直接放在 `triggered_planet_modifier` 下的。
+
+**修复**: 参照原版 `jobs/researchers_add` inline script 的模式：
+- 蜂群块：删除 `modifier` 包裹，改为 `job_calculator_physicist_add` / `job_calculator_biologist_add` / `job_calculator_engineer_add` 直接放置
+- 机器块：同上
+- 常规帝国块保持原样（`job_head_researcher_add` 是合法键，`modifier` 包裹对常规帝国块是正确语法）
+
+---
+
 ## 涉及文件
 
 | 文件 | 修改次数 |
 |---|---|
 | `events/00_new_events_for_balanced_fallen_empire.txt` | 3 |
-| `events/00_balanced_events_for_ciris_woman_king.txt` | 1 |
+| `events/00_balanced_events_for_ciris_woman_king.txt` | 2 |
 | `events/00_new_events_for_rebuilt_computer.txt` | 2 |
+| `events/00_new_events_for_fallen_empire_ship_leader.txt` | 1 |
+| `common/buildings/00_ap_nano_buildings.txt` | 1 |
+| `common/buildings/14_balanced_fallen_buildings.txt` | 1 |
+| `common/deposits/21_cpu_plan_b.txt` | 1 |
+| `common/species_rights/citizenship_types/01_balanced_citizenship_types_for_rebuild_computer.txt` | 1 |
+| `common/species_rights/living_standards/01_balanced_living_standards_for_rebuild_computer.txt` | 1 |
+| `common/archaeological_site_types/new_site_type_for_rebuilt_computer.txt` | 1 |
+
+| 文件 | 修改次数 |
+|---|---|
+| `events/00_new_events_for_balanced_fallen_empire.txt` | 3 |
+| `events/00_balanced_events_for_ciris_woman_king.txt` | 2 |
+| `events/00_new_events_for_rebuilt_computer.txt` | 2 |
+| `events/00_new_events_for_fallen_empire_ship_leader.txt` | 1 |
+| `common/buildings/00_ap_nano_buildings.txt` | 1 |
 | `common/species_rights/citizenship_types/01_balanced_citizenship_types_for_rebuild_computer.txt` | 1 |
 | `common/species_rights/living_standards/01_balanced_living_standards_for_rebuild_computer.txt` | 1 |
 | `common/archaeological_site_types/new_site_type_for_rebuilt_computer.txt` | 1 |
