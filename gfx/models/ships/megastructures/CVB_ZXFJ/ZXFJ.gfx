@@ -9,7 +9,7 @@ objectTypes = {
 		name = "fallen_empire_04_titan_mesh_yunfan"
 		file = "gfx/models/ships/fallen_empire_01/fallen_empire_titan.mesh"
 		scale = 1.0
-		
+
 		animation = { id = "idle"		type = "fallen_empire_titan_idle_animation" }
 
 		meshsettings = {
@@ -29,5 +29,12 @@ objectTypes = {
 			texture_specular = "fallen_empire_stations_specular.dds"
 			shader = "PdxMeshTerra"
 		}
+	}
+
+	pdxmesh = {
+		name = "ae_shield_mesh"
+		file = "gfx/models/ships/megastructures/CVB_ZXFJ/ZXFJ.mesh"
+		scale = 1.0
+		animation = { id = "idle"	type = "matter_decompressor_01_stage_4_idle_animation" }
 	}
 }
