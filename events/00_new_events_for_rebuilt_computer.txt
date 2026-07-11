@@ -1324,12 +1324,12 @@ country_event = {
 				flag = event_target:machine_fallen_empire2
 				effect = {
 					set_name = {
-							key = name_xenophobe_fallen
-							variable_string = "[xenophobe_fallen_empire.GetName]"
+							key = name_machine_fallen
+							variable_string = "[machine_fallen_empire2.GetName]"
 						}
 					save_global_event_target_as = yunfan_leader_country
 					every_country = {
-						establish_communications_no_message = event_target:xenophobe_fallen_empire_leader_country
+						establish_communications_no_message = event_target:yunfan_leader_country
 					}
 				}
 			}

@@ -43,7 +43,7 @@ new_computer_site = {
 tech_fallen_ship_site = {
 	desc = tech_fallen_ship_site_desc
 	picture = GFX_evt_archaeological_dig
-	stages = 3
+	stages = 4
 	weight = 0
 
 	allow = {
