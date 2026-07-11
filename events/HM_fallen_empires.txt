@@ -93,9 +93,8 @@ event = {
                         while = {
                             count = 8
                             add_district = district_city
-                            add_district = district_mining_uncapped
-                            add_district = district_generator_uncapped
-                            add_district = district_industrial
+                            add_district = district_mining
+                            add_district = district_generator
                         }
                     }
                     create_starbase = {
@@ -109,8 +108,7 @@ event = {
                         module = "gun_battery"
                         building = "target_uplink_computer"
                         building = "defense_grid"
-                        building = "colossus_yards"
-                        building = "titan_yards"
+                        building = "capital_yards"
                         effect = {
                             while = {
                                 count = 18

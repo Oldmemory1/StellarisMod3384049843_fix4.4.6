@@ -109,11 +109,11 @@ fallen_lgategrander = {
             }
             while = {
                 count = 6
-                add_district = district_mining_uncapped
+                add_district = district_mining
             }
             while = {
                 count = 6
-                add_district = district_generator_uncapped
+                add_district = district_generator
             }
             while = {
                 count = 94
