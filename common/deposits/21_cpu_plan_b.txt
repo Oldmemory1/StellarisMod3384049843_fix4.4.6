@@ -11,23 +11,15 @@ d_cpu_b_flag = {
             exists = owner
             owner = { is_regular_empire = yes }
         }
-        job_researcher_add = 1
+        job_engineer_add = 1
     }
 
     triggered_planet_modifier = {
         potential = {
             exists = owner
-            owner = { is_hive_empire = yes }
+            owner = { is_gestalt = yes }
         }
-        job_brain_drone_add = 1
-    }
-
-    triggered_planet_modifier = {
-        potential = {
-            exists = owner
-            owner = { is_machine_empire = yes }
-        }
-        job_calculator_add = 1
+        job_calculator_engineer_add = 1
     }
 }
 
