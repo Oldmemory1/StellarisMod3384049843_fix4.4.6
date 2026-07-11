@@ -47,9 +47,9 @@ building_master_archive = {
 			exists = owner
 			owner = { is_hive_empire = yes }
 		}
-		modifier = {
-			job_brain_drone_add = @fe2_jobs
-		}
+		job_calculator_physicist_add = @fe2_jobs
+		job_calculator_biologist_add = @fe2_jobs
+		job_calculator_engineer_add = @fe2_jobs
 	}
 
 	triggered_desc = {
@@ -65,9 +65,9 @@ building_master_archive = {
 			exists = owner
 			owner = { is_machine_empire = yes }
 		}
-		modifier = {
-			job_calculator_add = @fe2_jobs
-		}
+		job_calculator_physicist_add = @fe2_jobs
+		job_calculator_biologist_add = @fe2_jobs
+		job_calculator_engineer_add = @fe2_jobs
 	}
 
 	triggered_desc = {
@@ -153,9 +153,9 @@ building_master_archive2 = {
 			exists = owner
 			owner = { is_hive_empire = yes }
 		}
-		modifier = {
-			job_brain_drone_add = @fe2_jobs
-		}
+		job_calculator_physicist_add = @fe2_jobs
+		job_calculator_biologist_add = @fe2_jobs
+		job_calculator_engineer_add = @fe2_jobs
 	}
 
 	triggered_desc = {
@@ -171,9 +171,9 @@ building_master_archive2 = {
 			exists = owner
 			owner = { is_machine_empire = yes }
 		}
-		modifier = {
-			job_calculator_add = @fe2_jobs
-		}
+		job_calculator_physicist_add = @fe2_jobs
+		job_calculator_biologist_add = @fe2_jobs
+		job_calculator_engineer_add = @fe2_jobs
 	}
 
 	triggered_desc = {
