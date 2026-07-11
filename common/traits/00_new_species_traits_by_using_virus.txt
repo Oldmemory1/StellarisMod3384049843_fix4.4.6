@@ -47,15 +47,6 @@ using_cirus_traits1 = { #ID应该以“trait”开头
 	}
 	custom_tooltip = "using_cirus_traits1_modifier"
 	triggered_pop_group_modifier = {
-		potential = {
-			exists = planet
-			planet = {
-				any_pop = {
-					has_trait = using_cirus_traits1
-					NOT = { has_pop_flag = using_virus_make_illness }
-				}
-			}
-		}
 		pop_bonus_workforce_mult = 0.5
 		pop_amenities_usage_mult = -0.33
 		pop_housing_usage_mult = -0.33

@@ -1051,8 +1051,10 @@ planet_event = {
 				}
 				has_planet_flag = has_enough_doctor
 			}
-			planet_event = {
-				id = tech_fallen_events.18
+			planet = {
+				planet_event = {
+					id = tech_fallen_events.18
+				}
 			}
 			owner = {
 				if = {
@@ -1176,8 +1178,10 @@ planet_event = {
 								has_planet_flag = has_viru_situation
 							}
 						}
-						planet_event = {
-							id = tech_fallen_events.20
+						planet = {
+							planet_event = {
+								id = tech_fallen_events.20
+							}
 						}
 						owner = {
 							if = {
@@ -1288,8 +1292,10 @@ country_event = {
 
 	immediate = {
 		every_owned_planet = {
-			planet_event = {
-				id = tech_fallen_events.17
+			planet = {
+				planet_event = {
+					id = tech_fallen_events.17
+				}
 			}
 		}
 		country_event = {

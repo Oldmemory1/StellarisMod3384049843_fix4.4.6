@@ -243,4 +243,9 @@ spriteTypes = {
 		name = "GFX_leader_trait_submissive_yunfan"
 		texturefile = "gfx/interface/icons/traits/leader_trait_icons/leader_trait_submissive_yunfan.dds"
 	}
+
+	spriteType = {
+		name = "GFX_graysky_trait"
+		texturefile = "gfx/interface/icons/traits/leader_trait_icons/graysky_trait.dds"
+	}
 }
