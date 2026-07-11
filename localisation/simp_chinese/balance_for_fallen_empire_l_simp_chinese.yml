@@ -43,3 +43,5 @@
  efect_of_change_fallen_empire_power_6: "不会为堕落帝国和觉醒帝国提供免费舰队。\n注意：他们依然可能会自行建造船只。"
  edict_change_fallen_empire_power_edict: "调整堕落海军实力上限关于天灾难度的倍数"
  edict_change_fallen_empire_power_edict_desc: "$edict_change_fallen_empire_power_edict$"
+ mod_graygoo_kill_gater: "灰蛊风暴 — L星门诛灭者"
+ mod_graygoo_kill_gater_desc: "灰蛊风暴专注于消灭觉醒的L星门帝国，对其造成巨额额外伤害。"

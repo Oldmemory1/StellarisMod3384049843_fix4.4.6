@@ -50,3 +50,5 @@
  leader_trait_gestalt_graysky: "Graysky Gestalt"
  leader_trait_gestalt_graysky_desc: "The nanite entity known as 'Graysky' serving in a Gestalt empire. As the embodiment of a nanite swarm consciousness, it can simultaneously serve as Commander, Scientist, and Official. §YNote: This leader is immortal.§!"
  edict_change_fallen_empire_power_edict_desc: "$edict_change_fallen_empire_power_edict$"
+ mod_graygoo_kill_gater: "Gray Tempest — L-Gater Bane"
+ mod_graygoo_kill_gater_desc: "The Gray Tempest is singularly focused on annihilating the Awakened L-Gate Empire, dealing massively increased damage against them."
