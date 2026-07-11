@@ -29,10 +29,6 @@ nano_maker = {
 			is_enslaved = yes
 			can_take_servant_job = no
 		}
-		modifier = {
-			factor = 5
-			has_job = nano_maker
-		}
 	}
 }
 
@@ -68,10 +64,6 @@ gestal_nano_maker = {
 			factor = 2
 			is_enslaved = yes
 			can_take_servant_job = no
-		}
-		modifier = {
-			factor = 5
-			has_job = nano_maker
 		}
 	}
 }
