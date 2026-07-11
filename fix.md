@@ -4,7 +4,7 @@
 
 本分支修复了原mod在Stellaris 4.4版本中与蜂群失落帝国(Hive Fallen Empire)、合成女王危机、级联觉醒逻辑、物种权利等方面的兼容性问题和bug。
 
-共修复 **10处bug**，涉及 **5个文件**。
+共修复 **12处bug**，涉及 **7个文件**。
 
 ---
 
@@ -110,6 +110,36 @@ Mod版本是旧版代码，缺少4.0+版本的更新内容：
 
 ---
 
+### 9. 传奇提督领袖特质引用无效（4.x 领袖系统不兼容）
+**文件**: `events/00_new_events_for_fallen_empire_ship_leader.txt` (事件 `fallen_leader_events.2`)
+
+**问题**: Tubonerian 传奇提督使用了基于旧版 Stellaris（4.0前）三级特质系统的引用：
+- `leader_trait_aggressive_2` — 4.x中只有 `leader_trait_aggressive`（无后缀升级版）
+- `leader_trait_wrecker_3` — 4.x中最高 `leader_trait_wrecker_2`（Tier 2 老兵级）
+- `leader_trait_commanding_presence_3` — 4.x中最高 `leader_trait_commanding_presence_2`（Tier 2 老兵级）
+- `leader_trait_resilient_2` — 4.x中只有 `leader_trait_resilient`（无后缀升级版）
+
+4.0 领袖系统重做后，普通特质不再有级别后缀，老兵特质最多到 `_2`。
+
+**修复**: 
+- `_aggressive_2` → `leader_trait_aggressive`
+- `_wrecker_3` → `leader_trait_wrecker_2`（需 Paragon DLC + subclass_commander_admiral，领袖已有）
+- `_commanding_presence_3` → `leader_trait_commanding_presence_2`
+- `_resilient_2` → `leader_trait_resilient`
+
+---
+
+### 10. 机器FE活体陈设建筑使用不存在的触发条件
+**文件**: `common/buildings/00_ap_nano_buildings.txt`
+
+**问题**: `building_new_organic_paradise_for_fallen_machine` 的 `ai_resource_production` 的 `trigger` 块中使用了 `has_unemployed_pop_of_category = bio_trophy`，该条件在原版中不存在，CWTools 报错。
+
+Mod 作者意图：当星球上有失业的活体陈设人口时，AI 应重视在此建造该建筑。
+
+**修复**: 替换为最接近的合法触发条件 `num_unemployed > 0`（星球上有失业人口）。
+
+---
+
 ## 涉及文件
 
 | 文件 | 修改次数 |
@@ -117,6 +147,8 @@ Mod版本是旧版代码，缺少4.0+版本的更新内容：
 | `events/00_new_events_for_balanced_fallen_empire.txt` | 3 |
 | `events/00_balanced_events_for_ciris_woman_king.txt` | 2 |
 | `events/00_new_events_for_rebuilt_computer.txt` | 2 |
+| `events/00_new_events_for_fallen_empire_ship_leader.txt` | 1 |
+| `common/buildings/00_ap_nano_buildings.txt` | 1 |
 | `common/species_rights/citizenship_types/01_balanced_citizenship_types_for_rebuild_computer.txt` | 1 |
 | `common/species_rights/living_standards/01_balanced_living_standards_for_rebuild_computer.txt` | 1 |
 | `common/archaeological_site_types/new_site_type_for_rebuilt_computer.txt` | 1 |
