@@ -82,12 +82,6 @@ event = {
                             add_global_ship_design = NAME_FE_Starbase
                             add_global_ship_design = NAME_Nanite_Mothership
                             add_global_ship_design = NAME_Nanite_Interdictor
-                            if = {
-                                limit = { has_global_flag = PlayAsGray_Opened }
-                                add_global_ship_design = NAME_Nanite_Mothership_AG_1
-                                add_global_ship_design = NAME_Nanite_Mothership_AG_carrier_1
-                                add_global_ship_design = NAME_Nanite_Mothership_AG_carrier_2
-                            }
                             ruler = { add_skill = 9 }
                         }
                     }
@@ -297,10 +291,6 @@ country_event = {
             add_awakened_fallen_empire_resources = yes
             add_awakened_fallen_empire_fleet = yes
             capital_scope = {
-                if = {
-                    limit = { has_global_flag = PlayAsGray_Opened }
-                    create_AG_graygoo_tempest_fleet = yes
-                }
                 create_fleet = {
                     name = nanite_swarm_modifier
                     effect = {
