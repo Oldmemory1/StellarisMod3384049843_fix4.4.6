@@ -1,6 +1,5 @@
 citizenship_organic_trophy = {
 	potential = {
-		has_synthetic_dawn = yes
 		exists = from
 		from = {
 			OR = {
@@ -14,6 +13,7 @@ citizenship_organic_trophy = {
 				}
 			}
 		}
+		is_disconnected_drone_pop = no
 	}
 
 	allow = {
